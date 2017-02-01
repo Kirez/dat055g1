@@ -6,7 +6,7 @@ public class GamePlayer {
 
   public static int DEFAULT_MAX_HP = 100;
   public static int DEFAULT_WIDTH = 64;
-  public static int DEFUALT_HEIGHT = 128;
+  public static int DEFAULT_HEIGHT = 128;
   public static Point2D DEFAULT_POSITION = new Point2D(0, 0);
 
   private Point2D position;
@@ -25,7 +25,7 @@ public class GamePlayer {
     this.HP = HP;
 
     width = DEFAULT_WIDTH;
-    height = DEFUALT_HEIGHT;
+    height = DEFAULT_HEIGHT;
   }
 
   public GamePlayer(Point2D position, int maxHP) {
