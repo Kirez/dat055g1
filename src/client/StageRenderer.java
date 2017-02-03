@@ -11,6 +11,7 @@ public class StageRenderer implements GameRenderer {
   private PlayerRenderer playerRenderer2;
   private GameStage gameStage;
 
+  //  Constructor
   public StageRenderer(GameStage gameStage) {
     this.gameStage = gameStage;
     playerRenderer1 = new PlayerRenderer(gameStage.getPlayer1());
@@ -18,6 +19,7 @@ public class StageRenderer implements GameRenderer {
 
   }
 
+  //  The stage has two PlayerRenderers who are added to the canvas. GameStage is used to get the GroundLevel.
   @Override
   public void render(Canvas canvas) {
     GraphicsContext gc = canvas.getGraphicsContext2D();

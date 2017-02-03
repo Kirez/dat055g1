@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import server.GameClient;
+import server.GameServer;
 
 public class GameApplication extends Application {
 
@@ -16,10 +18,21 @@ public class GameApplication extends Application {
     launch(args);
   }
 
+  GameServer gs;
+  GameClient gc;
+
+
   @Override
   public void start(Stage primaryStage) throws Exception {
     primaryStage.setTitle("The MVC Game");
 
+    /* GAMESERVER-GAMECLIENT TEST
+    gs = new GameServer();
+    gs.start();
+    gc = new GameClient();
+    gc.start();
+    */
+    
     root = new Group();
     scene = new Scene(root);
 
@@ -28,5 +41,6 @@ public class GameApplication extends Application {
 
     primaryStage.setScene(scene);
     primaryStage.show();
+
   }
 }

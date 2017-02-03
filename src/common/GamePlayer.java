@@ -18,6 +18,7 @@ public class GamePlayer {
   private int width;
   private int height;
 
+  //  Constructors
   private GamePlayer(Point2D position, Point2D velocity, int maxHP, int HP) {
     this.position = position;
     this.velocity = velocity;
@@ -40,6 +41,8 @@ public class GamePlayer {
     this(DEFAULT_POSITION);
   }
 
+
+  //  Getters and setters
   public int getMaxHP() {
     return maxHP;
   }

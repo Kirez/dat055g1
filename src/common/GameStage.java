@@ -12,6 +12,7 @@ public class GameStage {
 
   private int groundLevelY;
 
+  //  Constructor
   public GameStage(Point2D p1s, Point2D p2s, GamePlayer p1, GamePlayer p2, int gly) {
     player1Spawn = p1s;
     player2Spawn = p2s;
@@ -27,6 +28,7 @@ public class GameStage {
     this(new Point2D(64, 64), new Point2D(704, 64), new GamePlayer(), new GamePlayer(), 256);
   }
 
+  //  Resets players position and HP, player is still after reset
   public void reset() {
     player1.setPosition(player1Spawn);
     player2.setPosition(player2Spawn);
@@ -38,6 +40,7 @@ public class GameStage {
     player2.setVelocity(new Point2D(0, 0));
   }
 
+  //  Getters
   public GamePlayer getPlayer1() {
     return player1;
   }
