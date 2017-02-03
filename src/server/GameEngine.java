@@ -11,12 +11,14 @@ public class GameEngine implements Runnable {
   public double tps;
   private int target_tps;
   private HashSet<GameController> controllers;
+  private boolean pause;
 
   public GameEngine() {
     controllers = new HashSet<>();
     target_tps = DEFAULT_TPS;
     stop = true;
     tps = 0;
+    pause = false;
   }
 
   public boolean addController(GameController controller) {
@@ -58,6 +60,20 @@ public class GameEngine implements Runnable {
           , TimeUnit.NANOSECONDS) / 1000d;
 
       tps = 1d / doubleDelta;
+
+      if (pause) {
+        while (pause) {
+          try {
+            Thread.sleep(100);
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          }
+        }
+      }
     }
+  }
+
+  public void setPause(boolean pause) {
+    this.pause = pause;
   }
 }
