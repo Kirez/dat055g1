@@ -17,6 +17,9 @@ public class GamePlayer {
 
   private int width;
   private int height;
+  private int i = 0;
+
+  public Box[] Hurtboxes = new Box[5];
 
   private GamePlayer(Point2D position, Point2D velocity, int maxHP, int HP) {
     this.position = position;
@@ -26,6 +29,7 @@ public class GamePlayer {
 
     width = DEFAULT_WIDTH;
     height = DEFAULT_HEIGHT;
+    generateHurtBoxes();
   }
 
   public GamePlayer(Point2D position, int maxHP) {
@@ -48,12 +52,21 @@ public class GamePlayer {
     this.HP = HP;
   }
 
+  public void generateHurtBoxes () {
+    Hurtboxes[0] = new Box(getPosition().getX(), getPosition().getY(), 64, 32, false, this);
+    Hurtboxes[1] = new Box(getPosition().getX(), getPosition().getY(), 32, 64, false, this);
+  }
+  public Box getHurtboxes(int i) {
+    return Hurtboxes[i];
+  }
+
   public Point2D getPosition() {
     return position;
   }
 
   public void setPosition(Point2D position) {
     this.position = position;
+
   }
 
   public Point2D getVelocity() {
