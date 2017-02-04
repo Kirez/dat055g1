@@ -4,10 +4,10 @@ import javafx.geometry.Point2D;
 
 public class GamePlayer {
 
-  public static int DEFAULT_MAX_HP = 100;
-  public static int DEFAULT_WIDTH = 64;
-  public static int DEFAULT_HEIGHT = 128;
-  public static Point2D DEFAULT_POSITION = new Point2D(0, 0);
+  private static int DEFAULT_MAX_HP = 100;
+  private static int DEFAULT_WIDTH = 64;
+  private static int DEFAULT_HEIGHT = 128;
+  private static Point2D DEFAULT_POSITION = new Point2D(0, 0);
 
   private Point2D position;
   private Point2D velocity;
@@ -17,6 +17,8 @@ public class GamePlayer {
 
   private int width;
   private int height;
+
+  private boolean onGround;
 
   //  Constructors
   private GamePlayer(Point2D position, Point2D velocity, int maxHP, int HP) {
@@ -73,5 +75,21 @@ public class GamePlayer {
 
   public int getWidth() {
     return width;
+  }
+
+  public void move(Point2D delta) {
+    position = position.add(delta);
+  }
+
+  public void accelerate(Point2D delta) {
+    velocity = velocity.add(delta);
+  }
+
+  public boolean isOnGround() {
+    return onGround;
+  }
+
+  public void setOnGround(boolean onGround) {
+    this.onGround = onGround;
   }
 }

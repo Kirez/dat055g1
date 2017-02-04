@@ -17,6 +17,8 @@ public class StageRenderer implements GameRenderer {
     playerRenderer1 = new PlayerRenderer(gameStage.getPlayer1());
     playerRenderer2 = new PlayerRenderer(gameStage.getPlayer2());
 
+    playerRenderer1.color = Color.RED;
+    playerRenderer2.color = Color.BLUE;
   }
 
   //  The stage has two PlayerRenderers who are added to the canvas. GameStage is used to get the GroundLevel.
