@@ -25,7 +25,7 @@ public class GameApplication extends Application {
 
   @Override
   public void start(Stage primaryStage) throws Exception {
-    primaryStage.setTitle("The MVC Game");
+    primaryStage.setTitle("TimmyFightGoGo");
 
     root = new Group();
     scene = new Scene(root);
@@ -81,6 +81,12 @@ public class GameApplication extends Application {
         case UP:
           playerController1.upDown = state;
           break;
+        case DOWN:
+          playerController1.downDown = state;
+          break;
+        case SPACE:
+          playerController1.hit = state;
+          break;
       }
     });
 
@@ -96,6 +102,12 @@ public class GameApplication extends Application {
           break;
         case UP:
           playerController1.upDown = state;
+          break;
+        case DOWN:
+          playerController1.downDown = state;
+          break;
+        case SPACE:
+          playerController1.hit = state;
           break;
       }
     });

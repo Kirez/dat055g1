@@ -42,4 +42,9 @@ public class Box extends BoundingBox {
   public int getBoxHeight() {
     return (int) height;
   }
+
+  public int getPunchX() {
+    return (int) player.getPosition().getX() + 64;
+  }
+  public int getPunchY() {return (int) player.getPosition().getY() + 32;}
 }
