@@ -2,6 +2,7 @@ package common;
 
 import javafx.geometry.Point2D;
 
+/*The model/state for players. Handles only data*/
 public class GamePlayer {
 
   private static int DEFAULT_MAX_HP = 100;

@@ -7,6 +7,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+/*Handles the state of a player each tick. Takes into consideration input from users*/
 public class PlayerController implements GameController {
 
   public GamePlayer player;

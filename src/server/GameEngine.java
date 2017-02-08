@@ -76,4 +76,8 @@ public class GameEngine implements Runnable {
   public void setPause(boolean pause) {
     this.pause = pause;
   }
+
+  public void togglePause() {
+    pause = !pause;
+  }
 }

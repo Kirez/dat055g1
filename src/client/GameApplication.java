@@ -10,6 +10,7 @@ import javafx.stage.WindowEvent;
 import server.GameClient;
 import server.GameServer;
 
+/*Client entry class handles switching of screens/modes*/
 public class GameApplication extends Application {
 
   private Group root;
@@ -62,7 +63,7 @@ public class GameApplication extends Application {
     gameScreen.exit();
   }
 
-  public void onKeyPressed(KeyEvent event) {
+  private void onKeyPressed(KeyEvent event) {
     switch (event.getCode()) {
       case F11:
         stage.setFullScreen(!stage.isFullScreen());
@@ -76,7 +77,7 @@ public class GameApplication extends Application {
     gameScreen.onKeyPressed(event);
   }
 
-  public void onKeyReleased(KeyEvent event) {
+  private void onKeyReleased(KeyEvent event) {
     gameScreen.onKeyReleased(event);
   }
 }
