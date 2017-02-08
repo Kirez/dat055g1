@@ -17,7 +17,6 @@ public class GameApplication extends Application {
 
   private GameScreen gameScreen;
   private GameServer gameServer;
-  private GameClient gameClient;
 
   private Stage stage;
 
@@ -29,12 +28,10 @@ public class GameApplication extends Application {
   public void start(Stage primaryStage) throws Exception {
     primaryStage.setTitle("The MVC Game");
 
-    /* GAMESERVER-GAMECLIENT TEST
+
     gameServer = new GameServer();
     gameServer.start();
-    gameClient = new GameClient();
-    gameClient.start();
-    */
+
 
     // The root element in the javafx gui stack, all sub-elements attach to this
     root = new Group();

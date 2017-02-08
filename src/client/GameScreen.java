@@ -67,7 +67,7 @@ public class GameScreen extends AbstractScreen implements Runnable {
     }
   }
 
-  //  Runs GameEngine and renderThread. What does Group do?
+  //  Runs GameEngine and renderThread.
   @Override
   public void enter() {
     // Set signals to go
