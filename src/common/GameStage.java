@@ -2,6 +2,7 @@ package common;
 
 import javafx.geometry.Point2D;
 
+/*The model/state for a stage and all that is in it. Handles only data*/
 public class GameStage {
 
   private static Point2D DEFAULT_PLAYER_1_SPAWN = new Point2D(64,64);

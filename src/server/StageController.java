@@ -7,6 +7,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import server.PlayerController.ACTION;
 
+/*Handles the state of the stage each tick and each player controller within it*/
 public class StageController implements GameController {
 
   GameStage stage;

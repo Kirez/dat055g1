@@ -7,6 +7,7 @@ import javafx.scene.input.KeyEvent;
 import server.GameEngine;
 import server.StageController;
 
+/*The 'play' screen handles the 'play' state*/
 public class GameScreen extends AbstractScreen implements Runnable {
 
   private Canvas canvas;
@@ -105,6 +106,11 @@ public class GameScreen extends AbstractScreen implements Runnable {
   }
 
   public void onKeyPressed(KeyEvent event) {
+    switch (event.getCode()) {
+      case P:
+        engine.togglePause();
+        break;
+    }
     stageController.onKeyPressed(event);
   }
 
