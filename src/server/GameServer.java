@@ -8,12 +8,9 @@ import java.net.SocketException;
 
 public class GameServer extends Thread {
 
-  int port = 0;
+
   DatagramSocket socket = null;
-  DatagramPacket recievePacket;
-  DatagramPacket sendPacket;
-  byte[] recieveBuf = new byte[1024];
-  byte[] sendBuf = new byte[1024];
+
 
   public GameServer() {
     try {
@@ -25,24 +22,22 @@ public class GameServer extends Thread {
 
   public void run() {
     while (true) {
-      recievePacket = new DatagramPacket(recieveBuf, recieveBuf.length);
+      byte[] recieveBuf = new byte[128];
+      DatagramPacket recievePacket = new DatagramPacket(recieveBuf, recieveBuf.length);
       try {
         socket.receive(recievePacket);
+
       } catch (IOException e) {
         e.printStackTrace();
       }
       String message = new String(recievePacket.getData());
-      System.out.print("SERVER RECIEVED: " + message);
-      InetAddress IPAddress = recievePacket.getAddress();
-      int port = recievePacket.getPort();
-      String sendMess = "YOYOYO! IM DA SERVER!";
-      sendData(sendMess.getBytes(), (int) sendMess.getBytes().length, IPAddress, port);
-      break;
+      System.out.print("SERVER RECIEVED: " + message + "\n");
+
     }
   }
 
-  public void sendData(byte[] data, int lenght, InetAddress address, int portnum) {
-    DatagramPacket sendPacket = new DatagramPacket(data, lenght, address, portnum);
+  public void sendData(byte[] data, int length, InetAddress address, int portnum) {
+    DatagramPacket sendPacket = new DatagramPacket(data, length, address, portnum);
     try {
       socket.send(sendPacket);
     } catch (IOException e) {

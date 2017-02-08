@@ -14,6 +14,7 @@ public class StageController implements GameController {
 
   private PlayerController player1Controller;
   private PlayerController player2Controller;
+  private GameClient gameClient;
 
   public StageController(GameStage stage) {
     this.stage = stage;
@@ -28,6 +29,10 @@ public class StageController implements GameController {
     player2Controller.bindKey(KeyCode.LEFT, ACTION.MOVE_LEFT);
     player2Controller.bindKey(KeyCode.UP, ACTION.JUMP);
     player2Controller.bindKey(KeyCode.RIGHT, ACTION.MOVE_RIGHT);
+
+    //The client side of server-client added to the stagecontroller in order to get and send information about the stage
+    gameClient = new GameClient();
+    gameClient.start();
   }
 
   @Override
@@ -73,11 +78,13 @@ public class StageController implements GameController {
   public void onKeyPressed(KeyEvent event) {
     player1Controller.onKeyPressed(event);
     player2Controller.onKeyPressed(event);
+    gameClient.setKeyPressed(event); //Add key to client sendlist
   }
 
   @Override
   public void onKeyReleased(KeyEvent event) {
     player1Controller.onKeyReleased(event);
     player2Controller.onKeyReleased(event);
+    gameClient.setKeyReleased(event); //Remove key from client sendlist
   }
 }
