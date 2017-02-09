@@ -1,23 +1,25 @@
 package client;
 
-import common.GameStage;
-import java.util.HashSet;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import server.GameEngine;
-import server.PlayerController;
-import server.StageController;
+import javafx.stage.WindowEvent;
+import server.GameClient;
+import server.GameServer;
 
 public class GameApplication extends Application {
 
-  private Canvas canvas;
   private Group root;
   private Scene scene;
 
-  private HashSet<GameRenderer> renderers;
+  private GameScreen gameScreen;
+  private GameServer gameServer;
+  private GameClient gameClient;
+
+  private Stage stage;
 
   public static void main(String args[]) {
     launch(args);
@@ -27,101 +29,57 @@ public class GameApplication extends Application {
   public void start(Stage primaryStage) throws Exception {
     primaryStage.setTitle("TimmyFightGoGo");
 
+    /* GAMESERVER-GAMECLIENT TEST
+    gameServer = new GameServer();
+    gameServer.start();
+    gameClient = new GameClient();
+    gameClient.start();
+    */
+
+    // The root element in the javafx gui stack, all sub-elements attach to this
     root = new Group();
+
+    // The scene where the root and all its children are displayed
     scene = new Scene(root);
-    canvas = new Canvas(768, 432);
-    GameStage stage = new GameStage();
-    renderers = new HashSet<>();
 
-    PlayerController playerController1 = new PlayerController(stage.getPlayer1());
-    StageController stageController = new StageController(stage);
-    StageRenderer stageRenderer = new StageRenderer(stage);
+    // Event handling (Input)
+    scene.setOnKeyPressed(this::onKeyPressed);
+    scene.setOnKeyReleased(this::onKeyReleased);
 
-    renderers.add(stageRenderer);
+    // What you see when in 'fight' mode
+    gameScreen = new GameScreen();
+    gameScreen.enter();
 
-    Thread renderThread = new Thread(() -> {
-      while (true) {
-        canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+    root.getChildren().add(gameScreen);
 
-        long before, after, delta, sleep = 0;
-        long defaultSleep = 1000 / 60;
-
-        before = System.currentTimeMillis();
-
-        for (GameRenderer renderer : renderers) {
-          renderer.render(canvas);
-        }
-
-        after = System.currentTimeMillis();
-        delta = after - before;
-
-        sleep = defaultSleep - delta;
-        sleep = sleep > 0 ? sleep : 0;
-
-        try {
-          Thread.sleep(sleep);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
-      }
-    });
-
-    root.getChildren().add(canvas);
-
-    scene.setOnKeyPressed(eh -> {
-      boolean state = true;
-
-      switch (eh.getCode()) {
-        case LEFT:
-          playerController1.leftDown = state;
-          break;
-        case RIGHT:
-          playerController1.rightDown = state;
-          break;
-        case UP:
-          playerController1.upDown = state;
-          break;
-        case DOWN:
-          playerController1.downDown = state;
-          break;
-        case SPACE:
-          playerController1.hit = state;
-          break;
-      }
-    });
-
-    scene.setOnKeyReleased(eh -> {
-      boolean state = false;
-
-      switch (eh.getCode()) {
-        case LEFT:
-          playerController1.leftDown = state;
-          break;
-        case RIGHT:
-          playerController1.rightDown = state;
-          break;
-        case UP:
-          playerController1.upDown = state;
-          break;
-        case DOWN:
-          playerController1.downDown = state;
-          break;
-        case SPACE:
-          playerController1.hit = state;
-          break;
-      }
-    });
-
-    GameEngine engine = new GameEngine();
-    engine.addController(playerController1);
-    engine.addController(stageController);
-
-    Thread engineThread = new Thread(engine);
-
-    engineThread.start();
-    renderThread.start();
-
+    // primaryStage is the stage provided by the javafx app instance
     primaryStage.setScene(scene);
+    primaryStage.setOnCloseRequest(this::exit);
     primaryStage.show();
+
+    // Save reference
+    stage = primaryStage;
+  }
+
+  private void exit(WindowEvent windowEvent) {
+    gameScreen.exit();
+  }
+
+  public void onKeyPressed(KeyEvent event) {
+    switch (event.getCode()) {
+      case F11:
+        stage.setFullScreen(!stage.isFullScreen());
+        break;
+      case ESCAPE:
+        // Release the nukes
+        Platform.exit();
+        System.exit(0);
+        break;
+    }
+    gameScreen.onKeyPressed(event);
+  }
+
+  public void onKeyReleased(KeyEvent event) {
+    gameScreen.onKeyReleased(event);
   }
 }

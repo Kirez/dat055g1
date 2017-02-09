@@ -10,15 +10,19 @@ import server.PlayerController;
 public class PlayerRenderer implements GameRenderer {
 
   private GamePlayer player;
+  public Color color;
 
+  //  Constructor
   public PlayerRenderer(GamePlayer player) {
     this.player = player;
+    color = Color.RED;
   }
 
+  //  Renders the player (which is now a 16x16 circle(oval) inside a rectangle) on the canvas
   @Override
   public void render(Canvas canvas) {
     GraphicsContext gc = canvas.getGraphicsContext2D();
-    gc.setFill(Color.RED);
+    gc.setFill(color);
     gc.fillOval(player.getPosition().getX(), player.getPosition().getY(), 16, 16);
     gc.fillRect(player.getHurtboxes(0).getHeadBoxX(), player.getHurtboxes(0).getHeadBoxY(),
         player.getHurtboxes(0).getBoxWidth(), player.getHurtboxes(0).getBoxHeight());
@@ -34,6 +38,15 @@ public class PlayerRenderer implements GameRenderer {
       gc.fillRect(player.getHitboxes(0).getPunchX(), player.getHitboxes(0).getPunchY(),
           player.getHitboxes(0).getBoxWidth(), player.getHitboxes(0).getBoxHeight());
     }*/
+
+    gc.setStroke(color); // Outline color
+
+    gc.beginPath();
+
+    gc.rect(player.getPosition().getX(), player.getPosition().getY(), player.getWidth()
+        , player.getHeight());
+
+    gc.stroke();
   }
 }
 
