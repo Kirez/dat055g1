@@ -31,7 +31,7 @@ public class GameServer extends Thread {
         e.printStackTrace();
       }
       String message = new String(recievePacket.getData());
-      System.out.print("SERVER RECIEVED: " + message + "\n");
+      //System.out.print("SERVER RECIEVED: " + message + "\n");
 
     }
   }

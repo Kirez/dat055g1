@@ -27,7 +27,7 @@ public class GameApplication extends Application {
 
   @Override
   public void start(Stage primaryStage) throws Exception {
-    primaryStage.setTitle("The MVC Game");
+    primaryStage.setTitle("TimmyFightGoGo");
 
 
     gameServer = new GameServer();

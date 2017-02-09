@@ -2,9 +2,11 @@ package server;
 
 import common.GamePlayer;
 import common.GameStage;
+import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.shape.Rectangle;
 import server.PlayerController.ACTION;
 
 /*Handles the state of the stage each tick and each player controller within it*/
@@ -15,6 +17,7 @@ public class StageController implements GameController {
   private PlayerController player1Controller;
   private PlayerController player2Controller;
   private GameClient gameClient;
+  int i;
 
   public StageController(GameStage stage) {
     this.stage = stage;
@@ -25,14 +28,19 @@ public class StageController implements GameController {
     player1Controller.bindKey(KeyCode.A, ACTION.MOVE_LEFT);
     player1Controller.bindKey(KeyCode.W, ACTION.JUMP);
     player1Controller.bindKey(KeyCode.D, ACTION.MOVE_RIGHT);
+    player1Controller.bindKey(KeyCode.S, ACTION.FALL);
+    player1Controller.bindKey(KeyCode.SPACE, ACTION.HIT);
 
     player2Controller.bindKey(KeyCode.LEFT, ACTION.MOVE_LEFT);
     player2Controller.bindKey(KeyCode.UP, ACTION.JUMP);
     player2Controller.bindKey(KeyCode.RIGHT, ACTION.MOVE_RIGHT);
+    player2Controller.bindKey(KeyCode.DOWN, ACTION.FALL);
+    player2Controller.bindKey(KeyCode.ENTER, ACTION.HIT);
 
     //The client side of server-client added to the stagecontroller in order to get and send information about the stage
     gameClient = new GameClient();
     gameClient.start();
+    int i = 0;
   }
 
   @Override
@@ -64,6 +72,46 @@ public class StageController implements GameController {
       p2.setVelocity(new Point2D(p2.getVelocity().getX(), 0));
     }
 
+    for (Rectangle B: p1.HurtBoxes) {
+      B.setX(p1.getPosition().getX() + p1.intX[i]);
+      B.setY(p1.getPosition().getY() + p1.intY[i]);
+      i++;
+    }
+
+    for (Rectangle B: p1.HitBoxes) {
+      B.setY(p1.getPosition().getY() + p1.intY[2]);
+      B.setX(p1.getPosition().getX() + p1.intX[2]);
+
+    }
+    i=0;
+    for (Rectangle B: p2.HurtBoxes) {
+      B.setX(p2.getPosition().getX() + p1.intX[i]);
+      B.setY(p2.getPosition().getY() + p1.intY[i]);
+    i++;
+    }
+    i=0;
+    for (Rectangle B: p2.HitBoxes) {
+      B.setY(p2.getPosition().getY() + p1.intY[2]);
+      B.setX(p2.getPosition().getX() - p1.intX[2]);
+    }
+    for (Rectangle hub : p1.HurtBoxes) {
+      Bounds bound1 = hub.getBoundsInParent();
+      for (Rectangle hib: p2.HitBoxes) {
+        Bounds bound2 = hib.getBoundsInParent();
+        if (bound1.intersects(bound2)) {
+          System.out.println("Rickity rekt");
+        }
+      }
+    }
+    for (Rectangle hub : p2.HurtBoxes) {
+      Bounds bound1 = hub.getBoundsInParent();
+      for (Rectangle hib: p1.HitBoxes) {
+        Bounds bound2 = hib.getBoundsInParent();
+        if (bound1.intersects(bound2)) {
+          System.out.println("Mortily Morted");
+        }
+      }
+    }
   }
 
   @Override
