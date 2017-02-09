@@ -10,6 +10,7 @@ import javafx.stage.WindowEvent;
 import server.GameClient;
 import server.GameServer;
 
+/*Client entry class handles switching of screens/modes*/
 public class GameApplication extends Application {
 
   private Group root;
@@ -17,7 +18,6 @@ public class GameApplication extends Application {
 
   private GameScreen gameScreen;
   private GameServer gameServer;
-  private GameClient gameClient;
 
   private Stage stage;
 
@@ -29,12 +29,10 @@ public class GameApplication extends Application {
   public void start(Stage primaryStage) throws Exception {
     primaryStage.setTitle("TimmyFightGoGo");
 
-    /* GAMESERVER-GAMECLIENT TEST
+
     gameServer = new GameServer();
     gameServer.start();
-    gameClient = new GameClient();
-    gameClient.start();
-    */
+
 
     // The root element in the javafx gui stack, all sub-elements attach to this
     root = new Group();
@@ -65,7 +63,7 @@ public class GameApplication extends Application {
     gameScreen.exit();
   }
 
-  public void onKeyPressed(KeyEvent event) {
+  private void onKeyPressed(KeyEvent event) {
     switch (event.getCode()) {
       case F11:
         stage.setFullScreen(!stage.isFullScreen());
@@ -79,7 +77,7 @@ public class GameApplication extends Application {
     gameScreen.onKeyPressed(event);
   }
 
-  public void onKeyReleased(KeyEvent event) {
+  private void onKeyReleased(KeyEvent event) {
     gameScreen.onKeyReleased(event);
   }
 }

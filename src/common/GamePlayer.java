@@ -1,27 +1,29 @@
 package common;
 
+import java.util.ArrayList;
+import javafx.geometry.BoundingBox;
+import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
+import javafx.scene.shape.Rectangle;
 
+/*The model/state for players. Handles only data*/
 public class GamePlayer {
 
   private static int DEFAULT_MAX_HP = 100;
   private static int DEFAULT_WIDTH = 64;
   private static int DEFAULT_HEIGHT = 128;
   private static Point2D DEFAULT_POSITION = new Point2D(0, 0);
-
+  public ArrayList<Rectangle> HurtBoxes;
+  public ArrayList<Rectangle> HitBoxes;
+  public double intX[] = new double[3];
+  public double intY[] = new double[3];
   private Point2D position;
   private Point2D velocity;
-
   private int maxHP;
   private int HP;
-
   private int width;
   private int height;
   private int i = 0;
-
-  public Box[] Hurtboxes = new Box[5];
-  public Box[] punchBox = new Box[5];
-
   private boolean onGround;
 
   //  Constructors
@@ -33,8 +35,19 @@ public class GamePlayer {
 
     width = DEFAULT_WIDTH;
     height = DEFAULT_HEIGHT;
+
+    this.HurtBoxes = new ArrayList<>();
+    this.HitBoxes = new ArrayList<>();
+
+
+    intX[0] = 0;
+    intX[1] = 16;
+    intX[2] = 96;
+    intY[0] = 0;
+    intY[1] = 32;
+    intY[2] = 24;
     generateHurtBoxes();
-    generateHitBoxes();
+ //   generateHitBoxes();
   }
 
   public GamePlayer(Point2D position, int maxHP) {
@@ -59,20 +72,19 @@ public class GamePlayer {
     this.HP = HP;
   }
 
-  public void generateHurtBoxes () {
-    Hurtboxes[0] = new Box(getPosition().getX(), getPosition().getY(), 64, 32, false, this);
-    Hurtboxes[1] = new Box(getPosition().getX(), getPosition().getY(), 32, 64, false, this);
-  }
-  public Box getHurtboxes(int i) {
-    return Hurtboxes[i];
+  public void generateHurtBoxes() {
+    Rectangle HurtBox1 = new Rectangle(getPosition().getX() + intX[0],
+        getPosition().getY() + intY[0], 64, 32);
+
+    HurtBoxes.add(HurtBox1);
+
+    Rectangle HurtBox2 = new Rectangle(getPosition().getX() + intX[1],
+        getPosition().getY() + intY[1], 32, 64);
+
+    HurtBoxes.add(HurtBox2);
+
   }
 
-  public void generateHitBoxes () {
-    punchBox[0] = new Box (getPosition().getX(), getPosition().getY(), 16, 16, true, this);
-  }
-  public Box getHitboxes(int i) {
-    return punchBox[i];
-  }
 
   public Point2D getPosition() {
     return position;

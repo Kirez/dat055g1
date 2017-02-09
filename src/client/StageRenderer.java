@@ -5,6 +5,9 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+/* Handles rendering of the stage and all that is in it
+*  In this case it calls the respective renderer for each player
+*  This in turn is asked to render by the GameScreen's render thread */
 public class StageRenderer implements GameRenderer {
 
   private PlayerRenderer playerRenderer1;

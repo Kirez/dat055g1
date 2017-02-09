@@ -3,21 +3,27 @@ package server;
 import common.GamePlayer;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Timer;
+import java.util.TimerTask;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.shape.Rectangle;
 
+/*Handles the state of a player each tick. Takes into consideration input from users*/
 public class PlayerController implements GameController {
 
   public GamePlayer player;
 
   private HashMap<KeyCode, ACTION> keyBinds;
   private HashSet<ACTION> actions; //Action-set to be performed during update
+  private boolean hit;
 
   public PlayerController(GamePlayer player) {
     this.player = player;
     keyBinds = new HashMap<>();
     actions = new HashSet<>();
+    hit = false;
   }
 
   @Override
@@ -35,12 +41,31 @@ public class PlayerController implements GameController {
       }
     }
     if (actions.contains(ACTION.FALL)) {
-      player.setPosition(player.getPosition().add(0, 320 * delta));
+      if (!player.isOnGround()) {
+        player.setPosition(player.getPosition().add(0, 1600 * delta));
+      }
+      else {
+
+      }
     }
 
-    if (actions.contains(ACTION.HIT)) {
-      //punch();
-      System.out.println("Hadouken!");
+    if (actions.contains(ACTION.HIT) && !hit) {
+
+      if (player.HitBoxes.isEmpty()) {
+        Rectangle HitBox1 = new Rectangle((double) player.getPosition().getX() + player.intX[2],
+            (double) player.getPosition().getY() + player.intY[2], 32, 32);
+
+        player.HitBoxes.add(HitBox1);
+        new Timer().schedule(new TimerTask() {
+                               @Override
+                               public void run() {
+                                 synchronized (player) {
+                                   player.HitBoxes.remove(HitBox1);
+                                 }
+                               }
+                             }, 100
+        );
+      }
     }
 
     player.setPosition(player.getPosition().add(player.getVelocity().multiply(delta)));
