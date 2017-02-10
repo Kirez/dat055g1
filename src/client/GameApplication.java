@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import server.GameClient;
 import server.GameServer;
 
 /*Client entry class handles switching of screens/modes*/
