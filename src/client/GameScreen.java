@@ -50,8 +50,12 @@ public class GameScreen extends AbstractScreen implements Runnable {
 
       //  Render all the GameRenderers on the game window and updates the game screen with 60fps frequency
       for (GameRenderer renderer : renderers) {
-        renderer.render(canvas);
+        synchronized (GameRenderer.class) {
+          renderer.render(canvas);
+        }
       }
+
+
 
       after = System.currentTimeMillis();
       delta = after - before;

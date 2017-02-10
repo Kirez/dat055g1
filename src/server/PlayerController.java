@@ -4,6 +4,7 @@ import common.GamePlayer;
 import common.GamePlayer.STATE;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -48,24 +49,30 @@ public class PlayerController implements GameController {
 
     }
 
-    for (STATE state : player.getStateDurations().keySet()) {
+    Iterator<STATE> it = player.getStateDurations().keySet().iterator();
+
+    while (it.hasNext()) {
+      STATE state = it.next();
       double duration = player.getStateDurations().get(state);
       duration -= delta;
 
       if (duration <= 0) {
-        player.getStateDurations().remove(state);
+        it.remove();
         player.setCooldown(state, GamePlayer.PUNCH_DURATION*2);
       } else {
         player.getStateDurations().put(state, duration);
       }
     }
 
-    for (STATE state : player.getStateCooldowns().keySet()) {
+    it = player.getStateCooldowns().keySet().iterator();
+
+    while (it.hasNext()) {
+      STATE state = it.next();
       double duration = player.getStateCooldowns().get(state);
       duration -= delta;
 
       if (duration <= 0) {
-        player.getStateCooldowns().remove(state);
+        it.remove();
       } else {
         player.getStateCooldowns().put(state, duration);
       }
