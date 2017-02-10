@@ -1,8 +1,7 @@
 package common;
 
 import java.util.ArrayList;
-import javafx.geometry.BoundingBox;
-import javafx.geometry.Bounds;
+import java.util.HashMap;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Rectangle;
 
@@ -13,18 +12,21 @@ public class GamePlayer {
   private static int DEFAULT_WIDTH = 64;
   private static int DEFAULT_HEIGHT = 128;
   private static Point2D DEFAULT_POSITION = new Point2D(0, 0);
-  public ArrayList<Rectangle> HurtBoxes;
-  public ArrayList<Rectangle> HitBoxes;
-  public double intX[] = new double[3];
-  public double intY[] = new double[3];
+  private ArrayList<Rectangle> hurtBoxes;
+  private ArrayList<Rectangle> hitBoxes;
   private Point2D position;
   private Point2D velocity;
   private int maxHP;
   private int HP;
   private int width;
   private int height;
-  private int i = 0;
   private boolean onGround;
+  private boolean faceRight;
+
+  private HashMap<STATE, Double> stateDurations;
+  private HashMap<STATE, Double> stateCooldowns;
+
+  public static final double PUNCH_DURATION = 0.15;
 
   //  Constructors
   private GamePlayer(Point2D position, Point2D velocity, int maxHP, int HP) {
@@ -36,18 +38,16 @@ public class GamePlayer {
     width = DEFAULT_WIDTH;
     height = DEFAULT_HEIGHT;
 
-    this.HurtBoxes = new ArrayList<>();
-    this.HitBoxes = new ArrayList<>();
+    this.hurtBoxes = new ArrayList<>();
+    this.hitBoxes = new ArrayList<>();
 
+    hurtBoxes.add(new Rectangle(0, 0, 64, 32));
+    hurtBoxes.add(new Rectangle(16, 16, 32, 64));
+    hitBoxes.add(new Rectangle(32, 24, 16, 16));
 
-    intX[0] = 0;
-    intX[1] = 16;
-    intX[2] = 96;
-    intY[0] = 0;
-    intY[1] = 32;
-    intY[2] = 24;
-    generateHurtBoxes();
- //   generateHitBoxes();
+    stateDurations = new HashMap<>();
+    stateCooldowns = new HashMap<>();
+    faceRight = true;
   }
 
   public GamePlayer(Point2D position, int maxHP) {
@@ -62,7 +62,6 @@ public class GamePlayer {
     this(DEFAULT_POSITION);
   }
 
-
   //  Getters and setters
   public int getMaxHP() {
     return maxHP;
@@ -71,20 +70,6 @@ public class GamePlayer {
   public void setHP(int HP) {
     this.HP = HP;
   }
-
-  public void generateHurtBoxes() {
-    Rectangle HurtBox1 = new Rectangle(getPosition().getX() + intX[0],
-        getPosition().getY() + intY[0], 64, 32);
-
-    HurtBoxes.add(HurtBox1);
-
-    Rectangle HurtBox2 = new Rectangle(getPosition().getX() + intX[1],
-        getPosition().getY() + intY[1], 32, 64);
-
-    HurtBoxes.add(HurtBox2);
-
-  }
-
 
   public Point2D getPosition() {
     return position;
@@ -111,10 +96,6 @@ public class GamePlayer {
     return width;
   }
 
-  public void move(Point2D delta) {
-    position = position.add(delta);
-  }
-
   public void accelerate(Point2D delta) {
     velocity = velocity.add(delta);
   }
@@ -126,4 +107,78 @@ public class GamePlayer {
   public void setOnGround(boolean onGround) {
     this.onGround = onGround;
   }
+
+  public ArrayList<Rectangle> getHurtBoxes() {
+    ArrayList<Rectangle> rectangles = new ArrayList<>();
+    for (Rectangle hurtBox : hurtBoxes) {
+      rectangles.add(new Rectangle(hurtBox.getX() + getPosition().getX(),
+          hurtBox.getY() + getPosition().getY() + hurtBox.getY(), hurtBox.getWidth(),
+          hurtBox.getHeight()));
+    }
+
+    return rectangles;
+  }
+
+  public ArrayList<Rectangle> getHitBoxes() {
+    ArrayList<Rectangle> rectangles = new ArrayList<>();
+
+    if (stateDurations.containsKey(STATE.HITTING)) {
+      for (Rectangle hitBox : hitBoxes) {
+        if (faceRight) {
+          rectangles.add(new Rectangle(hitBox.getX() + width - hitBox.getWidth() / 2 + getPosition().getX(),
+              hitBox.getY() + getPosition().getY() + hitBox.getY(), hitBox.getWidth(),
+              hitBox.getHeight()));
+        } else {
+          rectangles.add(new Rectangle(-hitBox.getX() - hitBox.getWidth() / 2+ getPosition().getX(),
+              hitBox.getY() + getPosition().getY() + hitBox.getY(), hitBox.getWidth(),
+              hitBox.getHeight()));
+        }
+      }
+    }
+
+    return rectangles;
+  }
+
+  public boolean isOnCooldown(STATE state) {
+    return stateCooldowns.containsKey(state);
+  }
+
+  public boolean isActive(STATE state) {
+    return stateDurations.containsKey(state);
+  }
+
+  public void activate(STATE state) {
+    switch (state) {
+      case HITTING:
+        stateDurations.put(STATE.HITTING, PUNCH_DURATION);
+        break;
+    }
+  }
+
+  public void setCooldown(STATE state, double duration) {
+    stateCooldowns.put(state, duration);
+  }
+
+  public void setFaceRight(boolean faceRight) {
+    this.faceRight = faceRight;
+  }
+
+  public enum STATE {
+    MOVE_LEFT,
+    MOVE_RIGHT,
+    JUMPING,
+    FALLING,
+    HITTING,
+    STUNNED
+  }
+
+  public HashMap<STATE, Double> getStateDurations() {
+    return stateDurations;
+  }
+
+  public HashMap<STATE, Double> getStateCooldowns() {
+    return stateCooldowns;
+  }
+
+
 }
