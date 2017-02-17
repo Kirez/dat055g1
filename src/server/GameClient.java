@@ -1,15 +1,16 @@
 package server;
 
-import javafx.scene.input.KeyEvent;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.HashSet;
+import javafx.scene.input.KeyEvent;
 
-//Stores keypresses in set, sends keys to server..
-public class GameClient extends Thread{
+//Stores keypresses in setState, sends keys to server..
+public class GameClient extends Thread {
+
   private int port = 9876;
   private InetAddress address;
   private DatagramSocket socket = null;
@@ -39,7 +40,7 @@ public class GameClient extends Thread{
 
 
   public synchronized void sendKeys() {
-    if(keys.isEmpty()){
+    if (keys.isEmpty()) {
       sendData("NOKEY".getBytes());
       return;
     }
@@ -49,11 +50,11 @@ public class GameClient extends Thread{
   }
 
   public void run() {
-    while (true){
+    while (true) {
       sendKeys();
       try {
         sleep(50);
-      }catch (InterruptedException e){
+      } catch (InterruptedException e) {
         e.printStackTrace();
       }
     }

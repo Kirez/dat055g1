@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import server.GameServer;
 
 /*Client entry class handles switching of screens/modes*/
 public class GameApplication extends Application {
@@ -15,8 +14,8 @@ public class GameApplication extends Application {
   private Group root;
   private Scene scene;
 
-  private GameScreen gameScreen;
-  private GameServer gameServer;
+  private PlayScreen playScreen;
+  //private GameServer gameServer;
 
   private Stage stage;
 
@@ -28,10 +27,8 @@ public class GameApplication extends Application {
   public void start(Stage primaryStage) throws Exception {
     primaryStage.setTitle("TimmyFightGoGo");
 
-
-    gameServer = new GameServer();
-    gameServer.start();
-
+    //gameServer = new GameServer();
+    //gameServer.start();
 
     // The root element in the javafx gui stack, all sub-elements attach to this
     root = new Group();
@@ -44,10 +41,10 @@ public class GameApplication extends Application {
     scene.setOnKeyReleased(this::onKeyReleased);
 
     // What you see when in 'fight' mode
-    gameScreen = new GameScreen();
-    gameScreen.enter();
+    playScreen = new PlayScreen();
+    playScreen.enter();
 
-    root.getChildren().add(gameScreen);
+    root.getChildren().add(playScreen);
 
     // primaryStage is the stage provided by the javafx app instance
     primaryStage.setScene(scene);
@@ -59,7 +56,7 @@ public class GameApplication extends Application {
   }
 
   private void exit(WindowEvent windowEvent) {
-    gameScreen.exit();
+    playScreen.exit();
   }
 
   private void onKeyPressed(KeyEvent event) {
@@ -73,10 +70,10 @@ public class GameApplication extends Application {
         System.exit(0);
         break;
     }
-    gameScreen.onKeyPressed(event);
+    playScreen.onKeyPressed(event);
   }
 
   private void onKeyReleased(KeyEvent event) {
-    gameScreen.onKeyReleased(event);
+    playScreen.onKeyReleased(event);
   }
 }

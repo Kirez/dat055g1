@@ -1,7 +1,6 @@
 package client;
 
 import common.GamePlayer;
-import common.GamePlayer.STATE;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -12,8 +11,8 @@ import javafx.scene.shape.Rectangle;
 *  In this case by the StageRenderer */
 public class PlayerRenderer implements GameRenderer {
 
-  private GamePlayer player;
   public Color color;
+  private GamePlayer player;
 
   //  Constructor
   public PlayerRenderer(GamePlayer player) {
@@ -26,22 +25,23 @@ public class PlayerRenderer implements GameRenderer {
   public void render(Canvas canvas) {
     GraphicsContext gc = canvas.getGraphicsContext2D();
     gc.setFill(color);
-    gc.fillOval(player.getPosition().getX(), player.getPosition().getY(), 16, 16);
 
-    if (player.isOnCooldown(STATE.STUNNED)) {
+    if (player.stateStunned.isActive()) {
       gc.setFill(Color.MAGENTA);
     } else {
       gc.setFill(Color.RED);
     }
 
-    for (Rectangle B: player.getHurtBoxes()) {
-     gc.fillRect(B.getX(),B.getY(),B.getWidth(),B.getHeight());
+    for (Rectangle B : player.getHurtBoxes()) {
+      gc.fillRect(B.getX(), B.getY(), B.getWidth(), B.getHeight());
     }
 
-    gc.setFill(Color.MAGENTA);
+    if (player.statePunching.isActive()) {
+      gc.setFill(Color.MAGENTA);
 
-    for (Rectangle R: player.getHitBoxes()) {
-      gc.fillRect(R.getX(),R.getY(),R.getWidth(),R.getHeight());
+      for (Rectangle R : player.getHitBoxes()) {
+        gc.fillRect(R.getX(), R.getY(), R.getWidth(), R.getHeight());
+      }
     }
 
     gc.setStroke(color); // Outline color

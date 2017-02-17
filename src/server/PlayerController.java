@@ -1,10 +1,10 @@
 package server;
 
+import common.ActionCycle.CYCLE;
 import common.GamePlayer;
-import common.GamePlayer.STATE;
+import common.GamePlayer.ACTION;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -14,69 +14,43 @@ public class PlayerController implements GameController {
 
   public GamePlayer player;
 
-  private HashMap<KeyCode, STATE> keyBinds;
-  private HashSet<STATE> states; //Action-set to be performed during update
+  private HashMap<KeyCode, ACTION> keyBinds;
+  private HashSet<ACTION> actions; //actions to be performed during update
 
   public PlayerController(GamePlayer player) {
     this.player = player;
     keyBinds = new HashMap<>();
-    states = new HashSet<>();
+    actions = new HashSet<>();
   }
 
   @Override
   public void update(double delta) {
-    if (states.contains(STATE.MOVE_LEFT)) {
+    if (actions.contains(ACTION.MOVE_LEFT)) {
       player.setFaceRight(false);
       player.setPosition(player.getPosition().add(-320 * delta, 0));
     }
-    if (states.contains(STATE.MOVE_RIGHT)) {
+    if (actions.contains(ACTION.MOVE_RIGHT)) {
       player.setFaceRight(true);
       player.setPosition(player.getPosition().add(320 * delta, 0));
     }
-    if (states.contains(STATE.JUMPING)) {
+    if (actions.contains(ACTION.JUMP)) {
       if (player.isOnGround()) {
         player.accelerate(new Point2D(0, -400));
         player.setOnGround(false);
       }
     }
-    if (states.contains(STATE.FALLING)) {
+    if (actions.contains(ACTION.FALL)) {
       if (!player.isOnGround()) {
         player.setPosition(player.getPosition().add(0, 1600 * delta));
       }
     }
 
-    if (player.isActive(STATE.HITTING)) {
+    if (player.statePunching.isActive()) {
 
     }
 
-    Iterator<STATE> it = player.getStateDurations().keySet().iterator();
-
-    while (it.hasNext()) {
-      STATE state = it.next();
-      double duration = player.getStateDurations().get(state);
-      duration -= delta;
-
-      if (duration <= 0) {
-        it.remove();
-        player.setCooldown(state, GamePlayer.PUNCH_DURATION*2);
-      } else {
-        player.getStateDurations().put(state, duration);
-      }
-    }
-
-    it = player.getStateCooldowns().keySet().iterator();
-
-    while (it.hasNext()) {
-      STATE state = it.next();
-      double duration = player.getStateCooldowns().get(state);
-      duration -= delta;
-
-      if (duration <= 0) {
-        it.remove();
-      } else {
-        player.getStateCooldowns().put(state, duration);
-      }
-    }
+    player.statePunching.update(delta);
+    player.stateStunned.update(delta);
 
     player.setPosition(player.getPosition().add(player.getVelocity().multiply(delta)));
   }
@@ -86,27 +60,27 @@ public class PlayerController implements GameController {
     engine.addController(this);
   }
 
-  public void bindKey(KeyCode code, STATE state) {
-    keyBinds.put(code, state);
+  public void bindKey(KeyCode code, ACTION action) {
+    keyBinds.put(code, action);
   }
 
   @Override
   public void onKeyPressed(KeyEvent event) {
-    if (!states.contains(STATE.HITTING) && keyBinds.get(event.getCode()) == STATE.HITTING) {
-      if (!player.isOnCooldown(STATE.HITTING) && !player.isActive(STATE.HITTING)) {
-        player.activate(STATE.HITTING);
+    if (!actions.contains(ACTION.HIT) && keyBinds.get(event.getCode()) == ACTION.HIT) {
+      if (player.statePunching.isReady() && !player.stateStunned.isActive()) {
+        player.statePunching.enterCycle(CYCLE.SPOOL_UP);
       }
     }
 
     if (keyBinds.containsKey(event.getCode())) {
-      states.add(keyBinds.get(event.getCode()));
+      actions.add(keyBinds.get(event.getCode()));
     }
   }
 
   @Override
   public void onKeyReleased(KeyEvent event) {
     if (keyBinds.containsKey(event.getCode())) {
-      states.remove(keyBinds.get(event.getCode()));
+      actions.remove(keyBinds.get(event.getCode()));
     }
   }
 }

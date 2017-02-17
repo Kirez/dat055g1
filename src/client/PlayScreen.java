@@ -2,13 +2,14 @@ package client;
 
 import common.GameStage;
 import java.util.HashSet;
+import javafx.application.Platform;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyEvent;
 import server.GameEngine;
 import server.StageController;
 
 /*The 'play' screen handles the 'play' state*/
-public class GameScreen extends AbstractScreen implements Runnable {
+public class PlayScreen extends AbstractScreen implements Runnable {
 
   private Canvas canvas;
   private HashSet<GameRenderer> renderers;
@@ -20,7 +21,7 @@ public class GameScreen extends AbstractScreen implements Runnable {
   private boolean exitSignal;
 
   //  Constructor
-  public GameScreen() {
+  public PlayScreen() {
     renderers = new HashSet<>();
     gameStage = new GameStage();
     engine = new GameEngine();
@@ -50,12 +51,8 @@ public class GameScreen extends AbstractScreen implements Runnable {
 
       //  Render all the GameRenderers on the game window and updates the game screen with 60fps frequency
       for (GameRenderer renderer : renderers) {
-        synchronized (GameRenderer.class) {
-          renderer.render(canvas);
-        }
+        renderer.render(canvas);
       }
-
-
 
       after = System.currentTimeMillis();
       delta = after - before;
@@ -84,8 +81,10 @@ public class GameScreen extends AbstractScreen implements Runnable {
     engineThread = new Thread(engine);
 
     // Run threads
-    engineThread.start();
-    renderThread.start();
+    Platform.runLater(this);
+    Platform.runLater(engine);
+    //engineThread.start();
+    //renderThread.start();
   }
 
   @Override
