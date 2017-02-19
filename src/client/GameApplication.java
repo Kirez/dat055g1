@@ -2,21 +2,18 @@ package client;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.input.KeyEvent;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 /*Client entry class handles switching of screens/modes*/
 public class GameApplication extends Application {
 
-  private Group root;
-  private Scene scene;
-
-  private PlayScreen playScreen;
+  public PlayScreen playScreen;
+  public MenuScreen menuScreen;
   //private GameServer gameServer;
 
+  private AbstractScreen activeScreen;
   private Stage stage;
 
   public static void main(String args[]) {
@@ -25,55 +22,38 @@ public class GameApplication extends Application {
 
   @Override
   public void start(Stage primaryStage) throws Exception {
-    primaryStage.setTitle("TimmyFightGoGo");
+    stage = primaryStage;
+    stage.setTitle("TimmyFightGoGo");
+    Screen screen = Screen.getPrimary();
+    stage.setWidth(screen.getBounds().getMaxX());
+    stage.setHeight(screen.getBounds().getMaxY());
+    //stage.setFullScreen(true);
 
-    //gameServer = new GameServer();
-    //gameServer.start();
+    playScreen = new PlayScreen(this);
+    menuScreen = new MenuScreen(this);
 
-    // The root element in the javafx gui stack, all sub-elements attach to this
-    root = new Group();
-
-    // The scene where the root and all its children are displayed
-    scene = new Scene(root);
-
-    // Event handling (Input)
-    scene.setOnKeyPressed(this::onKeyPressed);
-    scene.setOnKeyReleased(this::onKeyReleased);
-
-    // What you see when in 'fight' mode
-    playScreen = new PlayScreen();
-    playScreen.enter();
-
-    root.getChildren().add(playScreen);
+    setActiveScreen(menuScreen);
 
     // primaryStage is the stage provided by the javafx app instance
-    primaryStage.setScene(scene);
-    primaryStage.setOnCloseRequest(this::exit);
-    primaryStage.show();
+    stage.setOnCloseRequest(this::exit);
+    stage.show();
 
-    // Save reference
-    stage = primaryStage;
+    /*The following makes it so the screen pops-up in focus even when not in full screen*/
+    stage.requestFocus();
+    stage.setAlwaysOnTop(true);
+    stage.setAlwaysOnTop(false);
+  }
+
+  public void setActiveScreen(AbstractScreen screen) {
+    if (activeScreen != null) {
+      activeScreen.exit();
+    }
+    activeScreen = screen;
+    activeScreen.enter(stage);
   }
 
   private void exit(WindowEvent windowEvent) {
-    playScreen.exit();
-  }
-
-  private void onKeyPressed(KeyEvent event) {
-    switch (event.getCode()) {
-      case F11:
-        stage.setFullScreen(!stage.isFullScreen());
-        break;
-      case ESCAPE:
-        // Release the nukes
-        Platform.exit();
-        System.exit(0);
-        break;
-    }
-    playScreen.onKeyPressed(event);
-  }
-
-  private void onKeyReleased(KeyEvent event) {
-    playScreen.onKeyReleased(event);
+    activeScreen.exit();
+    Platform.exit();
   }
 }

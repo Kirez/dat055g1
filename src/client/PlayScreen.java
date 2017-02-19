@@ -1,104 +1,90 @@
 package client;
 
 import common.GameStage;
-import java.util.HashSet;
-import javafx.application.Platform;
+import javafx.animation.AnimationTimer;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 import server.GameEngine;
 import server.StageController;
 
 /*The 'play' screen handles the 'play' state*/
-public class PlayScreen extends AbstractScreen implements Runnable {
+public class PlayScreen extends AnimationTimer implements AbstractScreen {
 
   private Canvas canvas;
-  private HashSet<GameRenderer> renderers;
-  private Thread renderThread;
   private GameStage gameStage;
   private GameEngine engine;
   private Thread engineThread;
   private StageController stageController;
-  private boolean exitSignal;
+  private Group root;
+  private Scene scene;
+
+  private GameRenderer stageRenderer;
+  private GameRenderer player1Renderer;
+  private GameRenderer player2Renderer;
 
   //  Constructor
-  public PlayScreen() {
-    renderers = new HashSet<>();
+  public PlayScreen(GameApplication gameApplication) {
     gameStage = new GameStage();
     engine = new GameEngine();
-    canvas = new Canvas(768, 432);  // The render target
 
     // PlayerController, stageController, StageRenderer from the same gameStage
     stageController = new StageController(gameStage);
-    StageRenderer stageRenderer = new StageRenderer(gameStage);
 
-    renderers.add(stageRenderer);
+    stageRenderer = new StageRenderer(gameStage);
+    player1Renderer = new PlayerRenderer(gameStage.getPlayer1());
+    player2Renderer = new PlayerRenderer(gameStage.getPlayer2());
 
     stageController.attach(engine);
-
-    getChildren().add(canvas);
   }
 
-  //Runnable method for render-thread
   @Override
-  public void run() {
-    while (!exitSignal) {
-      canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+  public void handle(long l) {
+    canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-      long before, after, delta, sleep = 0;
-      long defaultSleep = 1000 / 60;
-
-      before = System.currentTimeMillis();
-
-      //  Render all the GameRenderers on the game window and updates the game screen with 60fps frequency
-      for (GameRenderer renderer : renderers) {
-        renderer.render(canvas);
-      }
-
-      after = System.currentTimeMillis();
-      delta = after - before;
-
-      sleep = defaultSleep - delta;
-      sleep = sleep > 0 ? sleep
-          : 0;  // If sleep > 0, sleep = sleep. Otherwise sleep = 0. Sleep is never negative.
-
-      try {
-        Thread.sleep(sleep);
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-    }
+    stageRenderer.render(canvas);
+    player1Renderer.render(canvas);
+    player2Renderer.render(canvas);
   }
 
   //  Runs GameEngine and renderThread.
   @Override
-  public void enter() {
-    // Set signals to go
-    exitSignal = false;
+  public void enter(Stage stage) {
+    // The root element in the javafx gui stack, all sub-elements attach to this
+    root = new Group();
+
+    canvas = new Canvas(stage.getWidth(), stage.getHeight());  // The render target
+
+    root.getChildren().add(canvas);
+
+    // The scene where the root and all its children are displayed
+    scene = new Scene(root);
+    scene.setOnKeyPressed(this::onKeyPressed);
+    scene.setOnKeyReleased(this::onKeyReleased);
+
+    stage.setScene(scene);
+
     engine.stop = false;
 
     // Create threads
-    renderThread = new Thread(this);
     engineThread = new Thread(engine);
 
-    // Run threads
-    Platform.runLater(this);
-    Platform.runLater(engine);
-    //engineThread.start();
-    //renderThread.start();
+    // Run thread
+    engineThread.start();
+
+    //Start animation timer aka renderer
+    this.start();
   }
 
   @Override
   public void exit() {
     // Signal for threads to stop
     engine.stop = true;
-    exitSignal = true;
 
     // Sync up with threads
     try {
-      System.out.print("Closing...");
-      System.out.print("renderThread...");
-      renderThread.join();
-      System.out.println("stopped");
       System.out.print("Closing...");
       System.out.print("engineThread...");
       engineThread.join();
