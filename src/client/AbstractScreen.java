@@ -1,13 +1,13 @@
 package client;
 
-import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 /*Common code for each screen*/
-public abstract class AbstractScreen extends Pane {
+public interface AbstractScreen {
 
   /*Run when a screen becomes visible*/
-  public abstract void enter();
+  void enter(Stage stage);
 
   /*Run when a screen becomes invisible*/
-  public abstract void exit();
+  void exit();
 }

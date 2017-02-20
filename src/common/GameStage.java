@@ -1,12 +1,14 @@
 package common;
 
 import javafx.geometry.Point2D;
+import javafx.scene.paint.Color;
 
 /*The model/state for a stage and all that is in it. Handles only data*/
 public class GameStage {
 
-  private static Point2D DEFAULT_PLAYER_1_SPAWN = new Point2D(64,64);
-  private static Point2D DEFAULT_PLAYER_2_SPAWN = new Point2D(640,64);
+  private static Point2D DEFAULT_PLAYER_1_SPAWN = new Point2D(2.5, 3);
+  private static Point2D DEFAULT_PLAYER_2_SPAWN = new Point2D(13.5, 3);
+  private static double DEFAULT_GROUND_Y = 6;
 
   private Point2D player1Spawn;
   private Point2D player2Spawn;
@@ -14,26 +16,32 @@ public class GameStage {
   private GamePlayer player1;
   private GamePlayer player2;
 
-  private int groundLevelY;
+  private double width = 16;
+  private double height = 9;
+
+  private double groundLevelY = 3;
 
   //  Constructor
-  public GameStage(Point2D p1s, Point2D p2s, GamePlayer p1, GamePlayer p2, int gly) {
+  public GameStage(Point2D p1s, Point2D p2s, GamePlayer p1, GamePlayer p2, double gly) {
     player1Spawn = p1s;
     player2Spawn = p2s;
     player1 = p1;
     player2 = p2;
     groundLevelY = gly;
 
+    player1.setColor(Color.RED);
+    player2.setColor(Color.BLUE);
+
     player1.setPosition(player1Spawn);
     player2.setPosition(player2Spawn);
   }
 
   public GameStage() {
-    this( DEFAULT_PLAYER_1_SPAWN
+    this(DEFAULT_PLAYER_1_SPAWN
         , DEFAULT_PLAYER_2_SPAWN
         , new GamePlayer()
         , new GamePlayer()
-        , 256);
+        , DEFAULT_GROUND_Y);
   }
 
   //  Resets players position and HP, player is still after reset
@@ -57,7 +65,7 @@ public class GameStage {
     return player2;
   }
 
-  public int getGroundLevelY() {
+  public double getGroundLevelY() {
     return groundLevelY;
   }
 }

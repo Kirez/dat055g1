@@ -1,7 +1,6 @@
 package client;
 
 import common.GamePlayer;
-import common.GamePlayer.STATE;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -13,38 +12,45 @@ import javafx.scene.shape.Rectangle;
 public class PlayerRenderer implements GameRenderer {
 
   private GamePlayer player;
-  public Color color;
 
   //  Constructor
   public PlayerRenderer(GamePlayer player) {
     this.player = player;
-    color = Color.RED;
   }
 
   //  Renders the player (which is now a 16x16 circle(oval) inside a rectangle) on the canvas
   @Override
   public void render(Canvas canvas) {
     GraphicsContext gc = canvas.getGraphicsContext2D();
-    gc.setFill(color);
-    gc.fillOval(player.getPosition().getX(), player.getPosition().getY(), 16, 16);
 
-    if (player.isOnCooldown(STATE.STUNNED)) {
+    double scaleX = canvas.getWidth() / 16;
+    double scaleY = canvas.getHeight() / 9;
+
+    gc.save();
+    gc.scale(scaleX, scaleY);
+    gc.setLineWidth(gc.getLineWidth() / scaleX);
+
+    gc.setFill(player.getColor());
+
+    if (player.stateStunned.isActive()) {
       gc.setFill(Color.MAGENTA);
     } else {
-      gc.setFill(Color.RED);
+      gc.setFill(player.getColor());
     }
 
-    for (Rectangle B: player.getHurtBoxes()) {
-     gc.fillRect(B.getX(),B.getY(),B.getWidth(),B.getHeight());
+    for (Rectangle B : player.getHurtBoxes()) {
+      gc.fillRect(B.getX(), B.getY(), B.getWidth(), B.getHeight());
     }
 
-    gc.setFill(Color.MAGENTA);
+    if (player.statePunching.isActive()) {
+      gc.setFill(Color.MAGENTA);
 
-    for (Rectangle R: player.getHitBoxes()) {
-      gc.fillRect(R.getX(),R.getY(),R.getWidth(),R.getHeight());
+      for (Rectangle R : player.getHitBoxes()) {
+        gc.fillRect(R.getX(), R.getY(), R.getWidth(), R.getHeight());
+      }
     }
 
-    gc.setStroke(color); // Outline color
+    gc.setStroke(player.getColor()); // Outline color
 
     gc.beginPath();
 
@@ -52,6 +58,9 @@ public class PlayerRenderer implements GameRenderer {
         , player.getHeight());
 
     gc.stroke();
+    gc.setLineWidth(gc.getLineWidth() * scaleX);
+
+    gc.restore();
   }
 }
 
