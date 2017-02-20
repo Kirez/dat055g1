@@ -20,6 +20,8 @@ public class PlayScreen extends AnimationTimer implements AbstractScreen {
   private StageController stageController;
   private Group root;
   private Scene scene;
+  private Stage stage;
+  private GameApplication owner;
 
   private GameRenderer stageRenderer;
   private GameRenderer player1Renderer;
@@ -27,6 +29,7 @@ public class PlayScreen extends AnimationTimer implements AbstractScreen {
 
   //  Constructor
   public PlayScreen(GameApplication gameApplication) {
+    owner = gameApplication;
     gameStage = new GameStage();
     engine = new GameEngine();
 
@@ -52,9 +55,10 @@ public class PlayScreen extends AnimationTimer implements AbstractScreen {
   //  Runs GameEngine and renderThread.
   @Override
   public void enter(Stage stage) {
+    this.stage = stage;
+
     // The root element in the javafx gui stack, all sub-elements attach to this
     root = new Group();
-
     canvas = new Canvas(stage.getWidth(), stage.getHeight());  // The render target
 
     root.getChildren().add(canvas);
@@ -63,6 +67,10 @@ public class PlayScreen extends AnimationTimer implements AbstractScreen {
     scene = new Scene(root);
     scene.setOnKeyPressed(this::onKeyPressed);
     scene.setOnKeyReleased(this::onKeyReleased);
+
+    //Lambda linking the scenes dimensions with the canvas
+    scene.widthProperty().addListener(l -> canvas.setWidth(scene.getWidth()));
+    scene.heightProperty().addListener(l -> canvas.setHeight(scene.getHeight()));
 
     stage.setScene(scene);
 
@@ -98,6 +106,9 @@ public class PlayScreen extends AnimationTimer implements AbstractScreen {
     switch (event.getCode()) {
       case P:
         engine.togglePause();
+        break;
+      case F11:
+        stage.setFullScreen(!stage.isFullScreen());
         break;
     }
     stageController.onKeyPressed(event);

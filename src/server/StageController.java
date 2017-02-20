@@ -44,7 +44,8 @@ public class StageController implements GameController {
 
   @Override
   public void update(double delta) {
-    int gravity = 800;
+
+    double gravity = 9.82;
 
     GamePlayer p1 = stage.getPlayer1();
     GamePlayer p2 = stage.getPlayer2();

@@ -11,25 +11,31 @@ import javafx.scene.shape.Rectangle;
 *  In this case by the StageRenderer */
 public class PlayerRenderer implements GameRenderer {
 
-  public Color color;
   private GamePlayer player;
 
   //  Constructor
   public PlayerRenderer(GamePlayer player) {
     this.player = player;
-    color = Color.RED;
   }
 
   //  Renders the player (which is now a 16x16 circle(oval) inside a rectangle) on the canvas
   @Override
   public void render(Canvas canvas) {
     GraphicsContext gc = canvas.getGraphicsContext2D();
-    gc.setFill(color);
+
+    double scaleX = canvas.getWidth() / 16;
+    double scaleY = canvas.getHeight() / 9;
+
+    gc.save();
+    gc.scale(scaleX, scaleY);
+    gc.setLineWidth(gc.getLineWidth() / scaleX);
+
+    gc.setFill(player.getColor());
 
     if (player.stateStunned.isActive()) {
       gc.setFill(Color.MAGENTA);
     } else {
-      gc.setFill(Color.RED);
+      gc.setFill(player.getColor());
     }
 
     for (Rectangle B : player.getHurtBoxes()) {
@@ -44,7 +50,7 @@ public class PlayerRenderer implements GameRenderer {
       }
     }
 
-    gc.setStroke(color); // Outline color
+    gc.setStroke(player.getColor()); // Outline color
 
     gc.beginPath();
 
@@ -52,6 +58,9 @@ public class PlayerRenderer implements GameRenderer {
         , player.getHeight());
 
     gc.stroke();
+    gc.setLineWidth(gc.getLineWidth() * scaleX);
+
+    gc.restore();
   }
 }
 

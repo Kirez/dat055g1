@@ -19,8 +19,15 @@ public class StageRenderer implements GameRenderer {
   @Override
   public void render(Canvas canvas) {
     GraphicsContext gc = canvas.getGraphicsContext2D();
+    double scaleX = canvas.getWidth() / 16;
+    double scaleY = canvas.getHeight() / 9;
+
+    gc.save();
+    gc.scale(scaleX, scaleY);
 
     gc.setFill(Color.BLACK);
     gc.fillRect(0, gameStage.getGroundLevelY(), canvas.getWidth(), canvas.getHeight());
+
+    gc.restore();
   }
 }

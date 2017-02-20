@@ -2,6 +2,7 @@ package common;
 
 import java.util.ArrayList;
 import javafx.geometry.Point2D;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 /*The model/state for players. Handles only data*/
@@ -11,8 +12,8 @@ public class GamePlayer {
   private static final double PUNCH_DURATION = 0.15;
   private static final double PUNCH_COOL_DOWN = 0.15;
   private static int DEFAULT_MAX_HP = 100;
-  private static int DEFAULT_WIDTH = 64;
-  private static int DEFAULT_HEIGHT = 128;
+  private static double DEFAULT_WIDTH = 1;
+  private static double DEFAULT_HEIGHT = 2;
   private static Point2D DEFAULT_POSITION = new Point2D(0, 0);
 
   public ActionCycle stateStunned;
@@ -23,10 +24,11 @@ public class GamePlayer {
   private Point2D velocity;
   private int maxHP;
   private int HP;
-  private int width;
-  private int height;
+  private double width;
+  private double height;
   private boolean onGround;
   private boolean faceRight;
+  private Color color;
 
   //  Constructors
   private GamePlayer(Point2D position, Point2D velocity, int maxHP, int HP) {
@@ -41,9 +43,9 @@ public class GamePlayer {
     this.hurtBoxes = new ArrayList<>();
     this.hitBoxes = new ArrayList<>();
 
-    hurtBoxes.add(new Rectangle(8, 0, 48, 32));
-    hurtBoxes.add(new Rectangle(0, 16, 32, 64));
-    hitBoxes.add(new Rectangle(48, 24, 16, 16));
+    hurtBoxes.add(new Rectangle(height * 0.0625, 0, width * 0.75, height * 0.25));
+    hurtBoxes.add(new Rectangle(0, height * 0.125, width * 0.5, height * 0.5));
+    hitBoxes.add(new Rectangle(0.75 * width, height * 0.1875, width * 0.25, height * 0.125));
 
     stateStunned = new ActionCycle(PUNCH_DURATION, PUNCH_DURATION * 2, 0);
     statePunching = new ActionCycle(PUNCH_SPOOL_UP, PUNCH_DURATION, PUNCH_COOL_DOWN);
@@ -89,11 +91,11 @@ public class GamePlayer {
     this.velocity = velocity;
   }
 
-  public int getHeight() {
+  public double getHeight() {
     return height;
   }
 
-  public int getWidth() {
+  public double getWidth() {
     return width;
   }
 
@@ -151,6 +153,14 @@ public class GamePlayer {
 
   public void setFaceRight(boolean faceRight) {
     this.faceRight = faceRight;
+  }
+
+  public Color getColor() {
+    return color;
+  }
+
+  public void setColor(Color color) {
+    this.color = color;
   }
 
   public enum ACTION {

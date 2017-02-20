@@ -27,21 +27,21 @@ public class PlayerController implements GameController {
   public void update(double delta) {
     if (actions.contains(ACTION.MOVE_LEFT)) {
       player.setFaceRight(false);
-      player.setPosition(player.getPosition().add(-320 * delta, 0));
+      player.setPosition(player.getPosition().add(-4 * delta, 0));
     }
     if (actions.contains(ACTION.MOVE_RIGHT)) {
       player.setFaceRight(true);
-      player.setPosition(player.getPosition().add(320 * delta, 0));
+      player.setPosition(player.getPosition().add(4 * delta, 0));
     }
     if (actions.contains(ACTION.JUMP)) {
       if (player.isOnGround()) {
-        player.accelerate(new Point2D(0, -400));
+        player.accelerate(new Point2D(0, -6));
         player.setOnGround(false);
       }
     }
     if (actions.contains(ACTION.FALL)) {
       if (!player.isOnGround()) {
-        player.setPosition(player.getPosition().add(0, 1600 * delta));
+        player.setPosition(player.getPosition().add(0, 1 * delta));
       }
     }
 
