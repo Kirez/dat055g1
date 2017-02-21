@@ -26,7 +26,8 @@ public class PlayScreen extends AnimationTimer implements AbstractScreen {
   private GameRenderer stageRenderer;
   private GameRenderer player1Renderer;
   private GameRenderer player2Renderer;
-
+  private HealthRenderer player1HealthBar;
+  private HealthRenderer player2HealthBar;
   //  Constructor
   public PlayScreen(GameApplication gameApplication) {
     owner = gameApplication;
@@ -39,7 +40,8 @@ public class PlayScreen extends AnimationTimer implements AbstractScreen {
     stageRenderer = new StageRenderer(gameStage);
     player1Renderer = new PlayerRenderer(gameStage.getPlayer1());
     player2Renderer = new PlayerRenderer(gameStage.getPlayer2());
-
+    player1HealthBar = new HealthRenderer(gameStage.getPlayer1(), true);
+    player2HealthBar = new HealthRenderer(gameStage.getPlayer2(), false);
     stageController.attach(engine);
   }
 
@@ -48,6 +50,9 @@ public class PlayScreen extends AnimationTimer implements AbstractScreen {
     canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
     stageRenderer.render(canvas);
+    player1HealthBar.render(canvas);
+    player2HealthBar.render(canvas);
+
     player1Renderer.render(canvas);
     player2Renderer.render(canvas);
   }
