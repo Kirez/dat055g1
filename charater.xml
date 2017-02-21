@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<rooster>
+	<character>
+		<Red>
+		<health>80</health>
+		<charSize>
+			<height>80</height>
+			<width>36</width>
+		</charSize>
+			<head>
+				<height>0.5</height>
+				<width>0.5</width>
+				<x>0.0625</x>
+				<y>0</y>
+			</head>
+			<body>
+				<height>1</height>
+				<width>0.5</width>
+				<x>0.125</x>
+				<y>0.25</y>
+			</body>
+			<rleg>
+				<height>1</height>
+				<width>0.5</width>
+				<x>0.5</x>
+				<y>0.5</y>
+			</rleg>
+			<lleg>
+				<height>1</height>
+				<width>0.5</width>
+				<x>0</x>
+				<y>0.5</y>
+			</lleg>
+			<jab>
+				
+			</jab>
+	</Red>
+	</character>
+</rooster>

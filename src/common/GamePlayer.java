@@ -43,8 +43,8 @@ public class GamePlayer {
     this.hurtBoxes = new ArrayList<>();
     this.hitBoxes = new ArrayList<>();
 
-    hurtBoxes.add(new Rectangle(height * 0.0625, 0, width * 0.75, height * 0.25));
-    hurtBoxes.add(new Rectangle(0, height * 0.125, width * 0.5, height * 0.5));
+  //  hurtBoxes.add(new Rectangle(height * 0.0625, 0, width * 0.75, height * 0.25));
+  //  hurtBoxes.add(new Rectangle(0, height * 0.125, width * 0.5, height * 0.5));
     hitBoxes.add(new Rectangle(0.75 * width, height * 0.1875, width * 0.25, height * 0.125));
 
     stateStunned = new ActionCycle(PUNCH_DURATION, PUNCH_DURATION * 2, 0);
@@ -82,7 +82,13 @@ public class GamePlayer {
     this.position = position;
 
   }
-
+  public void addHurtbox(double x, double y, double boxwidth, double boxheight ) {
+    hurtBoxes.add(new Rectangle(x, y, boxwidth, boxheight));
+    System.out.println(x + " " + y + " " + boxwidth + " " + boxheight);
+  }
+  public void addHitbox(double x,double y,double boxwidth,double boxheight) {
+    hitBoxes.add(new Rectangle(x, y, boxwidth, boxheight));
+  }
   public Point2D getVelocity() {
     return velocity;
   }

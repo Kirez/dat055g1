@@ -1,5 +1,6 @@
 package common;
 
+import client.FileHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 
@@ -28,7 +29,8 @@ public class GameStage {
     player1 = p1;
     player2 = p2;
     groundLevelY = gly;
-
+    FileHandler fh1 = new FileHandler(p1);
+    FileHandler fh2 = new FileHandler(p2);
     player1.setColor(Color.RED);
     player2.setColor(Color.BLUE);
 

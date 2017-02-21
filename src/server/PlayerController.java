@@ -41,7 +41,7 @@ public class PlayerController implements GameController {
     }
     if (actions.contains(ACTION.FALL)) {
       if (!player.isOnGround()) {
-        player.setPosition(player.getPosition().add(0, 1 * delta));
+        player.setPosition(player.getPosition().add(0, 2 * delta));
       }
     }
 
