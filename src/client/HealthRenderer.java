@@ -31,6 +31,7 @@ public class HealthRenderer implements GameRenderer{
         double scaleY = canvas.getHeight() / 9;
 
         gc.save();
+
         gc.scale(scaleX, scaleY);
         gc.setLineWidth(gc.getLineWidth() / scaleX);
 
@@ -42,10 +43,16 @@ public class HealthRenderer implements GameRenderer{
             healthBar = new Rectangle(16-0.6-5.7, 0.3, 5.7, 0.4);
         }
 
-        gc.setFill(Color.LIMEGREEN);
-        gc.fillRect(healthBar.getX(), healthBar.getY(), healthBar.getWidth(), healthBar.getHeight());
+        double percentage = (double) player.getHP() / player.getMaxHP();
 
+        gc.setFill(Color.LIMEGREEN);
+        if (leftBar) {
+            gc.fillRect(healthBar.getX(), healthBar.getY(), healthBar.getWidth() * percentage, healthBar.getHeight());
+        } else {
+            gc.fillRect(healthBar.getX() + healthBar.getWidth() * (1d - percentage), healthBar.getY(), healthBar.getWidth() * percentage, healthBar.getHeight());
+        }
         gc.setLineWidth(gc.getLineWidth() * scaleX);
+
         gc.restore();
     }
 }
