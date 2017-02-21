@@ -163,6 +163,10 @@ public class GamePlayer {
     this.color = color;
   }
 
+  public int getHP() {
+    return HP;
+  }
+
   public enum ACTION {
     MOVE_LEFT,
     MOVE_RIGHT,

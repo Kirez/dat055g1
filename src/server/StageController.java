@@ -76,7 +76,8 @@ public class StageController implements GameController {
           if (hit.getBoundsInParent().intersects(hurt.getBoundsInParent())) {
             if (!p2.stateStunned.isActive()) {
               p2.stateStunned.enterCycle(CYCLE.ACTIVE);
-              System.out.println("Player 2 is hit");
+              p2.setHP(p2.getHP() - 10);
+              System.out.println("Player 2 is hit" + p2.getHP() + "HP");
             }
           }
         }
@@ -89,7 +90,8 @@ public class StageController implements GameController {
           if (hit.getBoundsInParent().intersects(hurt.getBoundsInParent())) {
             if (!p1.stateStunned.isActive()) {
               p1.stateStunned.enterCycle(CYCLE.ACTIVE);
-              System.out.println("Player 1 is hit");
+              p1.setHP(p1.getHP() - 10);
+              System.out.println("Player 1 is hit - " + p1.getHP() + "HP");
             }
           }
         }
