@@ -17,6 +17,7 @@ public class MenuScreen implements AbstractScreen {
   private GridPane layout;
   private Button playButton;
   private Button optionsButton;
+  private Button multiplayerButton;
   private Button exitButton;
   private Label title;
   private GameApplication owner;
@@ -26,12 +27,14 @@ public class MenuScreen implements AbstractScreen {
     playButton = new Button("Play");
     optionsButton = new Button("Options");
     exitButton = new Button("Exit");
+    multiplayerButton = new Button("Multiplayer");
     title = new Label("TimmyFightGoGo");
     title.setFont(Font.font(72));
     layout = new GridPane();
-    layout.addColumn(0, title, playButton, optionsButton, exitButton);
+    layout.addColumn(0, title, playButton, multiplayerButton, optionsButton, exitButton);
     playButton.setOnAction(this::onPlayButton);
     exitButton.setOnAction(this::onExitButton);
+    multiplayerButton.setOnAction(this::onMultiplayerButton);
     exit();
     layout.setAlignment(Pos.CENTER);
   }
@@ -54,6 +57,8 @@ public class MenuScreen implements AbstractScreen {
   void onPlayButton(ActionEvent event) {
     owner.setActiveScreen(owner.playScreen);
   }
+
+  void onMultiplayerButton(ActionEvent event) { owner.setActiveScreen(owner.connectScreen);}
 
   @Override
   public void exit() {
