@@ -1,23 +1,22 @@
 package server;
 
+import common.ActionCycle.CYCLE;
 import common.GamePlayer;
+import common.GamePlayer.ACTION;
 import common.GameStage;
-import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
-import server.PlayerController.ACTION;
 
 /*Handles the state of the stage each tick and each player controller within it*/
 public class StageController implements GameController {
 
   GameStage stage;
-
+  int i;
   private PlayerController player1Controller;
   private PlayerController player2Controller;
-  private GameClient gameClient;
-  int i;
+  //private GameClient gameClient;
 
   public StageController(GameStage stage) {
     this.stage = stage;
@@ -38,14 +37,15 @@ public class StageController implements GameController {
     player2Controller.bindKey(KeyCode.ENTER, ACTION.HIT);
 
     //The client side of server-client added to the stagecontroller in order to get and send information about the stage
-    gameClient = new GameClient();
-    gameClient.start();
+    //gameClient = new GameClient();
+    //gameClient.start();
     int i = 0;
   }
 
   @Override
   public void update(double delta) {
-    int gravity = 800;
+
+    double gravity = 9.82;
 
     GamePlayer p1 = stage.getPlayer1();
     GamePlayer p2 = stage.getPlayer2();
@@ -54,61 +54,44 @@ public class StageController implements GameController {
 
     if (p1f.getY() < stage.getGroundLevelY()) {
       p1.accelerate(new Point2D(0, gravity * delta));
-    }
-    else if (!p1.isOnGround()) {
+    } else if (!p1.isOnGround()) {
       p1.setOnGround(true);
       p1.setPosition(new Point2D(p1.getPosition().getX()
-          ,stage.getGroundLevelY() - p1.getHeight()));
+          , stage.getGroundLevelY() - p1.getHeight()));
       p1.setVelocity(new Point2D(p1.getVelocity().getX(), 0));
     }
 
     if (p2f.getY() < stage.getGroundLevelY()) {
       p2.accelerate(new Point2D(0, gravity * delta));
-    }
-    else if (!p2.isOnGround()) {
+    } else if (!p2.isOnGround()) {
       p2.setOnGround(true);
       p2.setPosition(new Point2D(p2.getPosition().getX()
-          ,stage.getGroundLevelY() - p2.getHeight()));
+          , stage.getGroundLevelY() - p2.getHeight()));
       p2.setVelocity(new Point2D(p2.getVelocity().getX(), 0));
     }
 
-    for (Rectangle B: p1.HurtBoxes) {
-      B.setX(p1.getPosition().getX() + p1.intX[i]);
-      B.setY(p1.getPosition().getY() + p1.intY[i]);
-      i++;
-    }
-
-    for (Rectangle B: p1.HitBoxes) {
-      B.setY(p1.getPosition().getY() + p1.intY[2]);
-      B.setX(p1.getPosition().getX() + p1.intX[2]);
-
-    }
-    i=0;
-    for (Rectangle B: p2.HurtBoxes) {
-      B.setX(p2.getPosition().getX() + p1.intX[i]);
-      B.setY(p2.getPosition().getY() + p1.intY[i]);
-    i++;
-    }
-    i=0;
-    for (Rectangle B: p2.HitBoxes) {
-      B.setY(p2.getPosition().getY() + p1.intY[2]);
-      B.setX(p2.getPosition().getX() - p1.intX[2]);
-    }
-    for (Rectangle hub : p1.HurtBoxes) {
-      Bounds bound1 = hub.getBoundsInParent();
-      for (Rectangle hib: p2.HitBoxes) {
-        Bounds bound2 = hib.getBoundsInParent();
-        if (bound1.intersects(bound2)) {
-          System.out.println("Rickity rekt");
+    if (player1Controller.player.statePunching.isActive()) {
+      for (Rectangle hit : p1.getHitBoxes()) {
+        for (Rectangle hurt : p2.getHurtBoxes()) {
+          if (hit.getBoundsInParent().intersects(hurt.getBoundsInParent())) {
+            if (!p2.stateStunned.isActive()) {
+              p2.stateStunned.enterCycle(CYCLE.ACTIVE);
+              System.out.println("Player 2 is hit");
+            }
+          }
         }
       }
     }
-    for (Rectangle hub : p2.HurtBoxes) {
-      Bounds bound1 = hub.getBoundsInParent();
-      for (Rectangle hib: p1.HitBoxes) {
-        Bounds bound2 = hib.getBoundsInParent();
-        if (bound1.intersects(bound2)) {
-          System.out.println("Mortily Morted");
+
+    if (player2Controller.player.statePunching.isActive()) {
+      for (Rectangle hit : p2.getHitBoxes()) {
+        for (Rectangle hurt : p1.getHurtBoxes()) {
+          if (hit.getBoundsInParent().intersects(hurt.getBoundsInParent())) {
+            if (!p1.stateStunned.isActive()) {
+              p1.stateStunned.enterCycle(CYCLE.ACTIVE);
+              System.out.println("Player 1 is hit");
+            }
+          }
         }
       }
     }
@@ -126,13 +109,13 @@ public class StageController implements GameController {
   public void onKeyPressed(KeyEvent event) {
     player1Controller.onKeyPressed(event);
     player2Controller.onKeyPressed(event);
-    gameClient.setKeyPressed(event); //Add key to client sendlist
+    //gameClient.setKeyPressed(event); //Add key to client sendlist
   }
 
   @Override
   public void onKeyReleased(KeyEvent event) {
     player1Controller.onKeyReleased(event);
     player2Controller.onKeyReleased(event);
-    gameClient.setKeyReleased(event); //Remove key from client sendlist
+    //gameClient.setKeyReleased(event); //Remove key from client sendlist
   }
 }
