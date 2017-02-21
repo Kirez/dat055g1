@@ -11,6 +11,7 @@ public class GameApplication extends Application {
 
   public PlayScreen playScreen;
   public MenuScreen menuScreen;
+  public ConnectScreen connectScreen;
   //private GameServer gameServer;
 
   private AbstractScreen activeScreen;
@@ -31,6 +32,7 @@ public class GameApplication extends Application {
 
     playScreen = new PlayScreen(this);
     menuScreen = new MenuScreen(this);
+    connectScreen = new ConnectScreen(this);
 
     setActiveScreen(menuScreen);
 
