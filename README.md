@@ -5,8 +5,8 @@ Group project in object oriented applications
 ## Controls (WIP)
 
 ### General
-* `F11` Fullscreen toggle
-* `P` Pause toggle
+* `F11` Toggle fullscreen
+* `P` Toggle pause
 
 ### Player 1
 * `W A S D` Move
