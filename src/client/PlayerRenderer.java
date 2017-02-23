@@ -6,9 +6,19 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-/* Handles rendering of a player by reference to a canvas
-*  Does not render directly the render method is run from somewhere else
-*  In this case by the StageRenderer */
+/**
+ * Handles rendering of a player by reference to a canvas.
+ * <p>
+ * Does not render directly the render method is run from somewhere else.
+ * In this case by the StageRenderer
+ *
+ * @author Alexander Andersson (alexaan)
+ * @author Linus Berglund (belinus)
+ * @author Erik Källberg (kalerik)
+ * @author Timmy Truong (timmyt)
+ * @author Karl Ängermark (karlang)
+ * @version 2017-02-20
+ */
 public class PlayerRenderer implements GameRenderer {
 
   private GamePlayer player;

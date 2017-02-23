@@ -11,7 +11,16 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-/*Main menu where you press play, quit, options, etc*/
+/**
+ * Main menu where you press play, quit, options, etc
+ *
+ * @author Alexander Andersson (alexaan)
+ * @author Linus Berglund (belinus)
+ * @author Erik Källberg (kalerik)
+ * @author Timmy Truong (timmyt)
+ * @author Karl Ängermark (karlang)
+ * @version 2017-02-23
+ */
 public class MenuScreen implements AbstractScreen {
 
   private GridPane layout;

@@ -10,7 +10,17 @@ import javafx.stage.Stage;
 import server.GameEngine;
 import server.StageController;
 
-/*The 'play' screen handles the 'play' state*/
+/**
+ * The 'play' screen handles the 'play' state
+ *
+ * @author Alexander Andersson (alexaan)
+ * @author Linus Berglund (belinus)
+ * @author Erik Källberg (kalerik)
+ * @author Timmy Truong (timmyt)
+ * @author Karl Ängermark (karlang)
+ * @version 2017-02-23
+ */
+
 public class PlayScreen extends AnimationTimer implements AbstractScreen {
 
   private Canvas canvas;

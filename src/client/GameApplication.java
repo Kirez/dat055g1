@@ -6,7 +6,16 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-/*Client entry class handles switching of screens/modes*/
+/**
+ * Client entry class handles switching of screens/modes
+ *
+ * @author Alexander Andersson (alexaan)
+ * @author Linus Berglund (belinus)
+ * @author Erik Källberg (kalerik)
+ * @author Timmy Truong (timmyt)
+ * @author Karl Ängermark (karlang)
+ * @version 2017-02-21
+ */
 public class GameApplication extends Application {
 
   public PlayScreen playScreen;

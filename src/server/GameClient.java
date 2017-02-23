@@ -8,7 +8,17 @@ import java.net.UnknownHostException;
 import java.util.HashSet;
 import javafx.scene.input.KeyEvent;
 
-//Stores keypresses in setState, sends keys to server..
+
+/**
+ * Stores keypresses in setState, sends keys to server..
+ *
+ * @author Alexander Andersson (alexaan)
+ * @author Linus Berglund (belinus)
+ * @author Erik Källberg (kalerik)
+ * @author Timmy Truong (timmyt)
+ * @author Karl Ängermark (karlang)
+ * @version 2017-02-17
+ */
 public class GameClient extends Thread {
 
   private int port = 9876;

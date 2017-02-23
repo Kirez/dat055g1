@@ -3,6 +3,16 @@ package server;
 import java.util.HashSet;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * TODO: Add description
+ *
+ * @author Alexander Andersson (alexaan)
+ * @author Linus Berglund (belinus)
+ * @author Erik Källberg (kalerik)
+ * @author Timmy Truong (timmyt)
+ * @author Karl Ängermark (karlang)
+ * @version 2017-02-08
+ */
 public class GameEngine implements Runnable {
 
   public static int DEFAULT_TPS = 100;
