@@ -28,6 +28,7 @@ public class PlayScreen extends AnimationTimer implements AbstractScreen {
   private GameRenderer player2Renderer;
   private HealthRenderer player1HealthBar;
   private HealthRenderer player2HealthBar;
+
   //  Constructor
   public PlayScreen(GameApplication gameApplication) {
     owner = gameApplication;
