@@ -58,7 +58,9 @@ public class MenuScreen implements AbstractScreen {
     owner.setActiveScreen(owner.playScreen);
   }
 
-  void onMultiplayerButton(ActionEvent event) { owner.setActiveScreen(owner.connectScreen);}
+  void onMultiplayerButton(ActionEvent event) {
+    owner.setActiveScreen(owner.connectScreen);
+  }
 
   @Override
   public void exit() {

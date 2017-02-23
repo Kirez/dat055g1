@@ -70,10 +70,6 @@ public class GamePlayer {
     return maxHP;
   }
 
-  public void setHP(int HP) {
-    this.HP = HP;
-  }
-
   public Point2D getPosition() {
     return position;
   }
@@ -165,6 +161,10 @@ public class GamePlayer {
 
   public int getHP() {
     return HP;
+  }
+
+  public void setHP(int HP) {
+    this.HP = HP;
   }
 
   public enum ACTION {
