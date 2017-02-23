@@ -17,7 +17,7 @@ import javafx.scene.shape.Rectangle;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-21
+ * @version 2017-02-23
  */
 
 /*Handles the state of the stage each tick and each player controller within it*/
