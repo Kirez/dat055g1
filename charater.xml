@@ -14,13 +14,13 @@
 				<y>0</y>
 			</head>
 			<body>
-				<height>1</height>
+				<height>2</height>
 				<width>0.5</width>
 				<x>0.125</x>
 				<y>0.25</y>
 			</body>
 			<rleg>
-				<height>1</height>
+				<height>2</height>
 				<width>0.5</width>
 				<x>0.5</x>
 				<y>0.5</y>
@@ -32,8 +32,17 @@
 				<y>0.5</y>
 			</lleg>
 			<jab>
-				
+				<height>5</height>
+				<width>5</width>
+				<x>0.5</x>
+				<y>-1</y>
 			</jab>
+			<kick>
+				<height>1</height>
+				<width>1</width>
+				<x>-0.5</x>
+				<y>1.5</y>
+			</kick>
 	</Red>
 	</character>
 </rooster>

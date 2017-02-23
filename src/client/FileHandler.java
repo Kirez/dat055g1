@@ -39,12 +39,17 @@ public class FileHandler {
         boolean boxY = false;
         boolean boxRleg = false;
         boolean boxLleg = false;
+        boolean charJab = false;
+        boolean charKick = false;
 
         public void startElement(String uri, String localName, String qName,
             Attributes attributes) throws SAXException {
 
           if (qName.equalsIgnoreCase("HEALTH")) {
             charHealth = true;
+          }
+          if (qName.equalsIgnoreCase("JAB")) {
+            charJab = false;
           }
           if (qName.equalsIgnoreCase("HEAD")) {
             boxHead = true;
@@ -70,12 +75,19 @@ public class FileHandler {
           if (qName.equalsIgnoreCase("Y")) {
             boxY = true;
           }
+          if (qName.equalsIgnoreCase("KICK")) {
+            charKick = true;
+          }
         }
 
         public void endElement(String uri, String localName, String qName) throws SAXException {
 
           if (qName.equalsIgnoreCase("HEALTH")) {
             charHealth = false;
+          }
+          if (qName.equalsIgnoreCase("JAB")) {
+            charJab = false;
+            player.addHitbox(bX, bY, bWidth, bHeight);
           }
           if (qName.equalsIgnoreCase("HEAD")) {
             boxHead = false;
@@ -105,11 +117,15 @@ public class FileHandler {
           if (qName.equalsIgnoreCase("Y")) {
             boxY = false;
           }
+          if (qName.equalsIgnoreCase("KICK")) {
+            charKick = false;
+            player.addHitbox(bX, bY, bWidth, bHeight);
+          }
         }
 
         public void characters(char ch[], int start, int length) throws SAXException {
 
-          if (boxHead || boxBody || boxRleg || boxLleg) {
+          if (boxHead || boxBody || boxRleg || boxLleg || charJab || charKick) {
             if (boxHeight) {
               bHeight = Double.parseDouble(new String(ch,start,length));
             }

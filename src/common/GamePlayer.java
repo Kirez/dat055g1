@@ -18,6 +18,7 @@ public class GamePlayer {
 
   public ActionCycle stateStunned;
   public ActionCycle statePunching;
+  public ActionCycle stateKicking;
   private ArrayList<Rectangle> hurtBoxes;
   private ArrayList<Rectangle> hitBoxes;
   private Point2D position;
@@ -45,9 +46,10 @@ public class GamePlayer {
 
   //  hurtBoxes.add(new Rectangle(height * 0.0625, 0, width * 0.75, height * 0.25));
   //  hurtBoxes.add(new Rectangle(0, height * 0.125, width * 0.5, height * 0.5));
-    hitBoxes.add(new Rectangle(0.75 * width, height * 0.1875, width * 0.25, height * 0.125));
+  //  hitBoxes.add(new Rectangle(0.75 * width, height * 0.1875, width * 0.25, height * 0.125));
 
     stateStunned = new ActionCycle(PUNCH_DURATION, PUNCH_DURATION * 2, 0);
+    stateKicking = new ActionCycle(PUNCH_SPOOL_UP, PUNCH_DURATION, PUNCH_COOL_DOWN);
     statePunching = new ActionCycle(PUNCH_SPOOL_UP, PUNCH_DURATION, PUNCH_COOL_DOWN);
 
     faceRight = true;
@@ -156,6 +158,25 @@ public class GamePlayer {
 
     return rectangles;
   }
+  public Rectangle getHitBox(int hitbox) {
+    ArrayList<Rectangle> rectangles = new ArrayList<>();
+
+    for (Rectangle hitBox : hitBoxes) {
+      if (faceRight) {
+        rectangles.add(
+            new Rectangle(hitBox.getX() + width - hitBox.getWidth() / 2 + getPosition().getX(),
+                hitBox.getY() + getPosition().getY() + hitBox.getY(), hitBox.getWidth(),
+                hitBox.getHeight()));
+      } else {
+        rectangles
+            .add(new Rectangle(-hitBox.getX() - hitBox.getWidth() / 2 + getPosition().getX(),
+                hitBox.getY() + getPosition().getY() + hitBox.getY(), hitBox.getWidth(),
+                hitBox.getHeight()));
+      }
+    }
+
+    return rectangles.get(hitbox);
+  }
 
   public void setFaceRight(boolean faceRight) {
     this.faceRight = faceRight;
@@ -178,6 +199,7 @@ public class GamePlayer {
     MOVE_RIGHT,
     JUMP,
     FALL,
-    HIT
+    HIT,
+    KICK
   }
 }
