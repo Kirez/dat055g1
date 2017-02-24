@@ -11,18 +11,39 @@ import java.util.concurrent.TimeUnit;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-08
+ * @version 2017-02-23
  */
 public class GameEngine implements Runnable {
 
+  /**
+   * Desired tickrate
+   */
   public static int DEFAULT_TPS = 100;
 
+  /**
+   * Engine state. Enabling halts the engine thread.
+   */
   public boolean stop;
+  /**
+   * Actual tickrate
+   */
   public double tps;
+  /**
+   * Desired tickrate, is initiated to DEFAULT_TPS
+   */
   private int target_tps;
+  /**
+   * Used for keyboard inputs
+   */
   private HashSet<GameController> controllers;
+  /**
+   * Engine state. Enabling sleeps the engine thread.
+   */
   private boolean pause;
 
+  /**
+   * TODO: Continue here
+   */
   public GameEngine() {
     controllers = new HashSet<>();
     target_tps = DEFAULT_TPS;
