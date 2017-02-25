@@ -8,7 +8,6 @@ import java.net.UnknownHostException;
 import java.util.HashSet;
 import javafx.scene.input.KeyEvent;
 
-
 /**
  * Stores keypresses in setState, sends keys to server..
  *

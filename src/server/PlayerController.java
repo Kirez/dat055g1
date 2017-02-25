@@ -19,7 +19,6 @@ import javafx.scene.input.KeyEvent;
  * @author Karl Ängermark (karlang)
  * @version 2017-02-23
  */
-
 public class PlayerController implements GameController {
 
   public GamePlayer player;

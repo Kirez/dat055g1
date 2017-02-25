@@ -10,7 +10,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
 
 /**
- * TODO: Add description
+ * Handles the state of the stage each tick and each player controller within it
  *
  * @author Alexander Andersson (alexaan)
  * @author Linus Berglund (belinus)
@@ -19,8 +19,6 @@ import javafx.scene.shape.Rectangle;
  * @author Karl Ängermark (karlang)
  * @version 2017-02-23
  */
-
-/*Handles the state of the stage each tick and each player controller within it*/
 public class StageController implements GameController {
 
   GameStage stage;

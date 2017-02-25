@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class GameEngine implements Runnable {
 
   /**
-   * Desired tickrate
+   * Desired <tt>GameEngine</tt> tickrate.
    */
   public static int DEFAULT_TPS = 100;
 
@@ -25,11 +25,11 @@ public class GameEngine implements Runnable {
    */
   public boolean stop;
   /**
-   * Actual tickrate
+   * Actual <tt>GameEngine</tt> tickrate.
    */
   public double tps;
   /**
-   * Desired tickrate, is initiated to DEFAULT_TPS
+   * Desired <tt>GameEngine</tt> tickrate, is initiated to <tt>DEFAULT_TPS</tt>.
    */
   private int target_tps;
   /**
@@ -37,12 +37,12 @@ public class GameEngine implements Runnable {
    */
   private HashSet<GameController> controllers;
   /**
-   * Engine state. Enabling sleeps the engine thread.
+   * <tt>GameEngine</tt> state. Enabling sleeps the engine thread.
    */
   private boolean pause;
 
   /**
-   * TODO: Continue here
+   * Initializes the <tt>GameEngine</tt> to the default values.
    */
   public GameEngine() {
     controllers = new HashSet<>();
@@ -52,10 +52,21 @@ public class GameEngine implements Runnable {
     pause = false;
   }
 
+  /**
+   * Adds a <tt>controller</tt> instance to the HashSet.
+   *
+   * @param controller The controller to be added
+   * @return the <tt>GameEngine</tt> <tt>controller</tt> HashSet, with the <tt>controller</tt> added
+   */
   public boolean addController(GameController controller) {
     return controllers.add(controller);
   }
 
+  /**
+   * Updates all <tt>controllers</tt> belonging to this instance of the <tt>GameEngine</tt>
+   *
+   * @param delta the time difference between the current and the previous tick
+   */
   public void tick(double delta) {
     controllers.forEach(c -> c.update(delta));
   }
@@ -104,6 +115,13 @@ public class GameEngine implements Runnable {
     }
   }
 
+  /**
+   * Pauses the game.
+   *
+   * @param pause the <tt>GameEngine</tt> state
+   * @see #togglePause()
+   * @deprecated
+   */
   public void setPause(boolean pause) {
     this.pause = pause;
   }

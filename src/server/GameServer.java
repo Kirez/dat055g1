@@ -16,7 +16,6 @@ import java.net.SocketException;
  * @author Karl Ängermark (karlang)
  * @version 2017-02-23
  */
-
 public class GameServer extends Thread {
 
 
