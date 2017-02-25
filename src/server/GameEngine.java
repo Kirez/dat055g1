@@ -116,7 +116,7 @@ public class GameEngine implements Runnable {
   }
 
   /**
-   * Pauses the game.
+   * Enable the <tt>GameEngine</tt> pause state.
    *
    * @param pause the <tt>GameEngine</tt> state
    * @see #togglePause()
@@ -126,6 +126,9 @@ public class GameEngine implements Runnable {
     this.pause = pause;
   }
 
+  /**
+   * Toggle the <tt>GameEngine</tt> pause state.
+   */
   public void togglePause() {
     pause = !pause;
   }
