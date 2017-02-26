@@ -20,11 +20,16 @@ import javafx.scene.input.KeyEvent;
  */
 public class GameClient extends Thread {
 
+  /** Destination port number. */
   private int port = 9876;
+  /** Destination adress. */
   private InetAddress address;
   private DatagramSocket socket = null;
   private HashSet<String> keys;
 
+  /**
+   * Initializes the <tt>GameClient</tt>.
+   */
   public GameClient() {
     keys = new HashSet<>();
     try {
@@ -37,7 +42,6 @@ public class GameClient extends Thread {
     }
   }
 
-
   private void sendData(byte[] data) {
     DatagramPacket sendPacket = new DatagramPacket(data, data.length, address, port);
     try {
@@ -46,7 +50,6 @@ public class GameClient extends Thread {
       e.printStackTrace();
     }
   }
-
 
   public synchronized void sendKeys() {
     if (keys.isEmpty()) {
