@@ -17,9 +17,6 @@ import javafx.scene.shape.Rectangle;
  */
 public class GamePlayer {
 
-  private static final double PUNCH_SPOOL_UP = 0.15;
-  private static final double PUNCH_DURATION = 0.15;
-  private static final double PUNCH_COOL_DOWN = 0.15;
   private static int DEFAULT_MAX_HP = 100;
   private static double DEFAULT_WIDTH = 1;
   private static double DEFAULT_HEIGHT = 2;
@@ -27,6 +24,7 @@ public class GamePlayer {
 
   public ActionCycle stateStunned;
   public ActionCycle statePunching;
+  public ActionCycle stateKicking;
   private ArrayList<Rectangle> hurtBoxes;
   private ArrayList<Rectangle> hitBoxes;
   private Point2D position;
@@ -46,19 +44,8 @@ public class GamePlayer {
     this.maxHP = maxHP;
     this.HP = HP;
 
-    width = DEFAULT_WIDTH;
-    height = DEFAULT_HEIGHT;
-
     this.hurtBoxes = new ArrayList<>();
     this.hitBoxes = new ArrayList<>();
-
-    hurtBoxes.add(new Rectangle(height * 0.0625, 0, width * 0.75, height * 0.25));
-    hurtBoxes.add(new Rectangle(0, height * 0.125, width * 0.5, height * 0.5));
-    hitBoxes.add(new Rectangle(0.75 * width, height * 0.1875, width * 0.25, height * 0.125));
-
-    stateStunned = new ActionCycle(PUNCH_DURATION, PUNCH_DURATION * 2, 0);
-    statePunching = new ActionCycle(PUNCH_SPOOL_UP, PUNCH_DURATION, PUNCH_COOL_DOWN);
-
     faceRight = true;
   }
 
@@ -87,7 +74,34 @@ public class GamePlayer {
     this.position = position;
 
   }
-
+  public void addHurtbox(double x, double y, double boxwidth, double boxheight ) {
+    hurtBoxes.add(new Rectangle(x, y, boxwidth, boxheight));
+    System.out.println("Hurtbox: x:" + x + " y:" + y + " width:" + boxwidth + " height:" + boxheight);
+  }
+  public void addHitbox(double x,double y,double boxwidth,double boxheight) {
+    hitBoxes.add(new Rectangle(x, y, boxwidth, boxheight));
+    System.out.println("Hitbox: x: "+ x + " y:" + y + " width:" + boxwidth + " height:" + boxheight);
+  }
+  public void setHealth (int health) {
+    maxHP = health;
+    System.out.println("Character health: " + health);
+  }
+  public void setCharsize (double h, double w) {
+    height = h;
+    width = w;
+    System.out.println("Character size: height" + h + "width" + w);
+  }
+  public void setCycles (double spool, double duration, double cooldown, String type) {
+    stateStunned = new ActionCycle(0, 0.5, 0);
+    if (type=="kick") {
+      stateKicking = new ActionCycle(spool, duration, cooldown);
+      System.out.println("Action Cycle Kick"+ spool + " " + duration + " " + cooldown);
+    }
+    if (type=="jab") {
+      statePunching = new ActionCycle(spool, duration, cooldown);
+      System.out.println("Action Cycle Jab"+ spool + " " + duration + " " + cooldown);
+    }
+  }
   public Point2D getVelocity() {
     return velocity;
   }
@@ -136,7 +150,7 @@ public class GamePlayer {
     return rectangles;
   }
 
-  public ArrayList<Rectangle> getHitBoxes() {
+  public Rectangle getHitBox(int hitbox) {
     ArrayList<Rectangle> rectangles = new ArrayList<>();
 
     for (Rectangle hitBox : hitBoxes) {
@@ -153,7 +167,7 @@ public class GamePlayer {
       }
     }
 
-    return rectangles;
+    return rectangles.get(hitbox);
   }
 
   public void setFaceRight(boolean faceRight) {
@@ -185,6 +199,7 @@ public class GamePlayer {
     MOVE_RIGHT,
     JUMP,
     FALL,
-    HIT
+    HIT,
+    KICK
   }
 }
