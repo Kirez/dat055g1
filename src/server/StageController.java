@@ -9,14 +9,22 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
 
-/*Handles the state of the stage each tick and each player controller within it*/
+/**
+ * Handles the state of the stage each tick and each player controller within it
+ *
+ * @author Alexander Andersson (alexaan)
+ * @author Linus Berglund (belinus)
+ * @author Erik Källberg (kalerik)
+ * @author Timmy Truong (timmyt)
+ * @author Karl Ängermark (karlang)
+ * @version 2017-02-23
+ */
 public class StageController implements GameController {
 
   GameStage stage;
   int i;
   private PlayerController player1Controller;
   private PlayerController player2Controller;
-  //private GameClient gameClient;
 
   public StageController(GameStage stage) {
     this.stage = stage;
@@ -36,9 +44,6 @@ public class StageController implements GameController {
     player2Controller.bindKey(KeyCode.DOWN, ACTION.FALL);
     player2Controller.bindKey(KeyCode.ENTER, ACTION.HIT);
 
-    //The client side of server-client added to the stagecontroller in order to get and send information about the stage
-    //gameClient = new GameClient();
-    //gameClient.start();
     int i = 0;
   }
 

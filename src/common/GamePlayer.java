@@ -5,7 +5,16 @@ import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-/*The model/state for players. Handles only data*/
+/**
+ * The model/state for players. Handles only data
+ *
+ * @author Alexander Andersson (alexaan)
+ * @author Linus Berglund (belinus)
+ * @author Erik Källberg (kalerik)
+ * @author Timmy Truong (timmyt)
+ * @author Karl Ängermark (karlang)
+ * @version 2017-02-23
+ */
 public class GamePlayer {
 
   private static final double PUNCH_SPOOL_UP = 0.15;

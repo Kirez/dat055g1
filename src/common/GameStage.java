@@ -3,7 +3,16 @@ package common;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 
-/*The model/state for a stage and all that is in it. Handles only data*/
+/**
+ * The model/state for a stage and all that is in it. Handles only data
+ *
+ * @author Alexander Andersson (alexaan)
+ * @author Linus Berglund (belinus)
+ * @author Erik Källberg (kalerik)
+ * @author Timmy Truong (timmyt)
+ * @author Karl Ängermark (karlang)
+ * @version 2017-02-23
+ */
 public class GameStage {
 
   private static Point2D DEFAULT_PLAYER_1_SPAWN = new Point2D(2.5, 3);
