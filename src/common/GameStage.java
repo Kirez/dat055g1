@@ -20,7 +20,7 @@ public class GameStage {
   private double width = 16;
   private double height = 9;
 
-  private double groundLevelY = 3;
+  private double groundLevelY = 6;
 
   //  Constructor
   public GameStage(Point2D p1s, Point2D p2s, GamePlayer p1, GamePlayer p2, double gly) {

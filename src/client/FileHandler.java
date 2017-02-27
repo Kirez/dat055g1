@@ -12,6 +12,10 @@ public class FileHandler {
   double bWidth;
   double bX;
   double bY;
+  int health;
+  double aSpool;
+  double aDuration;
+  double aCooldown;
   private GamePlayer player;
 
   public FileHandler (GamePlayer player) {
@@ -19,6 +23,10 @@ public class FileHandler {
     bWidth = 0;
     bX = 0;
     bY = 0;
+    health = 0;
+    aCooldown = 0;
+    aSpool = 0;
+    aDuration = 0;
     this.player = player;
     importCharacters();
   }
@@ -31,6 +39,7 @@ public class FileHandler {
 
       DefaultHandler handler = new DefaultHandler() {
         boolean charHealth = false;
+        boolean charSize = false;
         boolean boxHead = false;
         boolean boxBody = false;
         boolean boxHeight = false;
@@ -41,6 +50,9 @@ public class FileHandler {
         boolean boxLleg = false;
         boolean charJab = false;
         boolean charKick = false;
+        boolean duration = false;
+        boolean spool = false;
+        boolean cooldown = false;
 
         public void startElement(String uri, String localName, String qName,
             Attributes attributes) throws SAXException {
@@ -48,8 +60,11 @@ public class FileHandler {
           if (qName.equalsIgnoreCase("HEALTH")) {
             charHealth = true;
           }
+          if (qName.equalsIgnoreCase("CHARSIZE")) {
+            charSize = true;
+          }
           if (qName.equalsIgnoreCase("JAB")) {
-            charJab = false;
+            charJab = true;
           }
           if (qName.equalsIgnoreCase("HEAD")) {
             boxHead = true;
@@ -75,6 +90,15 @@ public class FileHandler {
           if (qName.equalsIgnoreCase("Y")) {
             boxY = true;
           }
+          if (qName.equalsIgnoreCase("SPOOL")) {
+            spool = true;
+          }
+          if (qName.equalsIgnoreCase("DURATION")) {
+            duration = true;
+          }
+          if (qName.equalsIgnoreCase("COOLDOWN")) {
+            cooldown = true;
+          }
           if (qName.equalsIgnoreCase("KICK")) {
             charKick = true;
           }
@@ -84,10 +108,16 @@ public class FileHandler {
 
           if (qName.equalsIgnoreCase("HEALTH")) {
             charHealth = false;
+            player.setHealth(health);
+          }
+          if (qName.equalsIgnoreCase("CHARSIZE")) {
+            charSize = false;
+            player.setCharsize(bHeight, bWidth);
           }
           if (qName.equalsIgnoreCase("JAB")) {
             charJab = false;
             player.addHitbox(bX, bY, bWidth, bHeight);
+            player.setCycles(aSpool, aDuration, aCooldown, "jab");
           }
           if (qName.equalsIgnoreCase("HEAD")) {
             boxHead = false;
@@ -117,15 +147,25 @@ public class FileHandler {
           if (qName.equalsIgnoreCase("Y")) {
             boxY = false;
           }
+          if (qName.equalsIgnoreCase("SPOOL")) {
+            spool = false;
+          }
+          if (qName.equalsIgnoreCase("DURATION")) {
+            duration =false;
+          }
+          if (qName.equalsIgnoreCase("COOLDOWN")) {
+            cooldown = false;
+          }
           if (qName.equalsIgnoreCase("KICK")) {
             charKick = false;
             player.addHitbox(bX, bY, bWidth, bHeight);
+            player.setCycles(aSpool, aDuration, aCooldown, "kick");
           }
         }
 
         public void characters(char ch[], int start, int length) throws SAXException {
 
-          if (boxHead || boxBody || boxRleg || boxLleg || charJab || charKick) {
+          if (boxHead || boxBody || boxRleg || boxLleg || charJab || charKick || charSize) {
             if (boxHeight) {
               bHeight = Double.parseDouble(new String(ch,start,length));
             }
@@ -138,6 +178,18 @@ public class FileHandler {
             if (boxY) {
               bY = Double.parseDouble(new String(ch,start,length));
             }
+            if (spool) {
+              aSpool = Double.parseDouble(new String (ch,start,length));
+            }
+            if (duration) {
+              aDuration = Double.parseDouble(new String(ch,start,length));
+            }
+            if (cooldown) {
+              aCooldown = Double.parseDouble(new String(ch,start,length));
+            }
+          }
+          if (charHealth) {
+            health = Integer.parseInt(new String(ch,start,length));
           }
         }
 
