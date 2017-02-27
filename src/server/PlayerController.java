@@ -83,4 +83,18 @@ public class PlayerController implements GameController {
       actions.remove(keyBinds.get(event.getCode()));
     }
   }
+
+  public void actionStart(ACTION action) {
+    if (!actions.contains(ACTION.HIT) && action == ACTION.HIT) {
+      if (player.statePunching.isReady() && !player.stateStunned.isActive()) {
+        player.statePunching.enterCycle(CYCLE.SPOOL_UP);
+      }
+    }
+
+    actions.add(action);
+  }
+
+  public void actionEnd(ACTION action) {
+    actions.remove(action);
+  }
 }

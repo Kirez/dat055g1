@@ -167,6 +167,10 @@ public class GamePlayer {
     this.HP = HP;
   }
 
+  public boolean isFaceRight() {
+    return faceRight;
+  }
+
   public enum ACTION {
     MOVE_LEFT,
     MOVE_RIGHT,

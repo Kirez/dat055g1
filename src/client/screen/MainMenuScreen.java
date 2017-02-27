@@ -1,5 +1,6 @@
-package client;
+package client.screen;
 
+import client.GameApplication;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
@@ -12,29 +13,29 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /*Main menu where you press play, quit, options, etc*/
-public class MenuScreen implements AbstractScreen {
+public class MainMenuScreen implements Screen {
 
   private GridPane layout;
-  private Button playButton;
+  private Button createGameButton;
   private Button optionsButton;
-  private Button multiplayerButton;
+  private Button joinButton;
   private Button exitButton;
   private Label title;
   private GameApplication owner;
 
-  public MenuScreen(GameApplication gameApplication) {
+  public MainMenuScreen(GameApplication gameApplication) {
     owner = gameApplication;
-    playButton = new Button("Play");
+    createGameButton = new Button("Create");
+    joinButton = new Button("Join");
     optionsButton = new Button("Options");
     exitButton = new Button("Exit");
-    multiplayerButton = new Button("Multiplayer");
     title = new Label("TimmyFightGoGo");
     title.setFont(Font.font(72));
     layout = new GridPane();
-    layout.addColumn(0, title, playButton, multiplayerButton, optionsButton, exitButton);
-    playButton.setOnAction(this::onPlayButton);
+    layout.addColumn(0, title, createGameButton, joinButton, optionsButton, exitButton);
+    createGameButton.setOnAction(this::onPlayButton);
     exitButton.setOnAction(this::onExitButton);
-    multiplayerButton.setOnAction(this::onMultiplayerButton);
+    joinButton.setOnAction(this::onMultiplayerButton);
     exit();
     layout.setAlignment(Pos.CENTER);
   }
@@ -59,7 +60,7 @@ public class MenuScreen implements AbstractScreen {
   }
 
   void onMultiplayerButton(ActionEvent event) {
-    owner.setActiveScreen(owner.connectScreen);
+    owner.setActiveScreen(owner.joinScreen);
   }
 
   @Override

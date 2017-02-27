@@ -1,20 +1,24 @@
 package client;
 
+import client.screen.JoinScreen;
+import client.screen.MainMenuScreen;
+import client.screen.NetworkPlayScreen;
+import client.screen.PlayScreen;
+import client.screen.Screen;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-/*Client entry class handles switching of screens/modes*/
+/*Client entry class handles switching of screen/modes*/
 public class GameApplication extends Application {
 
   public PlayScreen playScreen;
-  public MenuScreen menuScreen;
-  public ConnectScreen connectScreen;
-  //private GameServer gameServer;
+  public MainMenuScreen mainMenuScreen;
+  public JoinScreen joinScreen;
+  public NetworkPlayScreen networkPlayScreen;
 
-  private AbstractScreen activeScreen;
+  private Screen activeScreen;
   private Stage stage;
 
   public static void main(String args[]) {
@@ -25,16 +29,17 @@ public class GameApplication extends Application {
   public void start(Stage primaryStage) throws Exception {
     stage = primaryStage;
     stage.setTitle("TimmyFightGoGo");
-    Screen screen = Screen.getPrimary();
+    javafx.stage.Screen screen = javafx.stage.Screen.getPrimary();
     stage.setWidth(screen.getBounds().getMaxX());
     stage.setHeight(screen.getBounds().getMaxY());
     //stage.setFullScreen(true);
 
     playScreen = new PlayScreen(this);
-    menuScreen = new MenuScreen(this);
-    connectScreen = new ConnectScreen(this);
+    mainMenuScreen = new MainMenuScreen(this);
+    joinScreen = new JoinScreen(this);
+    networkPlayScreen = new NetworkPlayScreen(this);
 
-    setActiveScreen(menuScreen);
+    setActiveScreen(mainMenuScreen);
 
     // primaryStage is the stage provided by the javafx app instance
     stage.setOnCloseRequest(this::exit);
@@ -46,7 +51,7 @@ public class GameApplication extends Application {
     stage.setAlwaysOnTop(false);
   }
 
-  public void setActiveScreen(AbstractScreen screen) {
+  public void setActiveScreen(Screen screen) {
     if (activeScreen != null) {
       activeScreen.exit();
     }

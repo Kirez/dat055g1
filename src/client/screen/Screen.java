@@ -1,9 +1,9 @@
-package client;
+package client.screen;
 
 import javafx.stage.Stage;
 
 /*Common code for each screen*/
-public interface AbstractScreen {
+public interface Screen {
 
   /*Run when a screen becomes visible*/
   void enter(Stage stage);
