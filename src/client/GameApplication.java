@@ -5,6 +5,7 @@ import client.screen.MainMenuScreen;
 import client.screen.NetworkPlayScreen;
 import client.screen.PlayScreen;
 import client.screen.Screen;
+import client.screen.SettingsScreen;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -27,6 +28,7 @@ public class GameApplication extends Application {
   public MainMenuScreen mainMenuScreen;
   public JoinScreen joinScreen;
   public NetworkPlayScreen networkPlayScreen;
+  public SettingsScreen settingsScreen;
 
   private Screen activeScreen;
   private Stage stage;
@@ -48,6 +50,7 @@ public class GameApplication extends Application {
     mainMenuScreen = new MainMenuScreen(this);
     joinScreen = new JoinScreen(this);
     networkPlayScreen = new NetworkPlayScreen(this);
+    settingsScreen = new SettingsScreen(this);
 
     setActiveScreen(mainMenuScreen);
 

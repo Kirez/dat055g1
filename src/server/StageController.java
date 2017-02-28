@@ -1,9 +1,12 @@
 package server;
 
+import static javafx.scene.input.KeyCode.getKeyCode;
+
 import common.ActionCycle.CYCLE;
 import common.GamePlayer;
 import common.GamePlayer.ACTION;
 import common.GameStage;
+import client.screen.SettingsScreen;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -32,19 +35,19 @@ public class StageController implements GameController {
     player2Controller = new PlayerController(stage.getPlayer2());
 
     // Player controls
-    player1Controller.bindKey(KeyCode.A, ACTION.MOVE_LEFT);
-    player1Controller.bindKey(KeyCode.W, ACTION.JUMP);
-    player1Controller.bindKey(KeyCode.D, ACTION.MOVE_RIGHT);
-    player1Controller.bindKey(KeyCode.S, ACTION.FALL);
-    player1Controller.bindKey(KeyCode.SPACE, ACTION.HIT);
-    player1Controller.bindKey(KeyCode.Q, ACTION.KICK);
+    player1Controller.bindKey(getKeyCode(SettingsScreen.leftField1.getText()), ACTION.MOVE_LEFT);
+    player1Controller.bindKey(getKeyCode(SettingsScreen.jumpField1.getText()), ACTION.JUMP);
+    player1Controller.bindKey(getKeyCode(SettingsScreen.rightField1.getText()), ACTION.MOVE_RIGHT);
+    player1Controller.bindKey(getKeyCode(SettingsScreen.downField2.getText()), ACTION.FALL);
+    player1Controller.bindKey(getKeyCode(SettingsScreen.jabField1.getText()), ACTION.HIT);
+    player1Controller.bindKey(getKeyCode(SettingsScreen.kickField1.getText()), ACTION.KICK);
 
-    player2Controller.bindKey(KeyCode.LEFT, ACTION.MOVE_LEFT);
-    player2Controller.bindKey(KeyCode.UP, ACTION.JUMP);
-    player2Controller.bindKey(KeyCode.RIGHT, ACTION.MOVE_RIGHT);
-    player2Controller.bindKey(KeyCode.DOWN, ACTION.FALL);
-    player2Controller.bindKey(KeyCode.ENTER, ACTION.HIT);
-    player2Controller.bindKey(KeyCode.CONTROL, ACTION.KICK);
+    player2Controller.bindKey(getKeyCode(SettingsScreen.leftField2.getText()), ACTION.MOVE_LEFT);
+    player2Controller.bindKey(getKeyCode(SettingsScreen.jumpField2.getText()), ACTION.JUMP);
+    player2Controller.bindKey(getKeyCode(SettingsScreen.rightField2.getText()), ACTION.MOVE_RIGHT);
+    player2Controller.bindKey(getKeyCode(SettingsScreen.downField2.getText()), ACTION.FALL);
+    player2Controller.bindKey(getKeyCode(SettingsScreen.jabField2.getText()), ACTION.HIT);
+    player2Controller.bindKey(getKeyCode(SettingsScreen.kickField2.getText()), ACTION.KICK);
   }
 
   @Override
@@ -77,7 +80,7 @@ public class StageController implements GameController {
 
     if (player1Controller.player.statePunching.isActive() || player1Controller.player.stateKicking.isActive()) {
         for (Rectangle hurt : p2.getHurtBoxes()) {
-          if (p1.getHitBox(0).getBoundsInLocal().intersects(hurt.getBoundsInParent())) {
+          if (p1.getHitBox(0).getBoundsInParent().intersects(hurt.getBoundsInParent())) {
             if (!p2.stateStunned.isActive()) {
               p2.stateStunned.enterCycle(CYCLE.ACTIVE);
               p2.setHP(p2.getHP() - 10);
@@ -90,7 +93,7 @@ public class StageController implements GameController {
 
     if (player2Controller.player.statePunching.isActive() ||  player2Controller.player.stateKicking.isActive()) {
         for (Rectangle hurt : p1.getHurtBoxes()) {
-          if (p2.getHitBox(1).getBoundsInLocal().intersects(hurt.getBoundsInParent())) {
+          if (p2.getHitBox(1).getBoundsInParent().intersects(hurt.getBoundsInParent())) {
             if (!p1.stateStunned.isActive()) {
               p1.stateStunned.enterCycle(CYCLE.ACTIVE);
               p1.setHP(p1.getHP() - 10);

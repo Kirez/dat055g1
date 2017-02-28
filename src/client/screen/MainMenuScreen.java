@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javax.swing.Action;
 
 /**
  * Main menu where you press play, quit, options, etc
@@ -26,7 +27,7 @@ public class MainMenuScreen implements Screen {
 
   private GridPane layout;
   private Button createGameButton;
-  private Button optionsButton;
+  private Button settingsButton;
   private Button joinButton;
   private Button exitButton;
   private Label title;
@@ -36,15 +37,16 @@ public class MainMenuScreen implements Screen {
     owner = gameApplication;
     createGameButton = new Button("Create");
     joinButton = new Button("Join");
-    optionsButton = new Button("Options");
+    settingsButton = new Button("Settings");
     exitButton = new Button("Exit");
     title = new Label("TimmyFightGoGo");
     title.setFont(Font.font(72));
     layout = new GridPane();
-    layout.addColumn(0, title, createGameButton, joinButton, optionsButton, exitButton);
+    layout.addColumn(0, title, createGameButton, joinButton, settingsButton, exitButton);
     createGameButton.setOnAction(this::onPlayButton);
     exitButton.setOnAction(this::onExitButton);
     joinButton.setOnAction(this::onMultiplayerButton);
+    settingsButton.setOnAction(this::onSettingsButton);
     exit();
     layout.setAlignment(Pos.CENTER);
   }
@@ -71,6 +73,8 @@ public class MainMenuScreen implements Screen {
   void onMultiplayerButton(ActionEvent event) {
     owner.setActiveScreen(owner.joinScreen);
   }
+
+  void onSettingsButton(ActionEvent event) {owner.setActiveScreen(owner.settingsScreen);}
 
   @Override
   public void exit() {

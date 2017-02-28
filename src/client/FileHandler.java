@@ -8,30 +8,19 @@ import common.GamePlayer;
     import java.util.*;
     import java.io.*;
 public class FileHandler {
-  double bHeight;
-  double bWidth;
-  double bX;
-  double bY;
-  int health;
-  double aSpool;
-  double aDuration;
-  double aCooldown;
+  static double bHeight;
+  static double bWidth;
+  static double bX;
+  static double bY;
+  static int health;
+  static double  aSpool;
+  static double aDuration;
+  static double aCooldown; 
   private GamePlayer player;
 
-  public FileHandler (GamePlayer player) {
-    bHeight = 0;
-    bWidth = 0;
-    bX = 0;
-    bY = 0;
-    health = 0;
-    aCooldown = 0;
-    aSpool = 0;
-    aDuration = 0;
-    this.player = player;
-    importCharacters();
-  }
 
-  public void importCharacters () {
+  public static void importCharacters (GamePlayer player) {
+
     try {
 
       SAXParserFactory factory = SAXParserFactory.newInstance();
