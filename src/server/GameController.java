@@ -14,6 +14,11 @@ import javafx.scene.input.KeyEvent;
  */
 public interface GameController {
 
+  /**
+   * Update logic
+   *
+   * @param delta the time difference between this and the previous tick, used for scaling
+   */
   void update(double delta);
 
   void attach(GameEngine engine);
