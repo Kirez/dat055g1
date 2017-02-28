@@ -7,9 +7,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-/**
- * Created by timmy on 2017-02-14.
- */
 
 public class HealthRenderer implements GameRenderer{
 

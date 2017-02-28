@@ -1,5 +1,6 @@
 package server;
 
+import client.GameApplication;
 import common.ActionCycle.CYCLE;
 import common.GamePlayer;
 import common.GamePlayer.ACTION;
