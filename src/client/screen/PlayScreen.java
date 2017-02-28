@@ -1,5 +1,10 @@
-package client;
+package client.screen;
 
+import client.GameApplication;
+import client.GameRenderer;
+import client.HealthRenderer;
+import client.PlayerRenderer;
+import client.StageRenderer;
 import common.GameStage;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
@@ -10,8 +15,18 @@ import javafx.stage.Stage;
 import server.GameEngine;
 import server.StageController;
 
-/*The 'play' screen handles the 'play' state*/
-public class PlayScreen extends AnimationTimer implements AbstractScreen {
+/**
+ * The 'play' screen handles the 'play' state
+ *
+ * @author Alexander Andersson (alexaan)
+ * @author Linus Berglund (belinus)
+ * @author Erik Källberg (kalerik)
+ * @author Timmy Truong (timmyt)
+ * @author Karl Ängermark (karlang)
+ * @version 2017-02-23
+ */
+
+public class PlayScreen extends AnimationTimer implements Screen {
 
   private Canvas canvas;
   private GameStage gameStage;
@@ -28,6 +43,7 @@ public class PlayScreen extends AnimationTimer implements AbstractScreen {
   private GameRenderer player2Renderer;
   private HealthRenderer player1HealthBar;
   private HealthRenderer player2HealthBar;
+
   //  Constructor
   public PlayScreen(GameApplication gameApplication) {
     owner = gameApplication;

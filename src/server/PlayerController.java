@@ -9,7 +9,16 @@ import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-/*Handles the state of a player each tick. Takes into consideration input from users*/
+/**
+ * Handles the state of a player each tick. Takes into consideration input from users
+ *
+ * @author Alexander Andersson (alexaan)
+ * @author Linus Berglund (belinus)
+ * @author Erik Källberg (kalerik)
+ * @author Timmy Truong (timmyt)
+ * @author Karl Ängermark (karlang)
+ * @version 2017-02-23
+ */
 public class PlayerController implements GameController {
 
   public GamePlayer player;
@@ -41,8 +50,11 @@ public class PlayerController implements GameController {
     }
     if (actions.contains(ACTION.FALL)) {
       if (!player.isOnGround()) {
-        player.setPosition(player.getPosition().add(0, 1 * delta));
+        player.setPosition(player.getPosition().add(0, 2 * delta));
       }
+    }
+    if (player.stateKicking.isActive()) {
+
     }
 
     if (player.statePunching.isActive()) {
@@ -51,7 +63,7 @@ public class PlayerController implements GameController {
 
     player.statePunching.update(delta);
     player.stateStunned.update(delta);
-
+    player.stateKicking.update(delta);
     player.setPosition(player.getPosition().add(player.getVelocity().multiply(delta)));
   }
 
@@ -66,12 +78,14 @@ public class PlayerController implements GameController {
 
   @Override
   public void onKeyPressed(KeyEvent event) {
-    if (!actions.contains(ACTION.HIT) && keyBinds.get(event.getCode()) == ACTION.HIT) {
-      if (player.statePunching.isReady() && !player.stateStunned.isActive()) {
+    if (((!actions.contains(ACTION.HIT)) && (!actions.contains(ACTION.KICK)) && (keyBinds.get(event.getCode()) == ACTION.HIT)) || ((!actions.contains(ACTION.KICK) && (!actions.contains(ACTION.HIT))) && keyBinds.get(event.getCode()) == ACTION.KICK)) {
+      if ((player.statePunching.isReady() && player.stateKicking.isReady()) && !player.stateStunned.isActive() && keyBinds.get(event.getCode()) == ACTION.HIT) {
         player.statePunching.enterCycle(CYCLE.SPOOL_UP);
       }
+      else if ((player.stateKicking.isReady() && player.stateKicking.isReady()) && !player.stateStunned.isActive() && keyBinds.get(event.getCode()) == ACTION.KICK) {
+        player.stateKicking.enterCycle(CYCLE.SPOOL_UP);
+      }
     }
-
     if (keyBinds.containsKey(event.getCode())) {
       actions.add(keyBinds.get(event.getCode()));
     }
@@ -82,5 +96,19 @@ public class PlayerController implements GameController {
     if (keyBinds.containsKey(event.getCode())) {
       actions.remove(keyBinds.get(event.getCode()));
     }
+  }
+
+  public void actionStart(ACTION action) {
+    if (!actions.contains(ACTION.HIT) && action == ACTION.HIT) {
+      if (player.statePunching.isReady() && !player.stateStunned.isActive()) {
+        player.statePunching.enterCycle(CYCLE.SPOOL_UP);
+      }
+    }
+
+    actions.add(action);
+  }
+
+  public void actionEnd(ACTION action) {
+    actions.remove(action);
   }
 }

@@ -3,16 +3,33 @@ package server;
 import java.util.HashSet;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * TODO: Add description
+ *
+ * @author Alexander Andersson (alexaan)
+ * @author Linus Berglund (belinus)
+ * @author Erik Källberg (kalerik)
+ * @author Timmy Truong (timmyt)
+ * @author Karl Ängermark (karlang)
+ * @version 2017-02-26
+ */
 public class GameEngine implements Runnable {
 
+  /** Desired <tt>GameEngine</tt> tickrate. */
   public static int DEFAULT_TPS = 100;
 
+  /** Engine state. Enabling halts the engine thread. */
   public boolean stop;
+  /** Actual <tt>GameEngine</tt> tickrate. */
   public double tps;
+  /** Desired <tt>GameEngine</tt> tickrate, is initiated to <tt>DEFAULT_TPS</tt>. */
   private int target_tps;
+  /** Used for keyboard inputs. */
   private HashSet<GameController> controllers;
+  /** <tt>GameEngine</tt> state. Enabling sleeps the engine thread. */
   private boolean pause;
 
+  /** Initializes the <tt>GameEngine</tt> */
   public GameEngine() {
     controllers = new HashSet<>();
     target_tps = DEFAULT_TPS;
@@ -21,14 +38,28 @@ public class GameEngine implements Runnable {
     pause = false;
   }
 
+  /**
+   * Adds a <tt>controller</tt> instance to the HashSet.
+   *
+   * @param controller The controller to be added
+   * @return the <tt>GameEngine</tt> <tt>controller</tt> HashSet, with the <tt>controller</tt> added
+   */
   public boolean addController(GameController controller) {
     return controllers.add(controller);
   }
 
+  /**
+   * Updates all <tt>controllers</tt> belonging to this instance of the <tt>GameEngine</tt>.
+   *
+   * @param delta the time difference between the current and the previous tick
+   */
   public void tick(double delta) {
     controllers.forEach(c -> c.update(delta));
   }
 
+  /**
+   * Main game loop.
+   */
   @Override
   public void run() {
     stop = false;
@@ -73,10 +104,20 @@ public class GameEngine implements Runnable {
     }
   }
 
+  /**
+   * Enable the <tt>GameEngine</tt> pause state.
+   *
+   * @param pause the <tt>GameEngine</tt> state
+   * @see #togglePause()
+   * @deprecated
+   */
   public void setPause(boolean pause) {
     this.pause = pause;
   }
 
+  /**
+   * Toggle the <tt>GameEngine</tt> pause state.
+   */
   public void togglePause() {
     pause = !pause;
   }

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<Settings>
+  <ScreenRes>
+    <Fullscreen>Native</Fullscreen>
+    <Medium>1280x720</Medium>
+    <Small>640x480</Small>
+  </ScreenRes>
+  <Controls>
+    <P1>
+      <Jump>W</Jump>
+      <Left>A</Left>
+      <Down>S</Down>
+      <Right>D</Right>
+      <Jab>SPACE</Jab>
+      <Kick>Q</Kick>
+    </P1>
+    <P2>
+      <Jump>UP</Jump>
+      <Left>LEFT</Left>
+      <Down>DOWN</Down>
+      <Right>RIGHT</Right>
+      <Jab>ENTER</Jab>
+      <Kick>CONTROL</Kick>
+    </P2>
+  </Controls>
+</Settings>
