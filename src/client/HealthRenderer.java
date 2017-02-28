@@ -7,10 +7,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 /**
- * Created by timmy on 2017-02-14.
- */
-
-/**
  * TODO: Add description
  *
  * @author Alexander Andersson (alexaan)
@@ -18,7 +14,7 @@ import javafx.scene.shape.Rectangle;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-23
+ * @version 2017-02-28
  */
 public class HealthRenderer implements GameRenderer {
 

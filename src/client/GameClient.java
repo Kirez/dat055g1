@@ -14,6 +14,16 @@ import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+/**
+ * TODO: Add description
+ *
+ * @author Alexander Andersson (alexaan)
+ * @author Linus Berglund (belinus)
+ * @author Erik Källberg (kalerik)
+ * @author Timmy Truong (timmyt)
+ * @author Karl Ängermark (karlang)
+ * @version 2017-02-28
+ */
 public class GameClient implements Runnable {
   private GameStage gameStage;
   private GamePlayer player1;
