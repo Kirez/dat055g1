@@ -2,11 +2,12 @@ package server;
 
 import static javafx.scene.input.KeyCode.getKeyCode;
 
+import client.FileHandler;
 import common.ActionCycle.CYCLE;
 import common.GamePlayer;
 import common.GamePlayer.ACTION;
 import common.GameStage;
-import client.screen.SettingsScreen;
+import java.util.ArrayList;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -29,25 +30,40 @@ public class StageController implements GameController {
   private PlayerController player1Controller;
   private PlayerController player2Controller;
 
+
   public StageController(GameStage stage) {
     this.stage = stage;
     player1Controller = new PlayerController(stage.getPlayer1());
     player2Controller = new PlayerController(stage.getPlayer2());
+    ArrayList<String> impControls = FileHandler.importControls();
+      for (int i=0; i<12; i++) {
+        if (impControls.get(i).equals("CONTROL")) {
+          impControls.set(i, "Ctrl");
+        }
+        else {
+            impControls.set(i,
+                impControls.get(i).substring(0, 1).toUpperCase() + impControls.get(i).substring(1)
+                    .toLowerCase());
+          }
+
+        System.out.println("IMP: " + impControls.get(i));
+    }
 
     // Player controls
-    player1Controller.bindKey(getKeyCode(SettingsScreen.leftField1.getText()), ACTION.MOVE_LEFT);
-    player1Controller.bindKey(getKeyCode(SettingsScreen.jumpField1.getText()), ACTION.JUMP);
-    player1Controller.bindKey(getKeyCode(SettingsScreen.rightField1.getText()), ACTION.MOVE_RIGHT);
-    player1Controller.bindKey(getKeyCode(SettingsScreen.downField2.getText()), ACTION.FALL);
-    player1Controller.bindKey(getKeyCode(SettingsScreen.jabField1.getText()), ACTION.HIT);
-    player1Controller.bindKey(getKeyCode(SettingsScreen.kickField1.getText()), ACTION.KICK);
+    System.out.println("Vad är det här ens? -> " + getKeyCode(impControls.get(0)) + "Och vad fab är detta? ->" + getKeyCode(impControls.get(7)));
+    player1Controller.bindKey(getKeyCode(impControls.get(0)), ACTION.JUMP);
+    player1Controller.bindKey(getKeyCode(impControls.get(1)), ACTION.MOVE_LEFT);
+    player1Controller.bindKey(getKeyCode(impControls.get(3)), ACTION.MOVE_RIGHT);
+    player1Controller.bindKey(getKeyCode(impControls.get(2)), ACTION.FALL);
+    player1Controller.bindKey(getKeyCode(impControls.get(4)), ACTION.HIT);
+    player1Controller.bindKey(getKeyCode(impControls.get(5)), ACTION.KICK);
 
-    player2Controller.bindKey(getKeyCode(SettingsScreen.leftField2.getText()), ACTION.MOVE_LEFT);
-    player2Controller.bindKey(getKeyCode(SettingsScreen.jumpField2.getText()), ACTION.JUMP);
-    player2Controller.bindKey(getKeyCode(SettingsScreen.rightField2.getText()), ACTION.MOVE_RIGHT);
-    player2Controller.bindKey(getKeyCode(SettingsScreen.downField2.getText()), ACTION.FALL);
-    player2Controller.bindKey(getKeyCode(SettingsScreen.jabField2.getText()), ACTION.HIT);
-    player2Controller.bindKey(getKeyCode(SettingsScreen.kickField2.getText()), ACTION.KICK);
+    player2Controller.bindKey(getKeyCode(impControls.get(6)), ACTION.JUMP);
+    player2Controller.bindKey(getKeyCode(impControls.get(7)), ACTION.MOVE_LEFT);
+    player2Controller.bindKey(getKeyCode(impControls.get(9)), ACTION.MOVE_RIGHT);
+    player2Controller.bindKey(getKeyCode(impControls.get(8)), ACTION.FALL);
+    player2Controller.bindKey(getKeyCode(impControls.get(10)), ACTION.HIT);
+    player2Controller.bindKey(getKeyCode(impControls.get(11)), ACTION.KICK);
   }
 
   @Override

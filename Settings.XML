@@ -7,12 +7,12 @@
   </ScreenRes>
   <Controls>
     <P1>
-      <Jump>W</Jump>
-      <Left>A</Left>
-      <Down>S</Down>
-      <Right>D</Right>
-      <Jab>SPACE</Jab>
-      <Kick>Q</Kick>
+      <Jump>q</Jump>
+      <Left>w</Left>
+      <Down>e</Down>
+      <Right>r</Right>
+      <Jab>t</Jab>
+      <Kick>y</Kick>
     </P1>
     <P2>
       <Jump>UP</Jump>
