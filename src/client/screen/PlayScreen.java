@@ -25,7 +25,6 @@ import server.StageController;
  * @author Karl Ängermark (karlang)
  * @version 2017-02-28
  */
-
 public class PlayScreen extends AnimationTimer implements Screen {
 
   private Canvas canvas;

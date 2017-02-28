@@ -23,7 +23,6 @@ import server.GameServer;
  * @author Karl Ängermark (karlang)
  * @version 2017-02-28
  */
-
 public class CreateScreen implements Screen {
 
   private GridPane layout;
