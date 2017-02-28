@@ -1,15 +1,25 @@
-/*package client;
+package client.screen;
 
 
-import java.awt.Button;
-import java.awt.Label;
+import client.GameApplication;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
-*/
+import javafx.stage.Stage;
+
+import javax.swing.*;
+
+
+
 
 /*EndScreen with the options to have a rematch, etc.*/
-/*public class EndScreen implements Screen {
+public class EndScreen implements Screen {
 
     private GridPane layout;
     private Button menuButton;
@@ -17,12 +27,14 @@ import javafx.scene.text.Font;
     private Button exitButton;
     private Label winner;
     private GameApplication owner;
+    private String winningPlayer;
 
     public EndScreen(GameApplication gameApplication) {
         owner = gameApplication;
         menuButton = new Button("Main Menu");
         rematchButton = new Button("Rematch");
         exitButton = new Button("Exit");
+        winningPlayer = "Timmy";
         winner = new Label("Winner: " + winningPlayer);
         winner.setFont(Font.font(48));
         layout = new GridPane();
@@ -45,15 +57,22 @@ import javafx.scene.text.Font;
         stage.setScene(scene);
     }
 
+    void onRematchButton(ActionEvent event){
+
+    }
+
+    void onMenuButton(ActionEvent event){
+
+    }
+
     void onExitButton(ActionEvent event) {
         Platform.exit();
     }
 
     void onPlayButton(ActionEvent event) {
-        owner.setActiveScreen(owner.playScreen);
+        owner.setActiveScreen(owner.endScreen);
     }
 
-    void onMultiplayerButton(ActionEvent event) { owner.setActiveScreen(owner.connectScreen);}
 
     @Override
     public void exit() {
@@ -61,4 +80,3 @@ import javafx.scene.text.Font;
     }
 }
 
-*/

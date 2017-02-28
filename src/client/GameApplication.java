@@ -1,14 +1,12 @@
 package client;
 
-import client.screen.JoinScreen;
-import client.screen.MainMenuScreen;
-import client.screen.NetworkPlayScreen;
-import client.screen.PlayScreen;
-import client.screen.Screen;
+import client.screen.*;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+
+import javax.xml.stream.events.EndDocument;
 
 
 /**
@@ -27,6 +25,7 @@ public class GameApplication extends Application {
   public MainMenuScreen mainMenuScreen;
   public JoinScreen joinScreen;
   public NetworkPlayScreen networkPlayScreen;
+  public EndScreen endScreen;
 
   private Screen activeScreen;
   private Stage stage;
@@ -48,6 +47,7 @@ public class GameApplication extends Application {
     mainMenuScreen = new MainMenuScreen(this);
     joinScreen = new JoinScreen(this);
     networkPlayScreen = new NetworkPlayScreen(this);
+    endScreen = new EndScreen(this);
 
     setActiveScreen(mainMenuScreen);
 

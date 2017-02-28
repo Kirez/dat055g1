@@ -27,6 +27,7 @@ public class StageController implements GameController {
   int i;
   private PlayerController player1Controller;
   private PlayerController player2Controller;
+  private GameApplication owner;
 
   public StageController(GameStage stage) {
     this.stage = stage;
@@ -102,15 +103,17 @@ public class StageController implements GameController {
         }
     }
     if (p1.getHP() == 0 || p2.getHP() == 0){
-      if(p1.getHP() == 0){
+      /*if(p1.getHP() == 0){
         System.out.println("Winner p2!");
         System.exit(0);
       }
       else if(p2.getHP() == 0){
         System.out.println("Winner p1!");
         System.exit(0);
-      }
-     // stop(engine);
+      }*/
+     // stop(engine)
+      this.stop()
+      owner.setActiveScreen(owner.endScreen);
     }
   }
 
@@ -135,6 +138,7 @@ public class StageController implements GameController {
     player2Controller.onKeyReleased(event);
     //gameClient.setKeyReleased(event); //Remove key from client sendlist
   }
+
   public void stop(GameEngine engine) {
     engine.shutdown();
   }
