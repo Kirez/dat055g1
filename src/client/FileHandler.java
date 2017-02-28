@@ -18,6 +18,7 @@ import org.xml.sax.helpers.DefaultHandler;
  * @version 2017-02-28
  */
 public class FileHandler {
+
   double bHeight;
   double bWidth;
   double bX;
@@ -28,7 +29,7 @@ public class FileHandler {
   double aCooldown;
   private GamePlayer player;
 
-  public FileHandler (GamePlayer player) {
+  public FileHandler(GamePlayer player) {
     bHeight = 0;
     bWidth = 0;
     bX = 0;
@@ -41,7 +42,7 @@ public class FileHandler {
     importCharacters();
   }
 
-  public void importCharacters () {
+  public void importCharacters() {
     try {
 
       SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -161,7 +162,7 @@ public class FileHandler {
             spool = false;
           }
           if (qName.equalsIgnoreCase("DURATION")) {
-            duration =false;
+            duration = false;
           }
           if (qName.equalsIgnoreCase("COOLDOWN")) {
             cooldown = false;
@@ -177,38 +178,38 @@ public class FileHandler {
 
           if (boxHead || boxBody || boxRleg || boxLleg || charJab || charKick || charSize) {
             if (boxHeight) {
-              bHeight = Double.parseDouble(new String(ch,start,length));
+              bHeight = Double.parseDouble(new String(ch, start, length));
             }
             if (boxWidth) {
-              bWidth = Double.parseDouble(new String(ch,start,length));
+              bWidth = Double.parseDouble(new String(ch, start, length));
             }
             if (boxX) {
-              bX = Double.parseDouble(new String(ch,start,length));
+              bX = Double.parseDouble(new String(ch, start, length));
             }
             if (boxY) {
-              bY = Double.parseDouble(new String(ch,start,length));
+              bY = Double.parseDouble(new String(ch, start, length));
             }
             if (spool) {
-              aSpool = Double.parseDouble(new String (ch,start,length));
+              aSpool = Double.parseDouble(new String(ch, start, length));
             }
             if (duration) {
-              aDuration = Double.parseDouble(new String(ch,start,length));
+              aDuration = Double.parseDouble(new String(ch, start, length));
             }
             if (cooldown) {
-              aCooldown = Double.parseDouble(new String(ch,start,length));
+              aCooldown = Double.parseDouble(new String(ch, start, length));
             }
           }
           if (charHealth) {
-            health = Integer.parseInt(new String(ch,start,length));
+            health = Integer.parseInt(new String(ch, start, length));
           }
         }
 
       };
 
-      saxParser.parse("charater.xml",handler);
+      saxParser.parse("charater.xml", handler);
 
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
-  }
+}

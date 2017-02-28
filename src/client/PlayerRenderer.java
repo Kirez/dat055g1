@@ -55,12 +55,14 @@ public class PlayerRenderer implements GameRenderer {
     if (player.statePunching.isActive()) {
       gc.setFill(Color.MAGENTA);
 
-      gc.fillRect(player.getHitBox(0 ).getX(), player.getHitBox(0).getY(), player.getHitBox(0).getWidth(), player.getHitBox(0).getHeight());
+      gc.fillRect(player.getHitBox(0).getX(), player.getHitBox(0).getY(),
+          player.getHitBox(0).getWidth(), player.getHitBox(0).getHeight());
     }
     if (player.stateKicking.isActive()) {
       gc.setFill(Color.GREEN);
 
-      gc.fillRect(player.getHitBox(1).getX(), player.getHitBox(1).getY(), player.getHitBox(1).getWidth(), player.getHitBox(1).getHeight());
+      gc.fillRect(player.getHitBox(1).getX(), player.getHitBox(1).getY(),
+          player.getHitBox(1).getWidth(), player.getHitBox(1).getHeight());
 
     }
 

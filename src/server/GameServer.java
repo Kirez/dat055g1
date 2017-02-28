@@ -56,6 +56,11 @@ public class GameServer {
     gameThread = new Thread(gameEngine);
   }
 
+  public static void main(String[] args) throws IOException {
+    GameServer server = new GameServer(8022);
+    server.start();
+  }
+
   void syncClients() throws IOException {
     OutputStream outputStream = client1.getOutputStream();
     outputStream.write(NetworkPacket.sync(player1, 1));
@@ -76,7 +81,7 @@ public class GameServer {
         } else {
           client2 = client;
         }
-      } catch (IOException e){
+      } catch (IOException e) {
         e.printStackTrace();
       }
     }
@@ -99,9 +104,10 @@ public class GameServer {
   }
 
   private class ClientListener implements Runnable {
-    private Socket socket;
+
     InputStream inputStream;
     PlayerController playerController;
+    private Socket socket;
 
     public ClientListener(Socket socket, PlayerController playerController) {
       this.socket = socket;
@@ -134,8 +140,7 @@ public class GameServer {
               int actionStartInt = inputStream.read();
               if (actionStartInt < 0 || actionStartInt >= ACTION.values().length) {
                 System.err.println("Unknown action started");
-              }
-              else {
+              } else {
                 ACTION action = ACTION.values()[actionStartInt];
                 playerController.actionStart(action);
               }
@@ -144,8 +149,7 @@ public class GameServer {
               int actionEndInt = inputStream.read();
               if (actionEndInt < 0 || actionEndInt >= ACTION.values().length) {
                 System.err.println("Unknown action started");
-              }
-              else {
+              } else {
                 ACTION action = ACTION.values()[actionEndInt];
                 playerController.actionEnd(action);
               }
@@ -157,10 +161,5 @@ public class GameServer {
         e.printStackTrace();
       }
     }
-  }
-
-  public static void main(String[] args) throws IOException {
-    GameServer server = new GameServer(8022);
-    server.start();
   }
 }
