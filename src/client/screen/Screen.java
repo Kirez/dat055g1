@@ -2,7 +2,6 @@ package client.screen;
 
 import javafx.stage.Stage;
 
-
 /**
  * Common code for each screen
  *
@@ -13,6 +12,7 @@ import javafx.stage.Stage;
  * @author Karl Ängermark (karlang)
  * @version 2017-02-23
  */
+
 public interface Screen {
 
   /*Run when a screen becomes visible*/
