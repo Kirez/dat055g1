@@ -1,5 +1,7 @@
-package client;
+package client.screen;
 
+import client.GameApplication;
+import java.io.IOException;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -9,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import server.GameServer;
 
 /**
  * TODO: Add description
@@ -18,20 +21,20 @@ import javafx.stage.Stage;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-23
+ * @version 2017-02-28
  */
-public class ConnectScreen implements AbstractScreen {
+public class CreateScreen implements Screen {
 
   private GridPane layout;
-  private TextField ipAddressField;
-  private Button connectButton;
-  private Label connectLabel;
+  private TextField portField;
+  private Button createButton;
+  private Label createLabel;
   private Stage stage;
   private Scene scene;
   private Group root;
   private GameApplication owner;
 
-  public ConnectScreen(GameApplication gameApplication) {
+  public CreateScreen(GameApplication gameApplication) {
     owner = gameApplication;
   }
 
@@ -40,14 +43,14 @@ public class ConnectScreen implements AbstractScreen {
     this.stage = stage;
     root = new Group();
     scene = new Scene(root);
-    connectLabel = new Label("Play over Network!");
-    connectLabel.setFont(Font.font(72));
-    connectButton = new Button("Connect");
-    ipAddressField = new TextField();
-    ipAddressField.setPromptText("ip address");
+    createLabel = new Label("Host a game!");
+    createLabel.setFont(Font.font(72));
+    createButton = new Button("Connect");
+    portField = new TextField();
+    portField.setText("8822");
     layout = new GridPane();
-    layout.addRow(0, connectLabel);
-    layout.addRow(1, ipAddressField, connectButton);
+    layout.addRow(0, createLabel);
+    layout.addRow(1, portField, createButton);
     layout.setAlignment(Pos.CENTER);
 
     layout.setPrefWidth(stage.getWidth());
@@ -59,6 +62,15 @@ public class ConnectScreen implements AbstractScreen {
     root.getChildren().add(layout);
 
     stage.setScene(scene);
+  }
+
+  void onCreateButton() {
+    try {
+      GameServer server = new GameServer(Integer.parseInt(portField.getText()));
+    } catch (IOException e) {
+      System.err.println("Could not create server!");
+    }
+
   }
 
   @Override

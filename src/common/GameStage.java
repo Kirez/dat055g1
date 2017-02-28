@@ -1,5 +1,6 @@
 package common;
 
+import client.FileHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 
@@ -11,7 +12,7 @@ import javafx.scene.paint.Color;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-23
+ * @version 2017-02-28
  */
 public class GameStage {
 
@@ -28,7 +29,7 @@ public class GameStage {
   private double width = 16;
   private double height = 9;
 
-  private double groundLevelY = 3;
+  private double groundLevelY = 6;
 
   //  Constructor
   public GameStage(Point2D p1s, Point2D p2s, GamePlayer p1, GamePlayer p2, double gly) {
@@ -37,7 +38,8 @@ public class GameStage {
     player1 = p1;
     player2 = p2;
     groundLevelY = gly;
-
+    FileHandler fh1 = new FileHandler(p1);
+    FileHandler fh2 = new FileHandler(p2);
     player1.setColor(Color.RED);
     player2.setColor(Color.BLUE);
 

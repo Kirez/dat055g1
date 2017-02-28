@@ -1,5 +1,10 @@
-package client;
+package client.screen;
 
+import client.GameApplication;
+import client.GameRenderer;
+import client.HealthRenderer;
+import client.PlayerRenderer;
+import client.StageRenderer;
 import common.GameStage;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
@@ -18,10 +23,9 @@ import server.StageController;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-23
+ * @version 2017-02-28
  */
-
-public class PlayScreen extends AnimationTimer implements AbstractScreen {
+public class PlayScreen extends AnimationTimer implements Screen {
 
   private Canvas canvas;
   private GameStage gameStage;

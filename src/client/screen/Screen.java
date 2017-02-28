@@ -1,4 +1,4 @@
-package client;
+package client.screen;
 
 import javafx.stage.Stage;
 
@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  * @author Karl Ängermark (karlang)
  * @version 2017-02-23
  */
-public interface AbstractScreen {
+public interface Screen {
 
   /*Run when a screen becomes visible*/
   void enter(Stage stage);

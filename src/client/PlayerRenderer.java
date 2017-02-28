@@ -17,7 +17,7 @@ import javafx.scene.shape.Rectangle;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-23
+ * @version 2017-02-28
  */
 public class PlayerRenderer implements GameRenderer {
 
@@ -55,9 +55,15 @@ public class PlayerRenderer implements GameRenderer {
     if (player.statePunching.isActive()) {
       gc.setFill(Color.MAGENTA);
 
-      for (Rectangle R : player.getHitBoxes()) {
-        gc.fillRect(R.getX(), R.getY(), R.getWidth(), R.getHeight());
-      }
+      gc.fillRect(player.getHitBox(0).getX(), player.getHitBox(0).getY(),
+          player.getHitBox(0).getWidth(), player.getHitBox(0).getHeight());
+    }
+    if (player.stateKicking.isActive()) {
+      gc.setFill(Color.GREEN);
+
+      gc.fillRect(player.getHitBox(1).getX(), player.getHitBox(1).getY(),
+          player.getHitBox(1).getWidth(), player.getHitBox(1).getHeight());
+
     }
 
     gc.setStroke(player.getColor()); // Outline color
