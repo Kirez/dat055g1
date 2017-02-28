@@ -9,6 +9,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.WindowEvent;
 
 /**
  * Handles the state of the stage each tick and each player controller within it
@@ -100,6 +101,17 @@ public class StageController implements GameController {
           }
         }
     }
+    if (p1.getHP() == 0 || p2.getHP() == 0){
+      if(p1.getHP() == 0){
+        System.out.println("Winner p2!");
+        System.exit(0);
+      }
+      else if(p2.getHP() == 0){
+        System.out.println("Winner p1!");
+        System.exit(0);
+      }
+     // stop(engine);
+    }
   }
 
   @Override
@@ -122,5 +134,8 @@ public class StageController implements GameController {
     player1Controller.onKeyReleased(event);
     player2Controller.onKeyReleased(event);
     //gameClient.setKeyReleased(event); //Remove key from client sendlist
+  }
+  public void stop(GameEngine engine) {
+    engine.shutdown();
   }
 }

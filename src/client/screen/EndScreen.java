@@ -6,10 +6,10 @@ import java.awt.Label;
 import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
-
+*/
 
 /*EndScreen with the options to have a rematch, etc.*/
-/*public class EndScreen implements AbstractScreen {
+/*public class EndScreen implements Screen {
 
     private GridPane layout;
     private Button menuButton;
@@ -59,5 +59,6 @@ import javafx.scene.text.Font;
     public void exit() {
 
     }
-}*/
+}
 
+*/

@@ -1,5 +1,7 @@
 package server;
 
+import javafx.application.Platform;
+
 import java.util.HashSet;
 import java.util.concurrent.TimeUnit;
 
@@ -120,5 +122,9 @@ public class GameEngine implements Runnable {
    */
   public void togglePause() {
     pause = !pause;
+  }
+
+  public void shutdown() {
+    stop = true;
   }
 }
