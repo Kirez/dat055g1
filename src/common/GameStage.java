@@ -65,6 +65,9 @@ public class GameStage {
 
     player1.setVelocity(new Point2D(0, 0));
     player2.setVelocity(new Point2D(0, 0));
+
+    player1.setOnGround(false);
+    player2.setOnGround(false);
   }
 
   //  Getters

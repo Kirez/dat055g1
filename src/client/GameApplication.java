@@ -1,5 +1,6 @@
 package client;
 
+import client.screen.EndScreen;
 import client.screen.JoinScreen;
 import client.screen.MainMenuScreen;
 import client.screen.NetworkPlayScreen;
@@ -26,6 +27,7 @@ public class GameApplication extends Application {
   public MainMenuScreen mainMenuScreen;
   public JoinScreen joinScreen;
   public NetworkPlayScreen networkPlayScreen;
+  public EndScreen endScreen;
 
   private Screen activeScreen;
   private Stage stage;
@@ -39,14 +41,15 @@ public class GameApplication extends Application {
     stage = primaryStage;
     stage.setTitle("TimmyFightGoGo");
     javafx.stage.Screen screen = javafx.stage.Screen.getPrimary();
-    stage.setWidth(screen.getBounds().getMaxX());
-    stage.setHeight(screen.getBounds().getMaxY());
+    stage.setWidth(screen.getBounds().getMaxX()/2);
+    stage.setHeight(screen.getBounds().getMaxY()/2);
     //stage.setFullScreen(true);
 
     playScreen = new PlayScreen(this);
     mainMenuScreen = new MainMenuScreen(this);
     joinScreen = new JoinScreen(this);
     networkPlayScreen = new NetworkPlayScreen(this);
+    endScreen = new EndScreen(this);
 
     setActiveScreen(mainMenuScreen);
 
