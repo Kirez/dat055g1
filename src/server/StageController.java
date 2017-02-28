@@ -84,7 +84,7 @@ public class StageController implements GameController {
             if (!p2.stateStunned.isActive()) {
               p2.stateStunned.enterCycle(CYCLE.ACTIVE);
               p2.setHP(p2.getHP() - 10);
-              System.out.println("Player 2 is hit" + p2.getHP() + "HP");
+              System.out.println("Player 2 is hit - " + p2.getHP() + "HP");
             }
           }
         }
@@ -112,7 +112,7 @@ public class StageController implements GameController {
         System.exit(0);
       }*/
      // stop(engine)
-      this.stop()
+
       owner.setActiveScreen(owner.endScreen);
     }
   }
