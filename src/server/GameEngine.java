@@ -1,7 +1,5 @@
 package server;
 
-import javafx.application.Platform;
-
 import java.util.HashSet;
 import java.util.concurrent.TimeUnit;
 
@@ -17,21 +15,35 @@ import java.util.concurrent.TimeUnit;
  */
 public class GameEngine implements Runnable {
 
-  /** Desired <tt>GameEngine</tt> tickrate. */
+  /**
+   * Desired <tt>GameEngine</tt> tickrate.
+   */
   public static int DEFAULT_TPS = 100;
 
-  /** Engine state. Enabling halts the engine thread. */
+  /**
+   * Engine state. Enabling halts the engine thread.
+   */
   public boolean stop;
-  /** Actual <tt>GameEngine</tt> tickrate. */
+  /**
+   * Actual <tt>GameEngine</tt> tickrate.
+   */
   public double tps;
-  /** Desired <tt>GameEngine</tt> tickrate, is initiated to <tt>DEFAULT_TPS</tt>. */
+  /**
+   * Desired <tt>GameEngine</tt> tickrate, is initiated to <tt>DEFAULT_TPS</tt>.
+   */
   private int target_tps;
-  /** Used for keyboard inputs. */
+  /**
+   * Used for keyboard inputs.
+   */
   private HashSet<GameController> controllers;
-  /** <tt>GameEngine</tt> state. Enabling sleeps the engine thread. */
+  /**
+   * <tt>GameEngine</tt> state. Enabling sleeps the engine thread.
+   */
   private boolean pause;
 
-  /** Initializes the <tt>GameEngine</tt> */
+  /**
+   * Initializes the <tt>GameEngine</tt>
+   */
   public GameEngine() {
     controllers = new HashSet<>();
     target_tps = DEFAULT_TPS;

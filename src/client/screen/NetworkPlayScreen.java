@@ -13,6 +13,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.stage.Stage;
 
 public class NetworkPlayScreen extends AnimationTimer implements Screen {
+
   private Canvas canvas;
   private Group root;
   private Scene scene;

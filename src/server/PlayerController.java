@@ -78,11 +78,15 @@ public class PlayerController implements GameController {
 
   @Override
   public void onKeyPressed(KeyEvent event) {
-    if (((!actions.contains(ACTION.HIT)) && (!actions.contains(ACTION.KICK)) && (keyBinds.get(event.getCode()) == ACTION.HIT)) || ((!actions.contains(ACTION.KICK) && (!actions.contains(ACTION.HIT))) && keyBinds.get(event.getCode()) == ACTION.KICK)) {
-      if ((player.statePunching.isReady() && player.stateKicking.isReady()) && !player.stateStunned.isActive() && keyBinds.get(event.getCode()) == ACTION.HIT) {
+    if (((!actions.contains(ACTION.HIT)) && (!actions.contains(ACTION.KICK)) && (
+        keyBinds.get(event.getCode()) == ACTION.HIT)) || (
+        (!actions.contains(ACTION.KICK) && (!actions.contains(ACTION.HIT)))
+            && keyBinds.get(event.getCode()) == ACTION.KICK)) {
+      if ((player.statePunching.isReady() && player.stateKicking.isReady()) && !player.stateStunned
+          .isActive() && keyBinds.get(event.getCode()) == ACTION.HIT) {
         player.statePunching.enterCycle(CYCLE.SPOOL_UP);
-      }
-      else if ((player.stateKicking.isReady() && player.stateKicking.isReady()) && !player.stateStunned.isActive() && keyBinds.get(event.getCode()) == ACTION.KICK) {
+      } else if ((player.stateKicking.isReady() && player.stateKicking.isReady())
+          && !player.stateStunned.isActive() && keyBinds.get(event.getCode()) == ACTION.KICK) {
         player.stateKicking.enterCycle(CYCLE.SPOOL_UP);
       }
     }

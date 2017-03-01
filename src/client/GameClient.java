@@ -15,6 +15,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 public class GameClient implements Runnable {
+
   private GameStage gameStage;
   private GamePlayer player1;
   private GamePlayer player2;
@@ -29,6 +30,12 @@ public class GameClient implements Runnable {
     gameStage = new GameStage();
     player1 = gameStage.getPlayer1();
     player2 = gameStage.getPlayer2();
+  }
+
+  public static void main(String[] args) throws IOException {
+    GameClient client = new GameClient("localhost", 8022);
+
+    client.run();
   }
 
   private void onConnect() throws IOException {
@@ -128,12 +135,6 @@ public class GameClient implements Runnable {
     } catch (IOException e) {
       e.printStackTrace();
     }
-  }
-
-  public static void main(String[] args) throws IOException {
-    GameClient client = new GameClient("localhost", 8022);
-
-    client.run();
   }
 
   @Override

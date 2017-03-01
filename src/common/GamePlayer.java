@@ -74,34 +74,42 @@ public class GamePlayer {
     this.position = position;
 
   }
-  public void addHurtbox(double x, double y, double boxwidth, double boxheight ) {
+
+  public void addHurtbox(double x, double y, double boxwidth, double boxheight) {
     hurtBoxes.add(new Rectangle(x, y, boxwidth, boxheight));
-    System.out.println("Hurtbox: x:" + x + " y:" + y + " width:" + boxwidth + " height:" + boxheight);
+    System.out
+        .println("Hurtbox: x:" + x + " y:" + y + " width:" + boxwidth + " height:" + boxheight);
   }
-  public void addHitbox(double x,double y,double boxwidth,double boxheight) {
+
+  public void addHitbox(double x, double y, double boxwidth, double boxheight) {
     hitBoxes.add(new Rectangle(x, y, boxwidth, boxheight));
-    System.out.println("Hitbox: x: "+ x + " y:" + y + " width:" + boxwidth + " height:" + boxheight);
+    System.out
+        .println("Hitbox: x: " + x + " y:" + y + " width:" + boxwidth + " height:" + boxheight);
   }
-  public void setHealth (int health) {
+
+  public void setHealth(int health) {
     maxHP = health;
     System.out.println("Character health: " + health);
   }
-  public void setCharsize (double h, double w) {
+
+  public void setCharsize(double h, double w) {
     height = h;
     width = w;
     System.out.println("Character size: height" + h + "width" + w);
   }
-  public void setCycles (double spool, double duration, double cooldown, String type) {
+
+  public void setCycles(double spool, double duration, double cooldown, String type) {
     stateStunned = new ActionCycle(0, 0.5, 0);
-    if (type=="kick") {
+    if (type == "kick") {
       stateKicking = new ActionCycle(spool, duration, cooldown);
-      System.out.println("Action Cycle Kick"+ spool + " " + duration + " " + cooldown);
+      System.out.println("Action Cycle Kick" + spool + " " + duration + " " + cooldown);
     }
-    if (type=="jab") {
+    if (type == "jab") {
       statePunching = new ActionCycle(spool, duration, cooldown);
-      System.out.println("Action Cycle Jab"+ spool + " " + duration + " " + cooldown);
+      System.out.println("Action Cycle Jab" + spool + " " + duration + " " + cooldown);
     }
   }
+
   public Point2D getVelocity() {
     return velocity;
   }
@@ -170,10 +178,6 @@ public class GamePlayer {
     return rectangles.get(hitbox);
   }
 
-  public void setFaceRight(boolean faceRight) {
-    this.faceRight = faceRight;
-  }
-
   public Color getColor() {
     return color;
   }
@@ -192,6 +196,10 @@ public class GamePlayer {
 
   public boolean isFaceRight() {
     return faceRight;
+  }
+
+  public void setFaceRight(boolean faceRight) {
+    this.faceRight = faceRight;
   }
 
   public enum ACTION {

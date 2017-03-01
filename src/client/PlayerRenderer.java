@@ -51,19 +51,68 @@ public class PlayerRenderer implements GameRenderer {
     for (Rectangle B : player.getHurtBoxes()) {
       gc.fillRect(B.getX(), B.getY(), B.getWidth(), B.getHeight());
     }
-
+    if (player.statePunching.isSpoolingUp()) {
+      gc.setFill(Color.BLACK);
+      if (player.isFaceRight()) {
+        gc.fillRect(player.getPosition().getX() + 0.5, player.getHitBox(0).getY(),
+            (player.getHitBox(0).getWidth() + 0.5) / 2, player.getHitBox(0).getHeight());
+      } else {
+        gc.fillRect(player.getPosition().getX() + (0.5 - player.getHitBox(0).getWidth()) / 2,
+            player.getHitBox(0).getY(),
+            (player.getHitBox(0).getWidth() + 0.5) / 2, player.getHitBox(0).getHeight());
+      }
+    }
     if (player.statePunching.isActive()) {
       gc.setFill(Color.MAGENTA);
-
-      gc.fillRect(player.getHitBox(0 ).getX(), player.getHitBox(0).getY(), player.getHitBox(0).getWidth(), player.getHitBox(0).getHeight());
+      if (player.isFaceRight()) {
+        gc.fillRect(player.getPosition().getX() + 0.5, player.getHitBox(0).getY(),
+            (player.getHitBox(0).getWidth() + 0.5), player.getHitBox(0).getHeight());
+      } else {
+        gc.fillRect(player.getPosition().getX() - player.getHitBox(0).getWidth(),
+            player.getHitBox(0).getY(),
+            (player.getHitBox(0).getWidth() + 0.5), player.getHitBox(0).getHeight());
+      }
+    }
+    if (player.statePunching.isOnCoolDown()) {
+      gc.setFill(Color.GREEN);
+      if (player.isFaceRight()) {
+        gc.fillRect(player.getPosition().getX() + 0.5, player.getHitBox(0).getY(),
+            (player.getHitBox(0).getWidth() + 0.5) / 2, player.getHitBox(0).getHeight());
+      } else {
+        gc.fillRect(player.getPosition().getX() + (0.5 - player.getHitBox(0).getWidth()) / 2,
+            player.getHitBox(0).getY(),
+            (player.getHitBox(0).getWidth() + 0.5) / 2, player.getHitBox(0).getHeight());
+      }
+    }
+    if (player.stateKicking.isSpoolingUp()) {
+      gc.setFill(Color.BLACK);
+      if (player.isFaceRight()) {
+        gc.fillRect(player.getPosition().getX() + 0.5, player.getHitBox(1).getY(),
+            (player.getHitBox(1).getWidth() + 0.5) / 2, player.getHitBox(1).getHeight());
+      } else {
+        gc.fillRect(player.getPosition().getX() + (0.5 - player.getHitBox(1).getWidth()) / 2,
+            player.getHitBox(1).getY(),
+            (player.getHitBox(1).getWidth() + 0.5) / 2, player.getHitBox(1).getHeight());
+      }
     }
     if (player.stateKicking.isActive()) {
       gc.setFill(Color.GREEN);
 
-      gc.fillRect(player.getHitBox(1).getX(), player.getHitBox(1).getY(), player.getHitBox(1).getWidth(), player.getHitBox(1).getHeight());
+      gc.fillRect(player.getHitBox(1).getX(), player.getHitBox(1).getY(),
+          player.getHitBox(1).getWidth(), player.getHitBox(1).getHeight());
 
     }
-
+    if (player.stateKicking.isOnCoolDown()) {
+      gc.setFill(Color.BLACK);
+      if (player.isFaceRight()) {
+        gc.fillRect(player.getPosition().getX() + 0.5, player.getHitBox(1).getY(),
+            (player.getHitBox(1).getWidth() + 0.5) / 2, player.getHitBox(1).getHeight());
+      } else {
+        gc.fillRect(player.getPosition().getX() + (0.5 - player.getHitBox(1).getWidth()) / 2,
+            player.getHitBox(1).getY(),
+            (player.getHitBox(1).getWidth() + 0.5) / 2, player.getHitBox(1).getHeight());
+      }
+    }
     gc.setStroke(player.getColor()); // Outline color
 
     gc.beginPath();
