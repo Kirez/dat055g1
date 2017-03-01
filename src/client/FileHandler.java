@@ -1,6 +1,7 @@
 package client;
 
 import common.GamePlayer;
+import java.util.ArrayList;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
@@ -19,30 +20,18 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public class FileHandler {
 
-  double bHeight;
-  double bWidth;
-  double bX;
-  double bY;
-  int health;
-  double aSpool;
-  double aDuration;
-  double aCooldown;
+  static double bHeight;
+  static double bWidth;
+  static double bX;
+  static double bY;
+  static int health;
+  static double aSpool;
+  static double aDuration;
+  static double aCooldown;
   private GamePlayer player;
 
-  public FileHandler(GamePlayer player) {
-    bHeight = 0;
-    bWidth = 0;
-    bX = 0;
-    bY = 0;
-    health = 0;
-    aCooldown = 0;
-    aSpool = 0;
-    aDuration = 0;
-    this.player = player;
-    importCharacters();
-  }
+  public static void importCharacters(GamePlayer player) {
 
-  public void importCharacters() {
     try {
 
       SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -211,5 +200,125 @@ public class FileHandler {
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
+
+  public static ArrayList<String> importControls() {
+    ArrayList controls = new ArrayList<String>();
+
+    try {
+
+      SAXParserFactory factory = SAXParserFactory.newInstance();
+      SAXParser saxParser = factory.newSAXParser();
+
+      DefaultHandler handler = new DefaultHandler() {
+        boolean cJump = false;
+        boolean cLeft = false;
+        boolean cRight = false;
+        boolean cDown = false;
+        boolean cJab = false;
+        boolean cKick = false;
+        boolean player1 = false;
+        boolean player2 = false;
+        String temp;
+
+        public void startElement(String uri, String localName, String qName,
+            Attributes attributes) throws SAXException {
+          if (qName.equalsIgnoreCase("P1")) {
+            player1 = true;
+          }
+          if (qName.equalsIgnoreCase("P2")) {
+            player2 = true;
+          }
+          if (qName.equalsIgnoreCase("JUMP")) {
+            cJump = true;
+          }
+          if (qName.equalsIgnoreCase("LEFT")) {
+            cLeft = true;
+          }
+          if (qName.equalsIgnoreCase("RIGHT")) {
+            cRight = true;
+          }
+          if (qName.equalsIgnoreCase("DOWN")) {
+            cDown = true;
+          }
+          if (qName.equalsIgnoreCase("JAB")) {
+            cJab = true;
+          }
+          if (qName.equalsIgnoreCase("KICK")) {
+            cKick = true;
+          }
+        }
+
+        public void endElement(String uri, String localName, String qName) throws SAXException {
+          if (qName.equalsIgnoreCase("P1")) {
+            player1 = false;
+          }
+          if (qName.equalsIgnoreCase("P2")) {
+            player2 = false;
+          }
+          if (qName.equalsIgnoreCase("JUMP")) {
+            cJump = false;
+            controls.add(temp);
+          }
+          if (qName.equalsIgnoreCase("LEFT")) {
+            cLeft = false;
+            controls.add(temp);
+          }
+          if (qName.equalsIgnoreCase("RIGHT")) {
+            cRight = false;
+            controls.add(temp);
+          }
+          if (qName.equalsIgnoreCase("DOWN")) {
+            cDown = false;
+            controls.add(temp);
+          }
+          if (qName.equalsIgnoreCase("JAB")) {
+            cJab = false;
+            controls.add(temp);
+          }
+          if (qName.equalsIgnoreCase("KICK")) {
+            cKick = false;
+            controls.add(temp);
+          }
+        }
+
+        public void characters(char ch[], int start, int length) throws SAXException {
+          if (player1 || player2) {
+            if (cJump) {
+              temp = new String(ch, start, length);
+            }
+            if (cLeft) {
+              temp = new String(ch, start, length);
+            }
+            if (cRight) {
+              temp = new String(ch, start, length);
+            }
+            if (cDown) {
+              temp = new String(ch, start, length);
+            }
+            if (cJab) {
+              temp = new String(ch, start, length);
+            }
+            if (cKick) {
+              temp = new String(ch, start, length);
+            }
+          }
+        }
+      };
+
+      saxParser.parse("Settings.XML", handler);
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    for (Object c : controls) {
+      System.out.println("Controls: " + c);
+    }
+    return controls;
+  }
+
+  public void setControls(ArrayList<String> al) {
+    al = new ArrayList<>();
+
   }
 }

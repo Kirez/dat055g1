@@ -135,4 +135,8 @@ public class GameEngine implements Runnable {
   public void togglePause() {
     pause = !pause;
   }
+
+  public void shutdown() {
+    stop = true;
+  }
 }
