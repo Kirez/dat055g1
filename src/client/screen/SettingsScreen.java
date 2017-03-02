@@ -1,6 +1,5 @@
 package client.screen;
 
-
 import client.FileHandler;
 import client.GameApplication;
 import java.awt.Toolkit;
@@ -16,7 +15,14 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 /**
- * Created by karlang on 2/28/17.
+ * TODO: Add description
+ *
+ * @author Alexander Andersson (alexaan)
+ * @author Linus Berglund (belinus)
+ * @author Erik Källberg (kalerik)
+ * @author Timmy Truong (timmyt)
+ * @author Karl Ängermark (karlang)
+ * @version 2017-02-28
  */
 public class SettingsScreen implements Screen {
 
