@@ -77,7 +77,7 @@ public class GameServer {
         } else {
           client2 = client;
         }
-      } catch (IOException e){
+      } catch (IOException e) {
         e.printStackTrace();
       }
     }
@@ -100,6 +100,7 @@ public class GameServer {
   }
 
   private class ClientListener implements Runnable {
+
     private Socket socket;
     InputStream inputStream;
     PlayerController playerController;
@@ -135,8 +136,7 @@ public class GameServer {
               int actionStartInt = inputStream.read();
               if (actionStartInt < 0 || actionStartInt >= ACTION.values().length) {
                 System.err.println("Unknown action started");
-              }
-              else {
+              } else {
                 ACTION action = ACTION.values()[actionStartInt];
                 playerController.actionStart(action);
               }
@@ -145,8 +145,7 @@ public class GameServer {
               int actionEndInt = inputStream.read();
               if (actionEndInt < 0 || actionEndInt >= ACTION.values().length) {
                 System.err.println("Unknown action started");
-              }
-              else {
+              } else {
                 ACTION action = ACTION.values()[actionEndInt];
                 playerController.actionEnd(action);
               }

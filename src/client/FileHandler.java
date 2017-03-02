@@ -427,7 +427,7 @@ public class FileHandler {
 
       };
       Source src1 = new SAXSource(xr, new InputSource("Settings.XML"));
-      File fw =  new File("temp.XML");
+      File fw = new File("temp.XML");
       Result res1 = new StreamResult(fw);
       TransformerFactory.newInstance().newTransformer().transform(src1, res1);
 

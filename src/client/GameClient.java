@@ -15,6 +15,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 public class GameClient implements Runnable {
+
   private GameStage gameStage;
   private GamePlayer player1;
   private GamePlayer player2;

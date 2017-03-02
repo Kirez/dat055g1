@@ -3,6 +3,7 @@ package common;
 import javafx.scene.input.KeyCode;
 
 public class GameDefaults {
+
   public static final int DEFAULT_PORT = 8822;
   public static final String TITLE = "TimmyFightGoGo";
   public static final KeyCode DEFAULT_MOVE_LEFT = KeyCode.A;

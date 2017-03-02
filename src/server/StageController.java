@@ -136,6 +136,7 @@ public class StageController implements GameController {
     player2Controller.onKeyReleased(event);
     //gameClient.setKeyReleased(event); //Remove key from client sendlist
   }
+
   public void getControls() {
     ArrayList<String> impControls = FileHandler.importControls();
     for (int i = 0; i < 12; i++) {

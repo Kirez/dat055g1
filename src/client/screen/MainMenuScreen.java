@@ -74,7 +74,9 @@ public class MainMenuScreen implements Screen {
     owner.setActiveScreen(owner.joinScreen);
   }
 
-  void onSettingsButton(ActionEvent event) {owner.setActiveScreen(owner.settingsScreen);}
+  void onSettingsButton(ActionEvent event) {
+    owner.setActiveScreen(owner.settingsScreen);
+  }
 
   @Override
   public void exit() {
