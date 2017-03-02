@@ -8,6 +8,16 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+/**
+ * TODO: Add description
+ *
+ * @author Alexander Andersson (alexaan)
+ * @author Linus Berglund (belinus)
+ * @author Erik Källberg (kalerik)
+ * @author Timmy Truong (timmyt)
+ * @author Karl Ängermark (karlang)
+ * @version 2017-02-28
+ */
 public class FileHandler {
 
   static double bHeight;
@@ -19,7 +29,6 @@ public class FileHandler {
   static double aDuration;
   static double aCooldown;
   private GamePlayer player;
-
 
   public static void importCharacters(GamePlayer player) {
 

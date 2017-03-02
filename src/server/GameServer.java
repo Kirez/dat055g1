@@ -12,7 +12,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashSet;
 
-
 /**
  * TODO: Add description
  *
@@ -21,7 +20,7 @@ import java.util.HashSet;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-23
+ * @version 2017-02-28
  */
 public class GameServer {
 

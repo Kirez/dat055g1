@@ -1,6 +1,5 @@
 package client.screen;
 
-
 import client.GameApplication;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -69,10 +68,8 @@ public class EndScreen implements Screen {
     owner.setActiveScreen(owner.endScreen);
   }
 
-
   @Override
   public void exit() {
 
   }
 }
-
