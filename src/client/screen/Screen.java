@@ -2,6 +2,7 @@ package client.screen;
 
 import javafx.stage.Stage;
 
+
 /**
  * Common code for each screen
  *

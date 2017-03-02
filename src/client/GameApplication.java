@@ -12,6 +12,7 @@ import javafx.application.Platform;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+
 /**
  * Client entry class handles switching of screens/modes
  *
@@ -20,7 +21,7 @@ import javafx.stage.WindowEvent;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-28
+ * @version 2017-02-23
  */
 public class GameApplication extends Application {
 
@@ -43,8 +44,8 @@ public class GameApplication extends Application {
     stage = primaryStage;
     stage.setTitle("TimmyFightGoGo");
     javafx.stage.Screen screen = javafx.stage.Screen.getPrimary();
-    stage.setWidth(screen.getBounds().getMaxX()/2);
-    stage.setHeight(screen.getBounds().getMaxY()/2);
+    stage.setWidth(screen.getBounds().getMaxX());
+    stage.setHeight(screen.getBounds().getMaxY());
     //stage.setFullScreen(true);
 
     playScreen = new PlayScreen(this);

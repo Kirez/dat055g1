@@ -20,7 +20,7 @@ import javafx.stage.Stage;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-28
+ * @version 2017-02-23
  */
 public class MainMenuScreen implements Screen {
 

@@ -23,8 +23,9 @@ import server.StageController;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-28
+ * @version 2017-02-23
  */
+
 public class PlayScreen extends AnimationTimer implements Screen {
 
   private Canvas canvas;
@@ -76,7 +77,6 @@ public class PlayScreen extends AnimationTimer implements Screen {
   @Override
   public void enter(Stage stage) {
     this.stage = stage;
-    gameStage.reset();
 
     // The root element in the javafx gui stack, all sub-elements attach to this
     root = new Group();
@@ -130,10 +130,6 @@ public class PlayScreen extends AnimationTimer implements Screen {
         break;
       case F11:
         stage.setFullScreen(!stage.isFullScreen());
-        break;
-      case ESCAPE:
-        this.exit();
-        owner.setActiveScreen(owner.mainMenuScreen);
         break;
     }
     stageController.onKeyPressed(event);

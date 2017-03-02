@@ -12,7 +12,7 @@ import javafx.scene.paint.Color;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-28
+ * @version 2017-02-23
  */
 public class GameStage {
 
@@ -65,9 +65,6 @@ public class GameStage {
 
     player1.setVelocity(new Point2D(0, 0));
     player2.setVelocity(new Point2D(0, 0));
-
-    player1.setOnGround(false);
-    player2.setOnGround(false);
   }
 
   //  Getters

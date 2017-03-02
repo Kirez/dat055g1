@@ -10,15 +10,10 @@ import javafx.scene.input.KeyEvent;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-28
+ * @version 2017-02-23
  */
 public interface GameController {
 
-  /**
-   * Update logic
-   *
-   * @param delta the time difference between this and the previous tick, used for scaling
-   */
   void update(double delta);
 
   void attach(GameEngine engine);
