@@ -52,7 +52,6 @@ public class PlayScreen extends AnimationTimer implements Screen {
 
     // PlayerController, stageController, StageRenderer from the same gameStage
     stageController = new StageController(gameStage);
-
     stageRenderer = new StageRenderer(gameStage);
     player1Renderer = new PlayerRenderer(gameStage.getPlayer1());
     player2Renderer = new PlayerRenderer(gameStage.getPlayer2());
@@ -94,7 +93,7 @@ public class PlayScreen extends AnimationTimer implements Screen {
     scene.heightProperty().addListener(l -> canvas.setHeight(scene.getHeight()));
 
     stage.setScene(scene);
-
+    stageController.getControls();
     engine.stop = false;
 
     // Create threads
