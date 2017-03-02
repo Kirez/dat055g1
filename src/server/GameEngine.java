@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class GameEngine implements Runnable {
 
   /**
-   * Desired <tt>GameEngine</tt> tickrate.
+   * Desired {@code GameEngine} tickrate.
    */
   public static int DEFAULT_TPS = 100;
 
@@ -24,25 +24,23 @@ public class GameEngine implements Runnable {
    * Engine state. Enabling halts the engine thread.
    */
   public boolean stop;
+
   /**
-   * Actual <tt>GameEngine</tt> tickrate.
+   * Actual {@code GameEngine} tickrate.
    */
   public double tps;
-  /**
-   * Desired <tt>GameEngine</tt> tickrate, is initiated to <tt>DEFAULT_TPS</tt>.
-   */
+
+  // Desired GameEngine tickrate, is initiated to DEFAULT_TPS.
   private int target_tps;
-  /**
-   * Used for keyboard inputs.
-   */
+
+  // Used for keyboard inputs.
   private HashSet<GameController> controllers;
-  /**
-   * <tt>GameEngine</tt> state. Enabling sleeps the engine thread.
-   */
+
+  // GameEngine state. Enabling sleeps the engine thread.
   private boolean pause;
 
   /**
-   * Initializes the <tt>GameEngine</tt>
+   * Initializes the {@code GameEngine}
    */
   public GameEngine() {
     controllers = new HashSet<>();
@@ -53,17 +51,17 @@ public class GameEngine implements Runnable {
   }
 
   /**
-   * Adds a <tt>controller</tt> instance to the HashSet.
+   * Adds a {@code controller} instance to the HashSet.
    *
    * @param controller The controller to be added
-   * @return the <tt>GameEngine</tt> <tt>controller</tt> HashSet, with the <tt>controller</tt> added
+   * @return the {@code GameEngine} {@code controller} HashSet, with the {@code controller} added
    */
   public boolean addController(GameController controller) {
     return controllers.add(controller);
   }
 
   /**
-   * Updates all <tt>controllers</tt> belonging to this instance of the <tt>GameEngine</tt>.
+   * Updates all {@code controllers} belonging to this instance of the {@code GameEngine}.
    *
    * @param delta the time difference between the current and the previous tick
    */
@@ -119,9 +117,9 @@ public class GameEngine implements Runnable {
   }
 
   /**
-   * Enable the <tt>GameEngine</tt> pause state.
+   * Enable the {@code GameEngine} pause state.
    *
-   * @param pause the <tt>GameEngine</tt> state
+   * @param pause the {@code GameEngine} state
    * @see #togglePause()
    * @deprecated
    */
@@ -130,13 +128,9 @@ public class GameEngine implements Runnable {
   }
 
   /**
-   * Toggle the <tt>GameEngine</tt> pause state.
+   * Toggle the {@code GameEngine} pause state.
    */
   public void togglePause() {
     pause = !pause;
-  }
-
-  public void shutdown() {
-    stop = true;
   }
 }

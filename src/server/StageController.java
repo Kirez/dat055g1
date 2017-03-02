@@ -158,8 +158,4 @@ public class StageController implements GameController {
     player2Controller.onKeyReleased(event);
     //gameClient.setKeyReleased(event); //Remove key from client sendlist
   }
-
-  public void stop(GameEngine engine) {
-    engine.shutdown();
-  }
 }

@@ -27,7 +27,6 @@ import javafx.stage.Stage;
 public class SettingsScreen implements Screen {
 
   static public Button rightField1;
-  ;
   static public Button leftField1;
   static public Button downField1;
   static public Button jabField1;
