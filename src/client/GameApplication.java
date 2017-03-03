@@ -44,8 +44,8 @@ public class GameApplication extends Application {
     stage = primaryStage;
     stage.setTitle(GameDefaults.WINDOW_TITLE);
     javafx.stage.Screen screen = javafx.stage.Screen.getPrimary();
-    stage.setWidth(screen.getBounds().getMaxX()/2);
-    stage.setHeight(screen.getBounds().getMaxY()/2);
+    stage.setWidth(screen.getBounds().getMaxX() / 2);
+    stage.setHeight(screen.getBounds().getMaxY() / 2);
     //stage.setFullScreen(true);
 
     playScreen = new PlayScreen(this);
