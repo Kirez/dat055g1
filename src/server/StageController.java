@@ -33,36 +33,7 @@ public class StageController implements GameController {
     this.stage = stage;
     player1Controller = new PlayerController(stage.getPlayer1());
     player2Controller = new PlayerController(stage.getPlayer2());
-    ArrayList<String> impControls = FileHandler.importControls();
-    for (int i = 0; i < 12; i++) {
-      if (impControls.get(i).equals("CONTROL")) {
-        impControls.set(i, "Ctrl");
-      } else {
-        impControls.set(i,
-            impControls.get(i).substring(0, 1).toUpperCase() + impControls.get(i).substring(1)
-                .toLowerCase());
-      }
-
-      System.out.println("IMP: " + impControls.get(i));
-    }
-
-    // Player controls
-    System.out.println(
-        "Vad är det här ens? -> " + getKeyCode(impControls.get(0)) + "Och vad fab är detta? ->"
-            + getKeyCode(impControls.get(7)));
-    player1Controller.bindKey(getKeyCode(impControls.get(0)), ACTION.JUMP);
-    player1Controller.bindKey(getKeyCode(impControls.get(1)), ACTION.MOVE_LEFT);
-    player1Controller.bindKey(getKeyCode(impControls.get(3)), ACTION.MOVE_RIGHT);
-    player1Controller.bindKey(getKeyCode(impControls.get(2)), ACTION.FALL);
-    player1Controller.bindKey(getKeyCode(impControls.get(4)), ACTION.HIT);
-    player1Controller.bindKey(getKeyCode(impControls.get(5)), ACTION.KICK);
-
-    player2Controller.bindKey(getKeyCode(impControls.get(6)), ACTION.JUMP);
-    player2Controller.bindKey(getKeyCode(impControls.get(7)), ACTION.MOVE_LEFT);
-    player2Controller.bindKey(getKeyCode(impControls.get(9)), ACTION.MOVE_RIGHT);
-    player2Controller.bindKey(getKeyCode(impControls.get(8)), ACTION.FALL);
-    player2Controller.bindKey(getKeyCode(impControls.get(10)), ACTION.HIT);
-    player2Controller.bindKey(getKeyCode(impControls.get(11)), ACTION.KICK);
+    getControls();
   }
 
   @Override
@@ -92,7 +63,6 @@ public class StageController implements GameController {
           , stage.getGroundLevelY() - p2.getHeight()));
       p2.setVelocity(new Point2D(p2.getVelocity().getX(), 0));
     }
-
     if (p1f.getX() + p1.getWidth() / 2 > 16) {
       p1.setPosition(new Point2D(16 - p1.getWidth(), p1.getPosition().getY()));
     } else if (p1f.getX() - p1.getWidth() / 2 < 0) {
@@ -105,8 +75,7 @@ public class StageController implements GameController {
       p2.setPosition(new Point2D(0, p2.getPosition().getY()));
     }
 
-    if (player1Controller.player.statePunching.isActive() || player1Controller.player.stateKicking
-        .isActive()) {
+    if (player1Controller.player.statePunching.isActive()) {
       for (Rectangle hurt : p2.getHurtBoxes()) {
         if (p1.getHitBox(0).getBoundsInParent().intersects(hurt.getBoundsInParent())) {
           if (!p2.stateStunned.isActive()) {
@@ -118,14 +87,35 @@ public class StageController implements GameController {
       }
 
     }
+    if (player1Controller.player.stateKicking.isActive()) {
+      for (Rectangle hurt : p2.getHurtBoxes()) {
+        if (p1.getHitBox(1).getBoundsInParent().intersects(hurt.getBoundsInParent())) {
+          if (!p2.stateStunned.isActive()) {
+            p2.stateStunned.enterCycle(CYCLE.ACTIVE);
+            p2.setHP(p2.getHP() - 10);
+            System.out.println("Player 2 is hit - " + p2.getHP() + "HP");
+          }
+        }
+      }
+    }
 
-    if (player2Controller.player.statePunching.isActive() || player2Controller.player.stateKicking
-        .isActive()) {
+    if (player2Controller.player.statePunching.isActive()) {
+      for (Rectangle hurt : p1.getHurtBoxes()) {
+        if (p2.getHitBox(0).getBoundsInParent().intersects(hurt.getBoundsInParent())) {
+          if (!p1.stateStunned.isActive()) {
+            p1.stateStunned.enterCycle(CYCLE.ACTIVE);
+            p1.setHP(p1.getHP() - 20);
+            System.out.println("Player 1 is hit - " + p1.getHP() + "HP");
+          }
+        }
+      }
+    }
+    if (player2Controller.player.stateKicking.isActive()) {
       for (Rectangle hurt : p1.getHurtBoxes()) {
         if (p2.getHitBox(1).getBoundsInParent().intersects(hurt.getBoundsInParent())) {
           if (!p1.stateStunned.isActive()) {
             p1.stateStunned.enterCycle(CYCLE.ACTIVE);
-            p1.setHP(p1.getHP() - 10);
+            p1.setHP(p1.getHP() - 20);
             System.out.println("Player 1 is hit - " + p1.getHP() + "HP");
           }
         }
@@ -153,6 +143,33 @@ public class StageController implements GameController {
     player1Controller.onKeyReleased(event);
     player2Controller.onKeyReleased(event);
     //gameClient.setKeyReleased(event); //Remove key from client sendlist
+  }
+
+  public void getControls() {
+    ArrayList<String> impControls = FileHandler.importControls();
+    for (int i = 0; i < 12; i++) {
+      if (impControls.get(i).equals("CONTROL")) {
+        impControls.set(i, "Ctrl");
+      } else {
+        impControls.set(i,
+            impControls.get(i).substring(0, 1).toUpperCase() + impControls.get(i).substring(1)
+                .toLowerCase());
+      }
+    }
+    // Player controls
+    player1Controller.bindKey(getKeyCode(impControls.get(0)), ACTION.JUMP);
+    player1Controller.bindKey(getKeyCode(impControls.get(1)), ACTION.MOVE_LEFT);
+    player1Controller.bindKey(getKeyCode(impControls.get(3)), ACTION.MOVE_RIGHT);
+    player1Controller.bindKey(getKeyCode(impControls.get(2)), ACTION.FALL);
+    player1Controller.bindKey(getKeyCode(impControls.get(4)), ACTION.HIT);
+    player1Controller.bindKey(getKeyCode(impControls.get(5)), ACTION.KICK);
+
+    player2Controller.bindKey(getKeyCode(impControls.get(6)), ACTION.JUMP);
+    player2Controller.bindKey(getKeyCode(impControls.get(7)), ACTION.MOVE_LEFT);
+    player2Controller.bindKey(getKeyCode(impControls.get(9)), ACTION.MOVE_RIGHT);
+    player2Controller.bindKey(getKeyCode(impControls.get(8)), ACTION.FALL);
+    player2Controller.bindKey(getKeyCode(impControls.get(10)), ACTION.HIT);
+    player2Controller.bindKey(getKeyCode(impControls.get(11)), ACTION.KICK);
   }
 
   public void stop(GameEngine engine) {
