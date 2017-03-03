@@ -152,8 +152,7 @@ public class PlayScreen extends AnimationTimer implements Screen {
     }
   }
 
-  public void onKeyPressed(KeyEvent event) {
-
+  private void onKeyPressed(KeyEvent event) {
     switch (event.getCode()) {
       case P:
         engine.togglePause();
@@ -169,7 +168,7 @@ public class PlayScreen extends AnimationTimer implements Screen {
     stageController.onKeyPressed(event);
   }
 
-  public void onKeyReleased(KeyEvent event) {
+  private void onKeyReleased(KeyEvent event) {
     stageController.onKeyReleased(event);
   }
 

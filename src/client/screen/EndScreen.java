@@ -9,6 +9,8 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -55,6 +57,7 @@ public class EndScreen implements Screen {
     layout.setPrefSize(stage.getWidth(), stage.getHeight());
     winner.setText("Winner: " + PlayScreen.getWinner());
     stage.setScene(scene);
+    scene.setOnKeyPressed(this::onKeyPressed);
   }
 
   void onRematchButton(ActionEvent event) {
@@ -64,7 +67,11 @@ public class EndScreen implements Screen {
   void onMenuButton(ActionEvent event) {
     owner.setActiveScreen(owner.mainMenuScreen);
   }
-
+  public void onKeyPressed(KeyEvent event) {
+    if (event.getCode().equals(KeyCode.ESCAPE)) {
+      owner.setActiveScreen(owner.mainMenuScreen);
+    }
+  }
   void onExitButton(ActionEvent event) {
     Platform.exit();
   }

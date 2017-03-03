@@ -1,10 +1,11 @@
 package client;
 
+
 import client.screen.PlayScreen;
+import common.GameDefaults;
 import common.GamePlayer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -52,7 +53,14 @@ public class HealthRenderer implements GameRenderer {
 
     percentage = (double) player.getHP() / player.getMaxHP();
 
-    gc.setFill(Color.LIMEGREEN);
+    if (percentage >= 0.75) {
+      gc.setFill(GameDefaults.HEALTHBAR_GOOD);
+    } else if (percentage > 0.4) {
+      gc.setFill(GameDefaults.HEALTHBAR_BAD);
+    } else {
+      gc.setFill(GameDefaults.HEALTHBAR_AWFUL);
+    }
+
     if (leftBar) {
       gc.fillRect(healthBar.getX(), healthBar.getY(), healthBar.getWidth() * percentage,
           healthBar.getHeight());
@@ -60,8 +68,11 @@ public class HealthRenderer implements GameRenderer {
       gc.fillRect(healthBar.getX() + healthBar.getWidth() * (1d - percentage), healthBar.getY(),
           healthBar.getWidth() * percentage, healthBar.getHeight());
     }
-    gc.setLineWidth(gc.getLineWidth() * scaleX);
 
+    gc.setStroke(GameDefaults.HEALTHBAR_BORDER);
+    gc.strokeRect(healthBar.getX(), healthBar.getY(), healthBar.getWidth(), healthBar.getHeight());
+
+    gc.setLineWidth(gc.getLineWidth() * scaleX);
     gc.restore();
     setHealth();
   }

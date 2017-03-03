@@ -62,6 +62,8 @@ public class MainMenuScreen implements Screen {
     Scene scene = new Scene(root);
 
     layout.setPrefSize(stage.getWidth(), stage.getHeight());
+    stage.widthProperty().addListener(l -> layout.setPrefWidth(stage.getWidth()));
+    stage.heightProperty().addListener(l -> layout.setPrefHeight(stage.getHeight()));
 
     stage.setScene(scene);
   }
