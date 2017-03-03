@@ -111,15 +111,15 @@ public class GameClient implements Runnable {
     try {
       KeyCode code = event.getCode();
 
-      if (code == GameDefaults.DEFAULT_MOVE_LEFT) {
+      if (code == GameDefaults.MOVE_LEFT) {
         sendPacket(NetworkPacket.actionStart(ACTION.MOVE_LEFT));
-      } else if (code == GameDefaults.DEFAULT_MOVE_RIGHT) {
+      } else if (code == GameDefaults.MOVE_RIGHT) {
         sendPacket(NetworkPacket.actionStart(ACTION.MOVE_RIGHT));
-      } else if (code == GameDefaults.DEFAULT_JUMP) {
+      } else if (code == GameDefaults.JUMP) {
         sendPacket(NetworkPacket.actionStart(ACTION.JUMP));
-      } else if (code == GameDefaults.DEFAULT_FALL) {
+      } else if (code == GameDefaults.FALL) {
         sendPacket(NetworkPacket.actionStart(ACTION.FALL));
-      } else if (code == GameDefaults.DEFAULT_HIT) {
+      } else if (code == GameDefaults.HIT) {
         sendPacket(NetworkPacket.actionStart(ACTION.HIT));
       }
     } catch (IOException e) {
@@ -131,15 +131,15 @@ public class GameClient implements Runnable {
     try {
       KeyCode code = event.getCode();
 
-      if (code == GameDefaults.DEFAULT_MOVE_LEFT) {
+      if (code == GameDefaults.MOVE_LEFT) {
         sendPacket(NetworkPacket.actionEnd(ACTION.MOVE_LEFT));
-      } else if (code == GameDefaults.DEFAULT_MOVE_RIGHT) {
+      } else if (code == GameDefaults.MOVE_RIGHT) {
         sendPacket(NetworkPacket.actionEnd(ACTION.MOVE_RIGHT));
-      } else if (code == GameDefaults.DEFAULT_JUMP) {
+      } else if (code == GameDefaults.JUMP) {
         sendPacket(NetworkPacket.actionEnd(ACTION.JUMP));
-      } else if (code == GameDefaults.DEFAULT_FALL) {
+      } else if (code == GameDefaults.FALL) {
         sendPacket(NetworkPacket.actionEnd(ACTION.FALL));
-      } else if (code == GameDefaults.DEFAULT_HIT) {
+      } else if (code == GameDefaults.HIT) {
         sendPacket(NetworkPacket.actionEnd(ACTION.HIT));
       }
     } catch (IOException e) {

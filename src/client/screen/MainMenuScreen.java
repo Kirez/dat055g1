@@ -1,6 +1,7 @@
 package client.screen;
 
 import client.GameApplication;
+import common.GameDefaults;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
@@ -25,7 +26,7 @@ import javafx.stage.Stage;
 public class MainMenuScreen implements Screen {
 
   private GridPane layout;
-  private Button createGameButton;
+  private Button localGameButton;
   private Button settingsButton;
   private Button joinButton;
   private Button exitButton;
@@ -34,19 +35,23 @@ public class MainMenuScreen implements Screen {
 
   public MainMenuScreen(GameApplication gameApplication) {
     owner = gameApplication;
-    createGameButton = new Button("Create");
-    joinButton = new Button("Join");
-    settingsButton = new Button("Settings");
-    exitButton = new Button("Exit");
-    title = new Label("TimmyFightGoGo");
-    title.setFont(Font.font(72));
+
+    localGameButton = new Button(GameDefaults.LOCAL_GAME_BUTTON_TEXT);
+    joinButton =      new Button(GameDefaults.JOIN_GAME_BUTTON_TEXT);
+    settingsButton =  new Button(GameDefaults.SETTINGS_BUTTON_TEXT);
+    exitButton =      new Button(GameDefaults.EXIT_BUTTON_TEXT);
+
+    title = new Label(GameDefaults.TITLE);
+    title.setFont(Font.font(GameDefaults.BIG_FONT_SIZE));
+
     layout = new GridPane();
-    layout.addColumn(0, title, createGameButton, joinButton, settingsButton, exitButton);
-    createGameButton.setOnAction(this::onPlayButton);
+    layout.addColumn(0, title, localGameButton, joinButton, settingsButton, exitButton);
+
+    localGameButton.setOnAction(this::onLocalGameButton);
     exitButton.setOnAction(this::onExitButton);
-    joinButton.setOnAction(this::onMultiplayerButton);
+    joinButton.setOnAction(this::onJoinGameButton);
     settingsButton.setOnAction(this::onSettingsButton);
-    exit();
+
     layout.setAlignment(Pos.CENTER);
   }
 
@@ -65,11 +70,11 @@ public class MainMenuScreen implements Screen {
     Platform.exit();
   }
 
-  void onPlayButton(ActionEvent event) {
+  void onLocalGameButton(ActionEvent event) {
     owner.setActiveScreen(owner.playScreen);
   }
 
-  void onMultiplayerButton(ActionEvent event) {
+  void onJoinGameButton(ActionEvent event) {
     owner.setActiveScreen(owner.joinScreen);
   }
 
