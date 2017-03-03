@@ -34,7 +34,9 @@ public class StageRenderer implements GameRenderer {
     gc.save();
     gc.scale(scaleX, scaleY);
 
-    gc.setFill(Color.BLACK);
+    gc.setFill(Color.web("#002b36"));
+    gc.fillRect(0,0, canvas.getWidth(), canvas.getHeight());
+    gc.setFill(Color.web("#073642"));
     gc.fillRect(0, gameStage.getGroundLevelY(), canvas.getWidth(), canvas.getHeight());
 
     gc.restore();

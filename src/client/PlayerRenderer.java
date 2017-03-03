@@ -152,14 +152,7 @@ public class PlayerRenderer implements GameRenderer {
 
       }
     }
-    gc.setStroke(player.getColor()); // Outline color
 
-    gc.beginPath();
-
-    gc.rect(player.getPosition().getX(), player.getPosition().getY(), player.getWidth()
-        , player.getHeight());
-
-    gc.stroke();
     gc.setLineWidth(gc.getLineWidth() * scaleX);
 
     gc.restore();
