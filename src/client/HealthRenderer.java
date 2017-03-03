@@ -50,7 +50,14 @@ public class HealthRenderer implements GameRenderer {
 
     double percentage = (double) player.getHP() / player.getMaxHP();
 
-    gc.setFill(Color.LIMEGREEN);
+    if (percentage >= 0.75) {
+      gc.setFill(Color.LIMEGREEN);
+    } else if (percentage > 0.4) {
+      gc.setFill(Color.ORANGE);
+    } else {
+      gc.setFill(Color.RED);
+    }
+
     if (leftBar) {
       gc.fillRect(healthBar.getX(), healthBar.getY(), healthBar.getWidth() * percentage,
           healthBar.getHeight());
@@ -58,8 +65,11 @@ public class HealthRenderer implements GameRenderer {
       gc.fillRect(healthBar.getX() + healthBar.getWidth() * (1d - percentage), healthBar.getY(),
           healthBar.getWidth() * percentage, healthBar.getHeight());
     }
-    gc.setLineWidth(gc.getLineWidth() * scaleX);
 
+    gc.setStroke(Color.BLACK);
+    gc.strokeRect(healthBar.getX(),healthBar.getY(),healthBar.getWidth(), healthBar.getHeight());
+
+    gc.setLineWidth(gc.getLineWidth() * scaleX);
     gc.restore();
   }
 }
