@@ -1,5 +1,7 @@
 package client;
 
+
+import client.screen.PlayScreen;
 import common.GameDefaults;
 import common.GamePlayer;
 import javafx.scene.canvas.Canvas;
@@ -18,6 +20,7 @@ import javafx.scene.shape.Rectangle;
  */
 public class HealthRenderer implements GameRenderer {
 
+  public double percentage;
   private GamePlayer player;
   private boolean leftBar;
 
@@ -48,7 +51,7 @@ public class HealthRenderer implements GameRenderer {
       healthBar = new Rectangle(16 - 0.6 - 5.7, 0.3, 5.7, 0.4);
     }
 
-    double percentage = (double) player.getHP() / player.getMaxHP();
+    percentage = (double) player.getHP() / player.getMaxHP();
 
     if (percentage >= 0.75) {
       gc.setFill(GameDefaults.HEALTHBAR_GOOD);
@@ -71,5 +74,13 @@ public class HealthRenderer implements GameRenderer {
 
     gc.setLineWidth(gc.getLineWidth() * scaleX);
     gc.restore();
+    setHealth();
+  }
+
+  public void setHealth() {
+    PlayScreen.intProperty1.set(player.getHP());
+  }
+  public double getHealth() {
+    return player.getHP();
   }
 }

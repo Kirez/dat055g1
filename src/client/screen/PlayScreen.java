@@ -7,10 +7,15 @@ import client.PlayerRenderer;
 import client.StageRenderer;
 import common.GameStage;
 import javafx.animation.AnimationTimer;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import server.GameEngine;
 import server.StageController;
@@ -27,6 +32,9 @@ import server.StageController;
  */
 public class PlayScreen extends AnimationTimer implements Screen {
 
+  public static IntegerProperty intProperty1 = new SimpleIntegerProperty(100);
+  GridPane layout = new GridPane();
+  private boolean gameOver;
   private Canvas canvas;
   private GameStage gameStage;
   private GameEngine engine;
@@ -36,15 +44,36 @@ public class PlayScreen extends AnimationTimer implements Screen {
   private Scene scene;
   private Stage stage;
   private GameApplication owner;
+  private static boolean player1wins;
+  final ChangeListener changeListener = new ChangeListener() {
+    @Override
+    public void changed(ObservableValue observableValue, Object oldValue,
+        Object newValue) {
+   //   System.out.println(Integer.parseInt(newValue.toString()));
+      if ( player1HealthBar.getHealth() < player2HealthBar.getHealth()) {
+        player1wins =false;
+      }
+      else {
+        player1wins = true;
+      }
+      if (Integer.parseInt(newValue.toString()) <= 0) {
+        onGameEnd();
+        intProperty1.removeListener(changeListener);
+      }
+    }
 
+  };
   private GameRenderer stageRenderer;
   private GameRenderer player1Renderer;
   private GameRenderer player2Renderer;
   private HealthRenderer player1HealthBar;
   private HealthRenderer player2HealthBar;
+  private Object l;
 
   //  Constructor
   public PlayScreen(GameApplication gameApplication) {
+    gameOver = false;
+
     owner = gameApplication;
     gameStage = new GameStage();
     engine = new GameEngine();
@@ -91,6 +120,7 @@ public class PlayScreen extends AnimationTimer implements Screen {
     //Lambda linking the scenes dimensions with the canvas
     scene.widthProperty().addListener(l -> canvas.setWidth(scene.getWidth()));
     scene.heightProperty().addListener(l -> canvas.setHeight(scene.getHeight()));
+    intProperty1.addListener(changeListener);
 
     stage.setScene(scene);
     stageController.getControls();
@@ -142,4 +172,16 @@ public class PlayScreen extends AnimationTimer implements Screen {
     stageController.onKeyReleased(event);
   }
 
+  public void onGameEnd() {
+    this.exit();
+    owner.setActiveScreen(owner.endScreen);
+  }
+  public static String getWinner() {
+    if (player1wins== true) {
+      return ("Player 1");
+    }
+    else {
+      return ("Player 2");
+      }
+  }
 }
