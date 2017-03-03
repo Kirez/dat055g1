@@ -13,8 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javax.xml.transform.TransformerException;
-import org.xml.sax.SAXException;
 
 /**
  * TODO: Add description
@@ -28,15 +26,6 @@ import org.xml.sax.SAXException;
  */
 public class SettingsScreen implements Screen {
 
-
-  private GridPane layout;
-  private Stage stage;
-  private Scene scene;
-  private Group root;
-  private Label controlsLabel;
-  private Label playerLabel1;
-  private Label playerLabel2;
-  private Label screenresLabel;
 
   static public Button rightField1;
   static public Button leftField1;
@@ -52,7 +41,14 @@ public class SettingsScreen implements Screen {
   static public Button kickField2;
   static public Button selButton;
   static public Button backButton;
-
+  private GridPane layout;
+  private Stage stage;
+  private Scene scene;
+  private Group root;
+  private Label controlsLabel;
+  private Label playerLabel1;
+  private Label playerLabel2;
+  private Label screenresLabel;
   private GameApplication owner;
 
   public SettingsScreen(GameApplication gameApplication) {

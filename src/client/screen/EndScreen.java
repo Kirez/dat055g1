@@ -1,6 +1,7 @@
 package client.screen;
 
 import client.GameApplication;
+import client.HealthRenderer;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
@@ -31,21 +32,18 @@ public class EndScreen implements Screen {
   private Label winner;
   private GameApplication owner;
   private String winningPlayer;
-
   public EndScreen(GameApplication gameApplication) {
     owner = gameApplication;
     menuButton = new Button("Main Menu");
     rematchButton = new Button("Rematch");
     exitButton = new Button("Exit");
-    winningPlayer = "Timmy";
-    winner = new Label("Winner: " + winningPlayer);
+    winner = new Label();
     winner.setFont(Font.font(48));
     layout = new GridPane();
     layout.addColumn(0, winner, rematchButton, menuButton, exitButton);
     rematchButton.setOnAction(this::onRematchButton);
     menuButton.setOnAction(this::onMenuButton);
     exitButton.setOnAction(this::onExitButton);
-    exit();
     layout.setAlignment(Pos.CENTER);
   }
 
@@ -54,18 +52,17 @@ public class EndScreen implements Screen {
     Group root = new Group();
     root.getChildren().add(layout);
     Scene scene = new Scene(root);
-
     layout.setPrefSize(stage.getWidth(), stage.getHeight());
-
+    winner.setText("Winner: " + PlayScreen.getWinner());
     stage.setScene(scene);
   }
 
   void onRematchButton(ActionEvent event) {
-
+    owner.setActiveScreen(owner.playScreen);
   }
 
   void onMenuButton(ActionEvent event) {
-
+    owner.setActiveScreen(owner.mainMenuScreen);
   }
 
   void onExitButton(ActionEvent event) {

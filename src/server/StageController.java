@@ -121,6 +121,8 @@ public class StageController implements GameController {
         }
       }
     }
+
+
   }
 
   @Override
@@ -172,7 +174,4 @@ public class StageController implements GameController {
     player2Controller.bindKey(getKeyCode(impControls.get(11)), ACTION.KICK);
   }
 
-  public void stop(GameEngine engine) {
-    engine.shutdown();
-  }
 }

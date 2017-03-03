@@ -99,7 +99,6 @@ public class PlayerController implements GameController {
   }
 
 
-
   @Override
   public void onKeyReleased(KeyEvent event) {
     if (keyBinds.containsKey(event.getCode())) {

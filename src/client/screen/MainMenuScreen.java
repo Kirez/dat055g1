@@ -37,9 +37,9 @@ public class MainMenuScreen implements Screen {
     owner = gameApplication;
 
     localGameButton = new Button(GameDefaults.LOCAL_GAME_BUTTON_TEXT);
-    joinButton =      new Button(GameDefaults.JOIN_GAME_BUTTON_TEXT);
-    settingsButton =  new Button(GameDefaults.SETTINGS_BUTTON_TEXT);
-    exitButton =      new Button(GameDefaults.EXIT_BUTTON_TEXT);
+    joinButton = new Button(GameDefaults.JOIN_GAME_BUTTON_TEXT);
+    settingsButton = new Button(GameDefaults.SETTINGS_BUTTON_TEXT);
+    exitButton = new Button(GameDefaults.EXIT_BUTTON_TEXT);
 
     title = new Label(GameDefaults.TITLE);
     title.setFont(Font.font(GameDefaults.BIG_FONT_SIZE));
