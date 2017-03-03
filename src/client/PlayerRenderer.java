@@ -1,9 +1,9 @@
 package client;
 
+import common.GameDefaults;
 import common.GamePlayer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -43,7 +43,7 @@ public class PlayerRenderer implements GameRenderer {
     gc.setFill(player.getColor());
 
     if (player.stateStunned.isActive()) {
-      gc.setFill(Color.MAGENTA);
+      gc.setFill(GameDefaults.HITSTUN_COLOR);
     } else {
       gc.setFill(player.getColor());
     }
@@ -56,23 +56,23 @@ public class PlayerRenderer implements GameRenderer {
       if (player.isFaceRight()) {
         gc.fillRect(player.getPosition().getX() + 0.5, player.getHitBox(0).getY(),
             ((player.getHitBox(0).getWidth() + player.getHitBox(0).getX()) - player.getPosition()
-                .getX() - 0.5) * 0.33, player.getHitBox(0).getHeight());
+                .getX() - 0.505) * 0.33, player.getHitBox(0).getHeight());
       } else {
         gc.fillRect(player.getPosition().getX() + (0.5 - player.getHitBox(0).getWidth()) / 2,
             player.getHitBox(0).getY(),
             ((-player.getHitBox(0).getWidth() - player.getHitBox(0).getX()) + player.getPosition()
-                .getX() + 0.5) * 0.33, player.getHitBox(0).getHeight());
+                .getX() + 0.505) * 0.33, player.getHitBox(0).getHeight());
 
       }
     }
     if (player.statePunching.isActive()) {
-      gc.setFill(Color.BLACK);
+      gc.setFill(GameDefaults.HITBOX_COLOR);
       gc.fillRect(player.getHitBox(0).getX(), player.getHitBox(0).getY(),
           player.getHitBox(0).getWidth(), player.getHitBox(0).getHeight());
       gc.setFill(player.getColor());
       if (player.isFaceRight()) {
         gc.fillRect(player.getPosition().getX() + 0.5, player.getHitBox(0).getY(),
-            ((player.getHitBox(0).getX()) - player.getPosition().getX() - 0.5),
+            ((player.getHitBox(0).getX()) - player.getPosition().getX() - 0.505),
             player.getHitBox(0).getHeight());
       } else {
         gc.fillRect(player.getHitBox(0).getX() + player.getHitBox(0).getWidth(),
@@ -86,27 +86,27 @@ public class PlayerRenderer implements GameRenderer {
       if (player.isFaceRight()) {
         gc.fillRect(player.getPosition().getX() + 0.5, player.getHitBox(0).getY(),
             ((player.getHitBox(0).getWidth() + player.getHitBox(0).getX()) - player.getPosition()
-                .getX() - 0.5) * 0.66, player.getHitBox(0).getHeight());
+                .getX() - 0.505) * 0.66, player.getHitBox(0).getHeight());
       } else {
         gc.fillRect(player.getPosition().getX() + (0.5 - player.getHitBox(0).getWidth()) / 2,
             player.getHitBox(0).getY(),
             ((-player.getHitBox(0).getWidth() - player.getHitBox(0).getX()) + player.getPosition()
-                .getX() + 0.5) * 0.66, player.getHitBox(0).getHeight());
+                .getX() + 0.505) * 0.66, player.getHitBox(0).getHeight());
       }
     }
     if (player.stateKicking.isSpoolingUp()) {
       if (player.isFaceRight()) {
-        gc.setFill(Color.WHITE);
-        gc.fillRect(player.getPosition().getX() + 0.52, player.getPosition().getY() + 1.5, 0.2,
-            0.5);
+        gc.setFill(GameDefaults.BACKGROUND_COLOR);
+        gc.fillRect(player.getPosition().getX() + 0.52, player.getPosition().getY() + 1.5, 0.25,
+            0.505);
         gc.setFill(player.getColor());
         gc.fillRect(player.getPosition().getX() + 0.52, player.getPosition().getY() + 1.5,
             1.5 / 2, 0.2);
 
       } else {
-        gc.setFill(Color.WHITE);
+        gc.setFill(GameDefaults.BACKGROUND_COLOR);
         gc.fillRect(player.getPosition().getX() + 0.27, player.getPosition().getY() + 1.5, 0.25,
-            0.5);
+            0.505);
         gc.setFill(player.getColor());
         gc.fillRect(player.getPosition().getX() - 0.3, player.getHitBox(1).getY(),
             1.5 / 2, 0.2);
@@ -114,20 +114,20 @@ public class PlayerRenderer implements GameRenderer {
       }
     }
     if (player.stateKicking.isActive()) {
-      gc.setFill(Color.BLACK);
+      gc.setFill(GameDefaults.HITBOX_COLOR);
       gc.fillRect(player.getHitBox(1).getX(), player.getHitBox(1).getY(),
           player.getHitBox(1).getWidth(), player.getHitBox(1).getHeight());
-      gc.setFill(Color.WHITE);
+      gc.setFill(GameDefaults.BACKGROUND_COLOR);
       if (player.isFaceRight()) {
-        gc.fillRect(player.getPosition().getX() + 0.52, player.getPosition().getY() + 1.5, 0.2,
-            0.5);
+        gc.fillRect(player.getPosition().getX() + 0.52, player.getPosition().getY() + 1.5, 0.25,
+            0.505);
         gc.setFill(player.getColor());
         gc.fillRect(player.getPosition().getX() + 0.52, player.getPosition().getY() + 1.5,
             player.getHitBox(1).getX() + player.getHitBox(1).getWidth() - player.getPosition()
                 .getX() - 0.52, 0.2);
       } else {
         gc.fillRect(player.getPosition().getX() + 0.27, player.getPosition().getY() + 1.5, 0.25,
-            0.5);
+            0.505);
         gc.setFill(player.getColor());
         gc.fillRect(player.getHitBox(1).getX(), player.getHitBox(1).getY(),
             player.getPosition().getX() - player.getHitBox(1).getX() + 0.45, 0.2);
@@ -135,26 +135,23 @@ public class PlayerRenderer implements GameRenderer {
     }
     if (player.stateKicking.isOnCoolDown()) {
       if (player.isFaceRight()) {
-        gc.setFill(Color.WHITE);
+        gc.setFill(GameDefaults.BACKGROUND_COLOR);
         gc.fillRect(player.getPosition().getX() + 0.52, player.getPosition().getY() + 1.5, 0.2,
-            0.5);
+            0.505);
         gc.setFill(player.getColor());
         gc.fillRect(player.getPosition().getX() + 0.52, player.getPosition().getY() + 1.5,
             1.5 / 2, 0.2);
 
       } else {
-        gc.setFill(Color.WHITE);
+        gc.setFill(GameDefaults.BACKGROUND_COLOR);
         gc.fillRect(player.getPosition().getX() + 0.27, player.getPosition().getY() + 1.5, 0.25,
-            0.5);
+            0.505);
         gc.setFill(player.getColor());
         gc.fillRect(player.getPosition().getX() - 0.3, player.getHitBox(1).getY(),
             1.5 / 2, 0.2);
-
       }
     }
-
     gc.setLineWidth(gc.getLineWidth() * scaleX);
-
     gc.restore();
   }
 }

@@ -2,7 +2,6 @@ package common;
 
 import client.FileHandler;
 import javafx.geometry.Point2D;
-import javafx.scene.paint.Color;
 
 /**
  * The model/state for a stage and all that is in it. Handles only data
@@ -40,8 +39,8 @@ public class GameStage {
     groundLevelY = gly;
     FileHandler.importCharacters(p1);
     FileHandler.importCharacters(p2);
-    player1.setColor(Color.RED);
-    player2.setColor(Color.BLUE);
+    player1.setColor(GameDefaults.PLAYER_1_COLOR);
+    player2.setColor(GameDefaults.PLAYER_2_COLOR);
 
     player1.setPosition(player1Spawn);
     player2.setPosition(player2Spawn);

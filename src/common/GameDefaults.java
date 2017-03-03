@@ -1,6 +1,7 @@
 package common;
 
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
 
 /**
  * TODO: Add description
@@ -30,4 +31,10 @@ public class GameDefaults {
   public static final KeyCode FALL = KeyCode.S;
   public static final KeyCode HIT = KeyCode.SPACE;
 
+  public static final Color BACKGROUND_COLOR = Color.web("002b36");
+  public static final Color FOREGROUND_COLOR = Color.web("073642");
+  public static final Color PLAYER_1_COLOR = Color.web("cb4b16");
+  public static final Color PLAYER_2_COLOR = Color.web("268bd2");
+  public static final Color HITSTUN_COLOR = Color.web("d33682");
+  public static final Color HITBOX_COLOR = Color.web("859900");
 }
