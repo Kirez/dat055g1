@@ -37,4 +37,8 @@ public class GameDefaults {
   public static final Color PLAYER_2_COLOR = Color.web("268bd2");
   public static final Color HITSTUN_COLOR = Color.web("d33682");
   public static final Color HITBOX_COLOR = Color.web("859900");
+  public static final Color HEALTHBAR_BORDER = Color.web("000000");
+  public static final Color HEALTHBAR_GOOD = Color.web("fdf6e3");
+  public static final Color HEALTHBAR_BAD = Color.web("eee8d5");
+  public static final Color HEALTHBAR_AWFUL = Color.web("93a1a1");
 }
