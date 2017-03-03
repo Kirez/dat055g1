@@ -1,6 +1,5 @@
 package client.screen;
 
-
 import client.FileHandler;
 import client.GameApplication;
 import java.awt.Toolkit;
@@ -18,7 +17,14 @@ import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
 
 /**
- * Created by karlang on 2/28/17.
+ * TODO: Add description
+ *
+ * @author Alexander Andersson (alexaan)
+ * @author Linus Berglund (belinus)
+ * @author Erik Källberg (kalerik)
+ * @author Timmy Truong (timmyt)
+ * @author Karl Ängermark (karlang)
+ * @version 2017-02-28
  */
 public class SettingsScreen implements Screen {
 
@@ -33,7 +39,6 @@ public class SettingsScreen implements Screen {
   private Label screenresLabel;
 
   static public Button rightField1;
-  ;
   static public Button leftField1;
   static public Button downField1;
   static public Button jabField1;
