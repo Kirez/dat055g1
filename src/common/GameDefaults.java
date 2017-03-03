@@ -17,8 +17,8 @@ public class GameDefaults {
   public static final int SERVER_PORT = 8822;
   public static final int BIG_FONT_SIZE = 70;
 
-  public static final String WINDOW_TITLE = "Fight";
-  public static final String TITLE = "Fight: Dummy Name";
+  public static final String WINDOW_TITLE = "Freet Stighter: Total Combat";
+  public static final String TITLE = "Total Combat";
   public static final String LOCAL_GAME_BUTTON_TEXT = "Local Game";
   public static final String JOIN_GAME_BUTTON_TEXT = "Join";
   public static final String SETTINGS_BUTTON_TEXT = "Settings";
