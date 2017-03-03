@@ -7,6 +7,7 @@ import client.screen.NetworkPlayScreen;
 import client.screen.PlayScreen;
 import client.screen.Screen;
 import client.screen.SettingsScreen;
+import common.GameDefaults;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -41,7 +42,7 @@ public class GameApplication extends Application {
   @Override
   public void start(Stage primaryStage) throws Exception {
     stage = primaryStage;
-    stage.setTitle("TimmyFightGoGo");
+    stage.setTitle(GameDefaults.WINDOW_TITLE);
     javafx.stage.Screen screen = javafx.stage.Screen.getPrimary();
     stage.setWidth(screen.getBounds().getMaxX() / 2);
     stage.setHeight(screen.getBounds().getMaxY() / 2);

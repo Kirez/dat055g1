@@ -1,5 +1,21 @@
 package client;
 
+
+import javax.xml.parsers.SAXParserFactory;
+import javax.xml.parsers.*;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.sax.SAXSource;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+import org.xml.sax.*;
+import org.xml.sax.helpers.*;
+import common.GamePlayer;
+import java.util.*;
+import java.io.*;
 import common.GamePlayer;
 import java.util.ArrayList;
 import javax.xml.parsers.SAXParser;
@@ -311,14 +327,140 @@ public class FileHandler {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    for (Object c : controls) {
-      System.out.println("Controls: " + c);
-    }
     return controls;
   }
 
-  public void setControls(ArrayList<String> al) {
-    al = new ArrayList<>();
+  public static void setControls(ArrayList<String> al) {
+    try {
+      XMLReader xr = new XMLFilterImpl((XMLReaderFactory.createXMLReader())) {
+        ArrayList<String> nControls = al;
+        String tagName1 = "";
+        String tagName2 = "";
+        String temp;
+
+        public void startElement(String uri, String localName, String qName, Attributes attributes)
+            throws SAXException {
+          if (qName.equalsIgnoreCase("P1") || qName.equalsIgnoreCase("P2")) {
+            tagName1 = qName;
+          } else {
+            tagName2 = qName;
+          }
+          super.startElement(uri, localName, qName, attributes);
+        }
+
+        public void endElement(String uri, String localName,
+            String qName) throws SAXException {
+          if (qName.equalsIgnoreCase("P1") || qName.equalsIgnoreCase("P2")) {
+            tagName1 = "";
+          } else {
+            tagName2 = "";
+          }
+          super.endElement(uri, localName, qName);
+        }
+
+        public void characters(char[] ch,
+            int start, int length) throws SAXException {
+          if (tagName1.equalsIgnoreCase("P1")) {
+            if (tagName2.equalsIgnoreCase("JUMP")) {
+              temp = nControls.get(0);
+              ch = temp.toCharArray();
+              start = 0;
+              length = ch.length;
+            }
+            if (tagName2.equalsIgnoreCase("LEFT")) {
+              temp = nControls.get(1);
+              ch = temp.toCharArray();
+              start = 0;
+              length = ch.length;
+            }
+            if (tagName2.equalsIgnoreCase("DOWN")) {
+              temp = nControls.get(2);
+              ch = temp.toCharArray();
+              start = 0;
+              length = ch.length;
+            }
+            if (tagName2.equalsIgnoreCase("RIGHT")) {
+              temp = nControls.get(3);
+              ch = temp.toCharArray();
+              start = 0;
+              length = ch.length;
+            }
+
+            if (tagName2.equalsIgnoreCase("JAB")) {
+              temp = nControls.get(4);
+              ch = temp.toCharArray();
+              start = 0;
+              length = ch.length;
+            }
+            if (tagName2.equalsIgnoreCase("KICK")) {
+              temp = nControls.get(5);
+              ch = temp.toCharArray();
+              start = 0;
+              length = ch.length;
+            }
+          }
+          if (tagName1.equalsIgnoreCase("P2")) {
+            if (tagName2.equalsIgnoreCase("JUMP")) {
+              temp = nControls.get(6);
+              ch = temp.toCharArray();
+              start = 0;
+              length = ch.length;
+            }
+            if (tagName2.equalsIgnoreCase("LEFT")) {
+              temp = nControls.get(7);
+              ch = temp.toCharArray();
+              start = 0;
+              length = ch.length;
+            }
+            if (tagName2.equalsIgnoreCase("DOWN")) {
+              temp = nControls.get(8);
+              ch = temp.toCharArray();
+              start = 0;
+              length = ch.length;
+            }
+            if (tagName2.equalsIgnoreCase("RIGHT")) {
+              temp = nControls.get(9);
+              ch = temp.toCharArray();
+              start = 0;
+              length = ch.length;
+            }
+
+            if (tagName2.equalsIgnoreCase("JAB")) {
+              temp = nControls.get(10);
+              ch = temp.toCharArray();
+              start = 0;
+              length = ch.length;
+            }
+            if (tagName2.equalsIgnoreCase("KICK")) {
+              temp = nControls.get(11);
+              ch = temp.toCharArray();
+              start = 0;
+              length = ch.length;
+            }
+          }
+          super.characters(ch, start, length);
+
+        }
+
+      };
+      Source src1 = new SAXSource(xr, new InputSource("Settings.XML"));
+      File fw = new File("temp.XML");
+      Result res1 = new StreamResult(fw);
+      TransformerFactory.newInstance().newTransformer().transform(src1, res1);
+
+      Source src2 = new SAXSource(new InputSource("temp.XML"));
+      File settings = new File("Settings.XML");
+      settings.setWritable(true);
+      Result res2 = new StreamResult(settings);
+      TransformerFactory.newInstance().newTransformer().transform(src2, res2);
+      settings.setWritable(false);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
 
   }
+
+
 }
+
+
