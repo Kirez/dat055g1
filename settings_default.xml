@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><Settings>
+  <ScreenRes>
+    <Current>Native</Current>
+  </ScreenRes>
+  <Controls>
+    <P1>
+      <Jump>W</Jump>
+      <Left>A</Left>
+      <Down>S</Down>
+      <Right>D</Right>
+      <Jab>Q</Jab>
+      <Kick>E</Kick>
+    </P1>
+    <P2>
+      <Jump>UP</Jump>
+      <Left>LEFT</Left>
+      <Down>DOWN</Down>
+      <Right>RIGHT</Right>
+      <Jab>SHIFT</Jab>
+      <Kick>CONTROL</Kick>
+    </P2>
+  </Controls>
+</Settings>
