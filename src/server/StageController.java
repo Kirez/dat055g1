@@ -3,7 +3,6 @@ package server;
 import static javafx.scene.input.KeyCode.getKeyCode;
 
 import client.FileHandler;
-import client.GameApplication;
 import common.ActionCycle.CYCLE;
 import common.GamePlayer;
 import common.GamePlayer.ACTION;
@@ -26,10 +25,8 @@ import javafx.scene.shape.Rectangle;
 public class StageController implements GameController {
 
   GameStage stage;
-  int i;
   private PlayerController player1Controller;
   private PlayerController player2Controller;
-  private GameApplication owner;
 
 
   public StageController(GameStage stage) {
@@ -65,6 +62,17 @@ public class StageController implements GameController {
       p2.setPosition(new Point2D(p2.getPosition().getX()
           , stage.getGroundLevelY() - p2.getHeight()));
       p2.setVelocity(new Point2D(p2.getVelocity().getX(), 0));
+    }
+    if (p1f.getX() + p1.getWidth() / 2 > 16) {
+      p1.setPosition(new Point2D(16 - p1.getWidth(), p1.getPosition().getY()));
+    } else if (p1f.getX() - p1.getWidth() / 2 < 0) {
+      p1.setPosition(new Point2D(0, p1.getPosition().getY()));
+    }
+
+    if (p2f.getX() + p2.getWidth() / 2 > 16) {
+      p2.setPosition(new Point2D(16 - p2.getWidth(), p2.getPosition().getY()));
+    } else if (p2f.getX() - p2.getWidth() / 2 < 0) {
+      p2.setPosition(new Point2D(0, p2.getPosition().getY()));
     }
 
     if (player1Controller.player.statePunching.isActive()) {
