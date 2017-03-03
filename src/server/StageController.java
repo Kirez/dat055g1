@@ -46,6 +46,26 @@ public class StageController implements GameController {
     Point2D p1f = p1.getPosition().add(p1.getWidth() / 2, p1.getHeight());
     Point2D p2f = p2.getPosition().add(p2.getWidth() / 2, p2.getHeight());
 
+    if (p1.getPosition().getY() + p1.getHeight() < stage.getGroundLevelY()) {
+      p1.setOnGround(false);
+    }
+
+    if (p2.getPosition().getY() + p2.getHeight() < stage.getGroundLevelY()) {
+      p2.setOnGround(false);
+    }
+
+    if (p1.isOnGround()) {
+      p1.accelerate(new Point2D(p1.getVelocity().multiply(-5*delta).getX(), 0));
+    } else {
+      p1.accelerate(new Point2D(p1.getVelocity().multiply(-2.5*delta).getX(), 0));
+    }
+
+    if (p2.isOnGround()) {
+      p2.accelerate(new Point2D(p2.getVelocity().multiply(-5*delta).getX(), 0));
+    } else {
+      p2.accelerate(new Point2D(p2.getVelocity().multiply(-2.5*delta).getX(), 0));
+    }
+
     if (p1f.getY() < stage.getGroundLevelY()) {
       p1.accelerate(new Point2D(0, gravity * delta));
     } else if (!p1.isOnGround()) {
@@ -82,6 +102,12 @@ public class StageController implements GameController {
             p2.stateStunned.enterCycle(CYCLE.ACTIVE);
             p2.setHP(p2.getHP() - 10);
             System.out.println("Player 2 is hit - " + p2.getHP() + "HP");
+            if (p1.isFaceRight()) {
+              p2.accelerate(new Point2D(15, -3));
+            }
+            else {
+              p2.accelerate(new Point2D(-15, -3));
+            }
           }
         }
       }
@@ -94,6 +120,12 @@ public class StageController implements GameController {
             p2.stateStunned.enterCycle(CYCLE.ACTIVE);
             p2.setHP(p2.getHP() - 10);
             System.out.println("Player 2 is hit - " + p2.getHP() + "HP");
+            if (p1.isFaceRight()) {
+              p2.accelerate(new Point2D(20, -10));
+            }
+            else {
+              p2.accelerate(new Point2D(-20, -10));
+            }
           }
         }
       }
@@ -106,6 +138,12 @@ public class StageController implements GameController {
             p1.stateStunned.enterCycle(CYCLE.ACTIVE);
             p1.setHP(p1.getHP() - 20);
             System.out.println("Player 1 is hit - " + p1.getHP() + "HP");
+            if (p2.isFaceRight()) {
+              p1.accelerate(new Point2D(15, -3));
+            }
+            else {
+              p1.accelerate(new Point2D(-15, -3));
+            }
           }
         }
       }
@@ -117,6 +155,12 @@ public class StageController implements GameController {
             p1.stateStunned.enterCycle(CYCLE.ACTIVE);
             p1.setHP(p1.getHP() - 20);
             System.out.println("Player 1 is hit - " + p1.getHP() + "HP");
+            if (p2.isFaceRight()) {
+              p1.accelerate(new Point2D(20, -10));
+            }
+            else {
+              p1.accelerate(new Point2D(-20, -10));
+            }
           }
         }
       }
