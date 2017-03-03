@@ -17,7 +17,7 @@ import javafx.scene.shape.Rectangle;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-23
+ * @version 2017-02-28
  */
 public class PlayerRenderer implements GameRenderer {
 
@@ -62,6 +62,7 @@ public class PlayerRenderer implements GameRenderer {
             player.getHitBox(0).getY(),
             ((-player.getHitBox(0).getWidth() - player.getHitBox(0).getX()) + player.getPosition()
                 .getX() + 0.5) * 0.33, player.getHitBox(0).getHeight());
+
       }
     }
     if (player.statePunching.isActive()) {

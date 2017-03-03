@@ -13,7 +13,7 @@ import javafx.scene.shape.Rectangle;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-23
+ * @version 2017-02-28
  */
 public class GamePlayer {
 
@@ -178,10 +178,6 @@ public class GamePlayer {
     return rectangles.get(hitbox);
   }
 
-  public void setFaceRight(boolean faceRight) {
-    this.faceRight = faceRight;
-  }
-
   public Color getColor() {
     return color;
   }
@@ -200,6 +196,10 @@ public class GamePlayer {
 
   public boolean isFaceRight() {
     return faceRight;
+  }
+
+  public void setFaceRight(boolean faceRight) {
+    this.faceRight = faceRight;
   }
 
   public enum ACTION {

@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-26
+ * @version 2017-02-28
  */
 public class GameEngine implements Runnable {
 
@@ -134,5 +134,9 @@ public class GameEngine implements Runnable {
    */
   public void togglePause() {
     pause = !pause;
+  }
+
+  public void shutdown() {
+    stop = true;
   }
 }

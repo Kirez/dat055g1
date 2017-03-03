@@ -22,8 +22,8 @@ import org.xml.sax.SAXException;
  */
 public class SettingsScreen implements Screen {
 
+
   private GridPane layout;
-  ;
   private Stage stage;
   private Scene scene;
   private Group root;
@@ -31,7 +31,9 @@ public class SettingsScreen implements Screen {
   private Label playerLabel1;
   private Label playerLabel2;
   private Label screenresLabel;
+
   static public Button rightField1;
+  ;
   static public Button leftField1;
   static public Button downField1;
   static public Button jabField1;
@@ -62,7 +64,8 @@ public class SettingsScreen implements Screen {
     controlsLabel = new Label("Set controls");
     playerLabel1 = new Label("Player 1");
     playerLabel2 = new Label("Player 2");
-    screenresLabel = new Label("Adjust Screen settings");
+
+//    screenresLabel = new Label("Adjust Screen settings");
     jumpField1 = new Button(impControls.get(0));
     jumpField1.setOnAction(this::onClick);
     jumpField1.setPrefSize(100, 50);
@@ -175,7 +178,7 @@ public class SettingsScreen implements Screen {
   }
 
   void Back(ActionEvent e) {
-    ArrayList<String> al = new ArrayList<String>();
+    ArrayList<String> al = new ArrayList<>();
     al.add(jumpField1.getText());
     al.add(leftField1.getText());
     al.add(downField1.getText());

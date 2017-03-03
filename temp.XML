@@ -8,16 +8,16 @@
       <Left>A</Left>
       <Down>S</Down>
       <Right>D</Right>
-      <Jab>SPACE</Jab>
-      <Kick>Q</Kick>
+      <Jab>Q</Jab>
+      <Kick>E</Kick>
     </P1>
     <P2>
-      <Jump>UP</Jump>
-      <Left>LEFT</Left>
-      <Down>DOWN</Down>
-      <Right>RIGHT</Right>
-      <Jab>ENTER</Jab>
-      <Kick>CONTROL</Kick>
+      <Jump>I</Jump>
+      <Left>J</Left>
+      <Down>K</Down>
+      <Right>L</Right>
+      <Jab>CONTROL</Jab>
+      <Kick>ENTER</Kick>
     </P2>
   </Controls>
 </Settings>

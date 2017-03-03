@@ -12,7 +12,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashSet;
 
-
 /**
  * TODO: Add description
  *
@@ -21,7 +20,7 @@ import java.util.HashSet;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-23
+ * @version 2017-02-28
  */
 public class GameServer {
 
@@ -55,6 +54,11 @@ public class GameServer {
     gameEngine.addController(player2Controller);
 
     gameThread = new Thread(gameEngine);
+  }
+
+  public static void main(String[] args) throws IOException {
+    GameServer server = new GameServer(8022);
+    server.start();
   }
 
   void syncClients() throws IOException {
@@ -101,9 +105,10 @@ public class GameServer {
 
   private class ClientListener implements Runnable {
 
-    private Socket socket;
+
     InputStream inputStream;
     PlayerController playerController;
+    private Socket socket;
 
     public ClientListener(Socket socket, PlayerController playerController) {
       this.socket = socket;
@@ -157,10 +162,5 @@ public class GameServer {
         e.printStackTrace();
       }
     }
-  }
-
-  public static void main(String[] args) throws IOException {
-    GameServer server = new GameServer(8022);
-    server.start();
   }
 }

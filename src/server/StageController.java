@@ -3,13 +3,13 @@ package server;
 import static javafx.scene.input.KeyCode.getKeyCode;
 
 import client.FileHandler;
+import client.GameApplication;
 import common.ActionCycle.CYCLE;
 import common.GamePlayer;
 import common.GamePlayer.ACTION;
 import common.GameStage;
 import java.util.ArrayList;
 import javafx.geometry.Point2D;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
 
@@ -21,7 +21,7 @@ import javafx.scene.shape.Rectangle;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-23
+ * @version 2017-02-28
  */
 public class StageController implements GameController {
 
@@ -29,6 +29,7 @@ public class StageController implements GameController {
   int i;
   private PlayerController player1Controller;
   private PlayerController player2Controller;
+  private GameApplication owner;
 
 
   public StageController(GameStage stage) {
@@ -101,8 +102,7 @@ public class StageController implements GameController {
         }
       }
     }
-    if (player2Controller.player.stateKicking
-        .isActive()) {
+    if (player2Controller.player.stateKicking.isActive()) {
       for (Rectangle hurt : p1.getHurtBoxes()) {
         if (p2.getHitBox(1).getBoundsInParent().intersects(hurt.getBoundsInParent())) {
           if (!p1.stateStunned.isActive()) {
@@ -162,5 +162,9 @@ public class StageController implements GameController {
     player2Controller.bindKey(getKeyCode(impControls.get(8)), ACTION.FALL);
     player2Controller.bindKey(getKeyCode(impControls.get(10)), ACTION.HIT);
     player2Controller.bindKey(getKeyCode(impControls.get(11)), ACTION.KICK);
+  }
+
+  public void stop(GameEngine engine) {
+    engine.shutdown();
   }
 }

@@ -11,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javax.swing.Action;
 
 /**
  * Main menu where you press play, quit, options, etc
@@ -21,7 +20,7 @@ import javax.swing.Action;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-23
+ * @version 2017-02-28
  */
 public class MainMenuScreen implements Screen {
 

@@ -14,6 +14,16 @@ import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+/**
+ * TODO: Add description
+ *
+ * @author Alexander Andersson (alexaan)
+ * @author Linus Berglund (belinus)
+ * @author Erik Källberg (kalerik)
+ * @author Timmy Truong (timmyt)
+ * @author Karl Ängermark (karlang)
+ * @version 2017-02-28
+ */
 public class GameClient implements Runnable {
 
   private GameStage gameStage;
@@ -30,6 +40,12 @@ public class GameClient implements Runnable {
     gameStage = new GameStage();
     player1 = gameStage.getPlayer1();
     player2 = gameStage.getPlayer2();
+  }
+
+  public static void main(String[] args) throws IOException {
+    GameClient client = new GameClient("localhost", 8022);
+
+    client.run();
   }
 
   private void onConnect() throws IOException {
@@ -129,12 +145,6 @@ public class GameClient implements Runnable {
     } catch (IOException e) {
       e.printStackTrace();
     }
-  }
-
-  public static void main(String[] args) throws IOException {
-    GameClient client = new GameClient("localhost", 8022);
-
-    client.run();
   }
 
   @Override
