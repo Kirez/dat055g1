@@ -85,14 +85,18 @@ public class StageController implements GameController {
     }
     if (p1f.getX() + p1.getWidth() / 2 > 16) {
       p1.setPosition(new Point2D(16 - p1.getWidth(), p1.getPosition().getY()));
+      p1.setVelocity(new Point2D(p2.getVelocity().getX()*-1, p2.getVelocity().getY()));
     } else if (p1f.getX() - p1.getWidth() / 2 < 0) {
       p1.setPosition(new Point2D(0, p1.getPosition().getY()));
+      p1.setVelocity(new Point2D(p2.getVelocity().getX()*-1, p2.getVelocity().getY()));
     }
 
     if (p2f.getX() + p2.getWidth() / 2 > 16) {
       p2.setPosition(new Point2D(16 - p2.getWidth(), p2.getPosition().getY()));
+      p2.setVelocity(new Point2D(p2.getVelocity().getX()*-1, p2.getVelocity().getY()));
     } else if (p2f.getX() - p2.getWidth() / 2 < 0) {
       p2.setPosition(new Point2D(0, p2.getPosition().getY()));
+      p2.setVelocity(new Point2D(p2.getVelocity().getX()*-1, p2.getVelocity().getY()));
     }
 
     if (player1Controller.player.statePunching.isActive()) {
