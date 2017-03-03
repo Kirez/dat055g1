@@ -36,7 +36,7 @@ public class StageRenderer implements GameRenderer {
 
     // Background
     gc.setFill(GameDefaults.BACKGROUND_COLOR);
-    gc.fillRect(0,0, canvas.getWidth(), canvas.getHeight());
+    gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
     // Foreground
     gc.setFill(GameDefaults.FOREGROUND_COLOR);

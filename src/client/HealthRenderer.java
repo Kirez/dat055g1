@@ -67,7 +67,7 @@ public class HealthRenderer implements GameRenderer {
     }
 
     gc.setStroke(Color.BLACK);
-    gc.strokeRect(healthBar.getX(),healthBar.getY(),healthBar.getWidth(), healthBar.getHeight());
+    gc.strokeRect(healthBar.getX(), healthBar.getY(), healthBar.getWidth(), healthBar.getHeight());
 
     gc.setLineWidth(gc.getLineWidth() * scaleX);
     gc.restore();
