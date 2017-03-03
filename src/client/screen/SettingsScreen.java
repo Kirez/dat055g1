@@ -10,11 +10,10 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javax.xml.transform.TransformerException;
-import org.xml.sax.SAXException;
 
 /**
  * TODO: Add description
@@ -28,15 +27,6 @@ import org.xml.sax.SAXException;
  */
 public class SettingsScreen implements Screen {
 
-
-  private GridPane layout;
-  private Stage stage;
-  private Scene scene;
-  private Group root;
-  private Label controlsLabel;
-  private Label playerLabel1;
-  private Label playerLabel2;
-  private Label screenresLabel;
 
   static public Button rightField1;
   static public Button leftField1;
@@ -52,7 +42,14 @@ public class SettingsScreen implements Screen {
   static public Button kickField2;
   static public Button selButton;
   static public Button backButton;
-
+  private GridPane layout;
+  private Stage stage;
+  private Scene scene;
+  private Group root;
+  private Label controlsLabel;
+  private Label playerLabel1;
+  private Label playerLabel2;
+  private Label screenresLabel;
   private GameApplication owner;
 
   public SettingsScreen(GameApplication gameApplication) {
@@ -107,8 +104,8 @@ public class SettingsScreen implements Screen {
     kickField2 = new Button(impControls.get(11));
     kickField2.setOnAction(this::onClick);
     kickField2.setPrefSize(100, 50);
-    backButton = new Button("Back to Main Menu");
-    backButton.setOnAction(this::Back);
+    backButton = new Button("Main Menu");
+    backButton.setOnAction(this::backToMenu);
     backButton.setPrefSize(200, 75);
     //nativeButton = new Button ("Native");
 
@@ -144,6 +141,9 @@ public class SettingsScreen implements Screen {
 
     layout.addColumn(4, backButton);
 
+    // Enables exiting to main menu
+    scene.setOnKeyPressed(this::onKeyPressed);
+
     layout.setPrefWidth(stage.getWidth());
     layout.setPrefHeight(stage.getHeight());
 
@@ -171,6 +171,10 @@ public class SettingsScreen implements Screen {
   }
 
   void onKeyPressed(KeyEvent event) {
+    if (event.getCode().equals(KeyCode.ESCAPE)) {
+      ActionEvent e = new ActionEvent();
+      this.backToMenu(e);
+    }
     if (selButton != null) {
       selButton.setOnAction(null);
       selButton.setText(event.getCode().toString());
@@ -182,7 +186,7 @@ public class SettingsScreen implements Screen {
 
   }
 
-  void Back(ActionEvent e) {
+  void backToMenu(ActionEvent e) {
     ArrayList<String> al = new ArrayList<>();
     al.add(jumpField1.getText());
     al.add(leftField1.getText());

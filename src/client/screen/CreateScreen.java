@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -53,6 +55,10 @@ public class CreateScreen implements Screen {
     layout.addRow(1, portField, createButton);
     layout.setAlignment(Pos.CENTER);
 
+    // Enables exiting to main menu
+    scene.setOnKeyPressed(this::onKeyPressed);
+    scene.setOnKeyReleased(this::onKeyReleased);
+
     layout.setPrefWidth(stage.getWidth());
     layout.setPrefHeight(stage.getHeight());
 
@@ -64,6 +70,11 @@ public class CreateScreen implements Screen {
     stage.setScene(scene);
   }
 
+  @Override
+  public void exit() {
+
+  }
+
   void onCreateButton() {
     try {
       GameServer server = new GameServer(Integer.parseInt(portField.getText()));
@@ -73,8 +84,13 @@ public class CreateScreen implements Screen {
 
   }
 
-  @Override
-  public void exit() {
+  public void onKeyPressed(KeyEvent event) {
+    if (event.getCode().equals(KeyCode.ESCAPE)) {
+      owner.setActiveScreen(owner.mainMenuScreen);
+    }
+  }
+
+  public void onKeyReleased(KeyEvent event) {
 
   }
 }

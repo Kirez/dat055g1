@@ -1,9 +1,9 @@
 package client;
 
+import common.GameDefaults;
 import common.GameStage;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 
 /**
  * Handles rendering of the stage
@@ -34,9 +34,12 @@ public class StageRenderer implements GameRenderer {
     gc.save();
     gc.scale(scaleX, scaleY);
 
-    gc.setFill(Color.web("#002b36"));
-    gc.fillRect(0,0, canvas.getWidth(), canvas.getHeight());
-    gc.setFill(Color.web("#073642"));
+    // Background
+    gc.setFill(GameDefaults.BACKGROUND_COLOR);
+    gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+    // Foreground
+    gc.setFill(GameDefaults.FOREGROUND_COLOR);
     gc.fillRect(0, gameStage.getGroundLevelY(), canvas.getWidth(), canvas.getHeight());
 
     gc.restore();

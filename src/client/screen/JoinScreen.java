@@ -10,6 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -59,6 +61,10 @@ public class JoinScreen implements Screen {
     layout.addRow(1, ipAddressField, portField, connectButton);
     layout.setAlignment(Pos.CENTER);
 
+    // Enables exiting to main menu
+    scene.setOnKeyPressed(this::onKeyPressed);
+    scene.setOnKeyReleased(this::onKeyReleased);
+
     layout.setPrefWidth(stage.getWidth());
     layout.setPrefHeight(stage.getHeight());
 
@@ -72,6 +78,11 @@ public class JoinScreen implements Screen {
     stage.setScene(scene);
   }
 
+  @Override
+  public void exit() {
+
+  }
+
   void onConnectButton(ActionEvent event) {
     try {
       owner.networkPlayScreen.setClient(
@@ -82,8 +93,13 @@ public class JoinScreen implements Screen {
     }
   }
 
-  @Override
-  public void exit() {
+  public void onKeyPressed(KeyEvent event) {
+    if (event.getCode().equals(KeyCode.ESCAPE)) {
+      owner.setActiveScreen(owner.mainMenuScreen);
+    }
+  }
+
+  public void onKeyReleased(KeyEvent event) {
 
   }
 }
