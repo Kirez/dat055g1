@@ -14,11 +14,23 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javax.xml.transform.TransformerException;
+import org.xml.sax.SAXException;
 
 /**
  * Created by karlang on 2/28/17.
  */
 public class SettingsScreen implements Screen {
+
+
+  private GridPane layout;
+  private Stage stage;
+  private Scene scene;
+  private Group root;
+  private Label controlsLabel;
+  private Label playerLabel1;
+  private Label playerLabel2;
+  private Label screenresLabel;
 
   static public Button rightField1;
   ;
@@ -34,13 +46,8 @@ public class SettingsScreen implements Screen {
   static public Button jumpField2;
   static public Button kickField2;
   static public Button selButton;
-  private GridPane layout;
-  private Stage stage;
-  private Scene scene;
-  private Group root;
-  private Label controlsLabel;
-  private Label playerLabel1;
-  private Label playerLabel2;
+  static public Button backButton;
+
   private GameApplication owner;
 
   public SettingsScreen(GameApplication gameApplication) {
@@ -57,6 +64,8 @@ public class SettingsScreen implements Screen {
     controlsLabel = new Label("Set controls");
     playerLabel1 = new Label("Player 1");
     playerLabel2 = new Label("Player 2");
+
+//    screenresLabel = new Label("Adjust Screen settings");
     jumpField1 = new Button(impControls.get(0));
     jumpField1.setOnAction(this::onClick);
     jumpField1.setPrefSize(100, 50);
@@ -93,6 +102,11 @@ public class SettingsScreen implements Screen {
     kickField2 = new Button(impControls.get(11));
     kickField2.setOnAction(this::onClick);
     kickField2.setPrefSize(100, 50);
+    backButton = new Button("Back to Main Menu");
+    backButton.setOnAction(this::Back);
+    backButton.setPrefSize(200, 75);
+    //nativeButton = new Button ("Native");
+
     layout = new GridPane();
     layout.setPadding(new Insets(50, 50, 50, 50));
     layout.setHgap(30);
@@ -120,6 +134,10 @@ public class SettingsScreen implements Screen {
     layout.add(downField2, 3, 4);
     layout.add(jabField2, 3, 5);
     layout.add(kickField2, 3, 6);
+
+    //layout.addColumn(4, screenresLabel);
+
+    layout.addColumn(4, backButton);
 
     layout.setPrefWidth(stage.getWidth());
     layout.setPrefHeight(stage.getHeight());
@@ -157,5 +175,23 @@ public class SettingsScreen implements Screen {
       event.consume();
     }
 
+  }
+
+  void Back(ActionEvent e) {
+    ArrayList<String> al = new ArrayList<>();
+    al.add(jumpField1.getText());
+    al.add(leftField1.getText());
+    al.add(downField1.getText());
+    al.add(rightField1.getText());
+    al.add(jabField1.getText());
+    al.add(kickField1.getText());
+    al.add(jumpField2.getText());
+    al.add(leftField2.getText());
+    al.add(downField2.getText());
+    al.add(rightField2.getText());
+    al.add(jabField2.getText());
+    al.add(kickField2.getText());
+    FileHandler.setControls(al);
+    owner.setActiveScreen(owner.mainMenuScreen);
   }
 }
