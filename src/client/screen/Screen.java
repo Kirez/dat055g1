@@ -14,9 +14,14 @@ import javafx.stage.Stage;
  */
 public interface Screen {
 
-  /*Run when a screen becomes visible*/
+  /**
+   * Runs when a screen becomes visible
+   * @param stage the stage to enter
+   */
   void enter(Stage stage);
 
-  /*Run when a screen becomes invisible*/
+  /**
+   * Runs when a screen becomes invisible
+   */
   void exit();
 }

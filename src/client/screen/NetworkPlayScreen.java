@@ -39,6 +39,10 @@ public class NetworkPlayScreen extends AnimationTimer implements Screen {
   private GameClient client;
   private Thread clientThread;
 
+  /**
+   * Creates an instance of NetworkPlayScreen
+   * @param gameApplication the owner application
+   */
   public NetworkPlayScreen(GameApplication gameApplication) {
     this.owner = gameApplication;
 

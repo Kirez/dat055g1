@@ -3,7 +3,7 @@ package common;
 import java.nio.ByteBuffer;
 
 /**
- * TODO: Add description
+ * Toolkit for generating byte array packets
  *
  * @author Alexander Andersson (alexaan)
  * @author Linus Berglund (belinus)
