@@ -16,7 +16,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 /**
- * TODO: Add description
+ * A menu screen with options to change the game controls.
  *
  * @author Alexander Andersson (alexaan)
  * @author Linus Berglund (belinus)
@@ -27,21 +27,59 @@ import javafx.stage.Stage;
  */
 public class SettingsScreen implements Screen {
 
-
+  /**
+   * A button used for setting Player 1's control to move to the right.
+   */
   static public Button rightField1;
+  /**
+   * A button used for setting Player 1's control to move to the left.
+   */
   static public Button leftField1;
+  /**
+   * A button used for setting Player 1's control to fall while in the air.
+   */
   static public Button downField1;
+  /**
+   * A button used for setting Player 1's control to jab.
+   */
   static public Button jabField1;
+  /**
+   * A button used for setting Player 1's control to jump.
+   */
   static public Button jumpField1;
+  /**
+   * A button used for setting Player 1's control to kick.
+   */
   static public Button kickField1;
+  /**
+   * A button used for setting Player 2' control to move to the right.
+   */
   static public Button rightField2;
+  /**
+   * A button used for setting Player 2' control to move to the left.
+   */
   static public Button leftField2;
+  /**
+   * A button used for setting Player 2' control to fall while in the air.
+   */
   static public Button downField2;
+  /**
+   * A button used for setting Player 2' control to move to jab.
+   */
   static public Button jabField2;
+  /**
+   * A button used for setting Player 2' control to jump.
+   */
   static public Button jumpField2;
+  /**
+   * A button used for setting Player 2' control to kick.
+   */
   static public Button kickField2;
+  /**
+   * A temporary button used to indicate the current selected button.
+   */
   static public Button selButton;
-  static public Button backButton;
+  private Button backButton;
   private Button defaultsButton;
   private GridPane layout;
   private Stage stage;
@@ -50,13 +88,22 @@ public class SettingsScreen implements Screen {
   private Label controlsLabel;
   private Label playerLabel1;
   private Label playerLabel2;
-  private Label screenresLabel;
   private GameApplication owner;
 
+  /**
+   * Creates an instance of the <tt>SettingsScreen</tt>
+   *
+   * @param gameApplication a parameter that is set to the owner
+   */
   public SettingsScreen(GameApplication gameApplication) {
     owner = gameApplication;
   }
 
+  /**
+   * Enters the screen and creates the layout of the screen.
+   *
+   * @param stage the Stage
+   */
   @Override
   public void enter(Stage stage) {
     this.stage = stage;
@@ -68,7 +115,6 @@ public class SettingsScreen implements Screen {
     playerLabel1 = new Label("Player 1");
     playerLabel2 = new Label("Player 2");
 
-//    screenresLabel = new Label("Adjust Screen settings");
     jumpField1 = new Button(impControls.get(0));
     jumpField1.setOnAction(this::onClick);
     jumpField1.setPrefSize(100, 50);
@@ -140,7 +186,6 @@ public class SettingsScreen implements Screen {
     layout.add(jabField2, 3, 5);
     layout.add(kickField2, 3, 6);
 
-    //layout.addColumn(4, screenresLabel);
 
     layout.addColumn(4);
     layout.add(backButton, 4, 1);
@@ -157,11 +202,19 @@ public class SettingsScreen implements Screen {
     stage.setScene(scene);
   }
 
+  /**
+   * Exits the game.
+   */
   @Override
   public void exit() {
 
   }
 
+  /**
+   * Makes one of the buttons that changes the controls to wait for a KeyEvent.
+   *
+   * @param event An ActionEvent from clicking the buttons
+   */
   void onClick(ActionEvent event) {
     if (selButton == null) {
       Button Kn = (Button) event.getSource();
@@ -175,6 +228,12 @@ public class SettingsScreen implements Screen {
     }
   }
 
+  /**
+   * If ESC is pressed this function changes the current screen to the main menu. If a button is
+   * selected it changes the button text to the pressed key.
+   *
+   * @param event a KeyEvent
+   */
   void onKeyPressed(KeyEvent event) {
     if (event.getCode().equals(KeyCode.ESCAPE)) {
       ActionEvent e = new ActionEvent();
@@ -191,6 +250,12 @@ public class SettingsScreen implements Screen {
 
   }
 
+  /**
+   * Creates an ArrayList of the Button texts and calls the setControls function in
+   * <tt>FileHandler</tt>.Then it returns to the main menu.
+   *
+   * @param e ActionEvent from clicking a button
+   */
   void backToMenu(ActionEvent e) {
     ArrayList<String> al = new ArrayList<>();
     al.add(jumpField1.getText());
@@ -209,6 +274,11 @@ public class SettingsScreen implements Screen {
     owner.setActiveScreen(owner.mainMenuScreen);
   }
 
+  /**
+   * Changes the button texts to correspond to the default controls.
+   *
+   * @param e ActionEvent from clicking a button
+   */
   void setDefaultControls(ActionEvent e) {
     jumpField1.setText("W");
     leftField1.setText("A");

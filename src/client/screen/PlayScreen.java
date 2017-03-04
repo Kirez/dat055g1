@@ -46,6 +46,13 @@ public class PlayScreen extends AnimationTimer implements Screen {
   private GameApplication owner;
   private static boolean player1wins;
   final ChangeListener changeListener = new ChangeListener() {
+    /**
+     * Keeps track of the health of the players.
+     *
+     * @param observableValue
+     * @param oldValue
+     * @param newValue
+     */
     @Override
     public void changed(ObservableValue observableValue, Object oldValue,
         Object newValue) {
@@ -69,7 +76,11 @@ public class PlayScreen extends AnimationTimer implements Screen {
   private HealthRenderer player2HealthBar;
   private Object l;
 
-  //  Constructor
+  /**
+   * Creates an instance of the <tt>PlayScreen</tt>.
+   *
+   * @param gameApplication
+   */
   public PlayScreen(GameApplication gameApplication) {
     gameOver = false;
 
@@ -87,6 +98,11 @@ public class PlayScreen extends AnimationTimer implements Screen {
     stageController.attach(engine);
   }
 
+  /**
+   * Handles the rendering of the <tt>PlayScreen</tt>.
+   *
+   * @param l
+   */
   @Override
   public void handle(long l) {
     canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -99,7 +115,11 @@ public class PlayScreen extends AnimationTimer implements Screen {
     player2Renderer.render(canvas);
   }
 
-  //  Runs GameEngine and renderThread.
+  /**
+   * Enters the <tt>PlayScreen</tt>.
+   *
+   * @param stage the stage
+   */
   @Override
   public void enter(Stage stage) {
     this.stage = stage;
@@ -145,6 +165,9 @@ public class PlayScreen extends AnimationTimer implements Screen {
     this.start();
   }
 
+  /**
+   * Exits the game.
+   */
   @Override
   public void exit() {
     // Signal for threads to stop
@@ -161,6 +184,12 @@ public class PlayScreen extends AnimationTimer implements Screen {
     }
   }
 
+  /**
+   * Keeps track of pressed keys. If P is pressed the game is paused, F11 sets fullscreen and
+   * ESC exits to main menu.
+   *
+   * @param event a KeyEvent
+   */
   private void onKeyPressed(KeyEvent event) {
     switch (event.getCode()) {
       case P:
@@ -177,15 +206,28 @@ public class PlayScreen extends AnimationTimer implements Screen {
     stageController.onKeyPressed(event);
   }
 
+  /**
+   * Keeps track of released keys.
+   *
+   * @param event a KeyEvent.
+   */
   private void onKeyReleased(KeyEvent event) {
     stageController.onKeyReleased(event);
   }
 
+  /**
+   *Exits the game and sets the screen to the <tt>EndScreen</tt>.
+   */
   public void onGameEnd() {
     this.exit();
     owner.setActiveScreen(owner.endScreen);
   }
 
+  /**
+   * Returns a String with the winner.
+   *
+   * @return the winning player
+   */
   public static String getWinner() {
     if (player1wins == true) {
       return ("Player 1");

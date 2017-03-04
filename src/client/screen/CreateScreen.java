@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import server.GameServer;
 
 /**
- * TODO: Add description
+ * Screen used to host online games.
  *
  * @author Alexander Andersson (alexaan)
  * @author Linus Berglund (belinus)
@@ -36,10 +36,20 @@ public class CreateScreen implements Screen {
   private Group root;
   private GameApplication owner;
 
+  /**
+   * Creates an instance of the <tt>CreateScreen</tt>.
+   *
+   * @param gameApplication
+   */
   public CreateScreen(GameApplication gameApplication) {
     owner = gameApplication;
   }
 
+  /**
+   * Enters the screen and creates the content of it.
+   *
+   * @param stage
+   */
   @Override
   public void enter(Stage stage) {
     this.stage = stage;
@@ -70,11 +80,17 @@ public class CreateScreen implements Screen {
     stage.setScene(scene);
   }
 
+  /**
+   * Exits the game.
+   */
   @Override
   public void exit() {
 
   }
 
+  /**
+   * Creates a game server.
+   */
   void onCreateButton() {
     try {
       GameServer server = new GameServer(Integer.parseInt(portField.getText()));
@@ -84,12 +100,22 @@ public class CreateScreen implements Screen {
 
   }
 
+  /**
+   * Keeps track of key presses. Returns to Main menu when ESCAPE is pressed.
+   *
+   * '@param event
+   */
   public void onKeyPressed(KeyEvent event) {
     if (event.getCode().equals(KeyCode.ESCAPE)) {
       owner.setActiveScreen(owner.mainMenuScreen);
     }
   }
 
+  /**
+   * Keeps track of Key releases.
+   *
+   * @param event
+   */
   public void onKeyReleased(KeyEvent event) {
 
   }

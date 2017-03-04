@@ -31,17 +31,21 @@ import org.xml.sax.helpers.XMLReaderFactory;
  */
 public class FileHandler {
 
-  static double bHeight;
-  static double bWidth;
-  static double bX;
-  static double bY;
-  static int health;
-  static double aSpool;
-  static double aDuration;
-  static double aCooldown;
-  private GamePlayer player;
+  //Variables used for the imported characters
+  private static double bHeight;
+  private static double bWidth;
+  private static double bX;
+  private static double bY;
+  private static int health;
+  private static double aSpool;
+  private static double aDuration;
+  private static double aCooldown;
 
-  //Imports the character data specified in an XML file
+  /**
+   * Imports the character data specified in an XML file using the SAX parser.
+   *
+   * @param player the player that receives the data
+   */
   public static void importCharacters(GamePlayer player) {
 
     try {
@@ -66,6 +70,15 @@ public class FileHandler {
         boolean spool = false;
         boolean cooldown = false;
 
+        /**
+         * Sets a specific boolean to true when a certain element starts.
+         *
+         * @param uri is the Namespace of the attribute
+         * @param localName is the local name of the attribute
+         * @param qName is the qualified name of the attribute
+         * @param attributes are the attributes in the file
+         * @throws SAXException is a specific exception for the SAX parser
+         */
         public void startElement(String uri, String localName, String qName,
             Attributes attributes) throws SAXException {
 
@@ -116,6 +129,14 @@ public class FileHandler {
           }
         }
 
+        /**
+         * Sets a specific boolean to false and uses the corresponding variable to set a character value.
+         *
+         * @param uri is the Namespace of the attribute
+         * @param localName is the local name of the attribute
+         * @param qName is the qualified name of the attribute
+         * @throws SAXException is a specific exception for the SAX parser
+         */
         public void endElement(String uri, String localName, String qName) throws SAXException {
 
           if (qName.equalsIgnoreCase("HEALTH")) {
@@ -175,6 +196,14 @@ public class FileHandler {
           }
         }
 
+        /**
+         * Sets the corresponding variable when the specific elements are set to true.
+         *
+         * @param ch characters array of the content of a certain parsed element
+         * @param start start of the element content
+         * @param length length of the element content
+         * @throws SAXException is a specific exception for the SAX parser
+         */
         public void characters(char ch[], int start, int length) throws SAXException {
 
           if (boxHead || boxBody || boxRleg || boxLleg || charJab || charKick || charSize) {
@@ -214,7 +243,9 @@ public class FileHandler {
     }
   }
 
-  // Reads the controls specified in the Settings.xml file and returns an ArrayList
+  /**
+   *  Reads the controls specified in the Settings.xml file and returns an ArrayList with the controls.
+   */
   public static ArrayList<String> importControls() {
     ArrayList controls = new ArrayList<String>();
 
@@ -233,7 +264,15 @@ public class FileHandler {
         boolean player1 = false;
         boolean player2 = false;
         String temp;
-
+        /**
+         * Sets a specific boolean to true when a certain element starts.
+         *
+         * @param uri is the Namespace of the attribute
+         * @param localName is the local name of the attribute
+         * @param qName is the qualified name of the attribute
+         * @param attributes are the attributes in the file
+         * @throws SAXException is a specific exception for the SAX parser
+         */
         public void startElement(String uri, String localName, String qName,
             Attributes attributes) throws SAXException {
           if (qName.equalsIgnoreCase("P1")) {
@@ -261,7 +300,14 @@ public class FileHandler {
             cKick = true;
           }
         }
-
+        /**
+         * Sets a specific boolean to false and adds the fetched control to the ArrayList.
+         *
+         * @param uri is the Namespace of the attribute
+         * @param localName is the local name of the attribute
+         * @param qName is the qualified name of the attribute
+         * @throws SAXException is a specific exception for the SAX parser
+         */
         public void endElement(String uri, String localName, String qName) throws SAXException {
           if (qName.equalsIgnoreCase("P1")) {
             player1 = false;
@@ -294,7 +340,14 @@ public class FileHandler {
             controls.add(temp);
           }
         }
-
+        /**
+         * Sets the temp String when the specific elements are set to true.
+         *
+         * @param ch characters array of the content of a certain parsed element
+         * @param start start of the element content
+         * @param length length of the element content
+         * @throws SAXException is a specific exception for the SAX parser
+         */
         public void characters(char ch[], int start, int length) throws SAXException {
           if (player1 || player2) {
             if (cJump) {
@@ -327,7 +380,11 @@ public class FileHandler {
     return controls;
   }
 
-  //Writes the controls to the Settings.xml file
+  /**
+   * Writes the content of the received ArrayList to the Settings.XML file.
+   *
+   * @param al the received ArrayList of controls
+   */
   public static void setControls(ArrayList<String> al) {
     try {
       XMLReader xr = new XMLFilterImpl((XMLReaderFactory.createXMLReader())) {
@@ -335,7 +392,15 @@ public class FileHandler {
         String tagName1 = "";
         String tagName2 = "";
         String temp;
-
+        /**
+         * Sets one of strings to correspond the current element. The first String is only set when it parses in a player element.
+         *
+         * @param uri is the Namespace of the attribute
+         * @param localName is the local name of the attribute
+         * @param qName is the qualified name of the attribute
+         * @param attributes are the attributes in the file
+         * @throws SAXException is a specific exception for the SAX parser
+         */
         public void startElement(String uri, String localName, String qName, Attributes attributes)
             throws SAXException {
           if (qName.equalsIgnoreCase("P1") || qName.equalsIgnoreCase("P2")) {
@@ -345,7 +410,14 @@ public class FileHandler {
           }
           super.startElement(uri, localName, qName, attributes);
         }
-
+        /**
+         * Sets the current element string name to nothing.
+         *
+         * @param uri is the Namespace of the attribute
+         * @param localName is the local name of the attribute
+         * @param qName is the qualified name of the attribute
+         * @throws SAXException is a specific exception for the SAX parser
+         */
         public void endElement(String uri, String localName,
             String qName) throws SAXException {
           if (qName.equalsIgnoreCase("P1") || qName.equalsIgnoreCase("P2")) {
@@ -355,7 +427,14 @@ public class FileHandler {
           }
           super.endElement(uri, localName, qName);
         }
-
+        /**
+         * When on the corresponding element this function writes the new control
+         *
+         * @param ch characters array of the content of a certain parsed element
+         * @param start start of the element content
+         * @param length length of the element content
+         * @throws SAXException is a specific exception for the SAX parser
+         */
         public void characters(char[] ch,
             int start, int length) throws SAXException {
           if (tagName1.equalsIgnoreCase("P1")) {

@@ -13,7 +13,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.stage.Stage;
 
 /**
- * TODO: Add description
+ * The Screen used to play over networks.
  *
  * @author Alexander Andersson (alexaan)
  * @author Linus Berglund (belinus)
@@ -45,6 +45,11 @@ public class NetworkPlayScreen extends AnimationTimer implements Screen {
     canvas = new Canvas();
   }
 
+  /**
+   * Renders the game.
+   *
+   * @param l
+   */
   @Override
   public void handle(long l) {
     canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -57,6 +62,11 @@ public class NetworkPlayScreen extends AnimationTimer implements Screen {
     player2Renderer.render(canvas);
   }
 
+  /**
+   * Initializes the screen by creating instances of the renderers etc.
+   *
+   * @param stage
+   */
   @Override
   public void enter(Stage stage) {
     if (client == null) {
@@ -96,11 +106,19 @@ public class NetworkPlayScreen extends AnimationTimer implements Screen {
     clientThread.start();
   }
 
+  /**
+   * Does nothing.
+   */
   @Override
   public void exit() {
 
   }
 
+  /**
+   * Sets the Client.
+   *
+   * @param client
+   */
   public void setClient(GameClient client) {
     this.client = client;
   }
