@@ -20,7 +20,7 @@ import org.xml.sax.helpers.XMLFilterImpl;
 import org.xml.sax.helpers.XMLReaderFactory;
 
 /**
- * TODO: Add description
+ * Reads and writes data from XML files
  *
  * @author Alexander Andersson (alexaan)
  * @author Linus Berglund (belinus)
@@ -41,6 +41,7 @@ public class FileHandler {
   static double aCooldown;
   private GamePlayer player;
 
+  //Imports the character data specified in an XML file
   public static void importCharacters(GamePlayer player) {
 
     try {
@@ -213,6 +214,7 @@ public class FileHandler {
     }
   }
 
+  // Reads the controls specified in the Settings.xml file and returns an ArrayList
   public static ArrayList<String> importControls() {
     ArrayList controls = new ArrayList<String>();
 
@@ -325,6 +327,7 @@ public class FileHandler {
     return controls;
   }
 
+  //Writes the controls to the Settings.xml file
   public static void setControls(ArrayList<String> al) {
     try {
       XMLReader xr = new XMLFilterImpl((XMLReaderFactory.createXMLReader())) {

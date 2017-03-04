@@ -80,6 +80,7 @@ public class HealthRenderer implements GameRenderer {
   public void setHealth() {
     PlayScreen.intProperty1.set(player.getHP());
   }
+
   public double getHealth() {
     return player.getHP();
   }

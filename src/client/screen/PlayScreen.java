@@ -49,11 +49,10 @@ public class PlayScreen extends AnimationTimer implements Screen {
     @Override
     public void changed(ObservableValue observableValue, Object oldValue,
         Object newValue) {
-   //   System.out.println(Integer.parseInt(newValue.toString()));
-      if ( player1HealthBar.getHealth() < player2HealthBar.getHealth()) {
-        player1wins =false;
-      }
-      else {
+      //   System.out.println(Integer.parseInt(newValue.toString()));
+      if (player1HealthBar.getHealth() < player2HealthBar.getHealth()) {
+        player1wins = false;
+      } else {
         player1wins = true;
       }
       if (Integer.parseInt(newValue.toString()) <= 0) {
@@ -176,12 +175,12 @@ public class PlayScreen extends AnimationTimer implements Screen {
     this.exit();
     owner.setActiveScreen(owner.endScreen);
   }
+
   public static String getWinner() {
-    if (player1wins== true) {
+    if (player1wins == true) {
       return ("Player 1");
-    }
-    else {
+    } else {
       return ("Player 2");
-      }
+    }
   }
 }

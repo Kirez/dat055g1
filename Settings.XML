@@ -12,12 +12,12 @@
       <Kick>E</Kick>
     </P1>
     <P2>
-      <Jump>UP</Jump>
-      <Left>LEFT</Left>
-      <Down>DOWN</Down>
-      <Right>RIGHT</Right>
-      <Jab>ENTER</Jab>
-      <Kick>CONTROL</Kick>
+      <Jump>I</Jump>
+      <Left>J</Left>
+      <Down>K</Down>
+      <Right>L</Right>
+      <Jab>U</Jab>
+      <Kick>O</Kick>
     </P2>
   </Controls>
 </Settings>
