@@ -29,7 +29,7 @@ public class StageController implements GameController {
   private PlayerController player2Controller;
 
   /**
-   * Creates a new instance of <tt>StageController</tt>, gets the controls and creates instances
+   * Creates a new instance of {@code StageController}, gets the controls and creates instances
    * of PlayerController.
    *
    * @param stage
@@ -206,8 +206,8 @@ public class StageController implements GameController {
   }
 
   /**
-   * Attaches The <tt>StageController</tt> and the two <tt>PlayerControllers</tt> to the
-   * <tt>GameEngine</tt>.
+   * Attaches The {@code StageController} and the two {@code PlayerControllers} to the
+   * {@code GameEngine}.
    *
    * @param engine the engine to attach this controller to
    */

@@ -24,7 +24,7 @@ public class PlayerRenderer implements GameRenderer {
   private GamePlayer player;
 
   /**
-   * Crates an instance of the <tt>PlayerRenderer</tt>
+   * Crates an instance of the {@code PlayerRenderer}
    *
    * @param player The player being rendered
    */

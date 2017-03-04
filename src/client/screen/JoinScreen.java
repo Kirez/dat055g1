@@ -39,7 +39,7 @@ public class JoinScreen implements Screen {
   private GameApplication owner;
 
   /**
-   * Creates an instance of the <tt>JoinScreen</tt>.
+   * Creates an instance of the {@code JoinScreen}.
    *
    * @param gameApplication
    */

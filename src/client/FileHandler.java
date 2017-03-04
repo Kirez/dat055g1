@@ -1,6 +1,5 @@
 package client;
 
-
 import common.GamePlayer;
 import java.io.File;
 import java.util.ArrayList;

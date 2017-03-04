@@ -37,7 +37,7 @@ public class CreateScreen implements Screen {
   private GameApplication owner;
 
   /**
-   * Creates an instance of the <tt>CreateScreen</tt>.
+   * Creates an instance of the {@code CreateScreen}.
    *
    * @param gameApplication
    */

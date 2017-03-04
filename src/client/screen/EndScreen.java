@@ -36,7 +36,7 @@ public class EndScreen implements Screen {
   private String winningPlayer;
 
   /**
-   * Creates an instance of the <tt>Endscreen</tt>.
+   * Creates an instance of the {@code Endscreen}.
    *
    * @param gameApplication takes the Game Application as a parameter to use as owner
    */

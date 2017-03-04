@@ -34,7 +34,7 @@ public class MainMenuScreen implements Screen {
   private GameApplication owner;
 
   /**
-   * Creates an instance of the <tt>MainMenuScreen</tt>.
+   * Creates an instance of the {@code MainMenuScreen}.
    *
    * @param gameApplication
    */

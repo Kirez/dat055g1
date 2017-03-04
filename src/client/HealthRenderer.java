@@ -25,7 +25,7 @@ public class HealthRenderer implements GameRenderer {
   private boolean leftBar;
 
   /**
-   * Creates an instance of <tt>HealthRenderer</tt>.
+   * Creates an instance of {@code HealthRenderer}.
    *
    * @param player the player corresponding to the Healthbar
    * @param leftBar boolean for wether the bar is to the left

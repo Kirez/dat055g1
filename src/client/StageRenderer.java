@@ -20,7 +20,7 @@ public class StageRenderer implements GameRenderer {
   private GameStage gameStage;
 
   /**
-   * Creates an instance of the <tt>StageRenderer</tt>.
+   * Creates an instance of the {@code StageRenderer}.
    * @param gameStage
    */
   public StageRenderer(GameStage gameStage) {
