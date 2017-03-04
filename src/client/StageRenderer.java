@@ -19,12 +19,17 @@ public class StageRenderer implements GameRenderer {
 
   private GameStage gameStage;
 
-  //  Constructor
+  /**
+   * Creates an instance of the <tt>StageRenderer</tt>.
+   * @param gameStage
+   */
   public StageRenderer(GameStage gameStage) {
     this.gameStage = gameStage;
   }
 
-  //  The stage has two PlayerRenderers who are added to the canvas. GameStage is used to get the GroundLevel.
+  /**
+   * Renders the Stage. GameStage is used to get the GroundLevel.
+   */
   @Override
   public void render(Canvas canvas) {
     GraphicsContext gc = canvas.getGraphicsContext2D();

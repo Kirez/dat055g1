@@ -9,7 +9,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.Rectangle;
 
 /**
- * TODO: Add description
+ * Renders the HealthBars in the game.
  *
  * @author Alexander Andersson (alexaan)
  * @author Linus Berglund (belinus)
@@ -24,13 +24,22 @@ public class HealthRenderer implements GameRenderer {
   private GamePlayer player;
   private boolean leftBar;
 
-  //Constructor
+  /**
+   * Creates an instance of <tt>HealthRenderer</tt>.
+   *
+   * @param player the player corresponding to the Healthbar
+   * @param leftBar boolean for wether the bar is to the left
+   */
   public HealthRenderer(GamePlayer player, boolean leftBar) {
     this.player = player;
     this.leftBar = leftBar;
   }
 
-
+  /**
+   * Renders the HealthBar of a player.
+   *
+   * @param canvas javafx canvas to render to
+   */
   @Override
   public void render(Canvas canvas) {
     GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -77,10 +86,17 @@ public class HealthRenderer implements GameRenderer {
     setHealth();
   }
 
+  /**
+   * Updates the current health of a player.
+   */
   public void setHealth() {
     PlayScreen.intProperty1.set(player.getHP());
   }
 
+  /**
+   * Returns the current health of a player.
+   * @return the health of a player
+   */
   public double getHealth() {
     return player.getHP();
   }
