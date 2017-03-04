@@ -33,6 +33,12 @@ public class MainMenuScreen implements Screen {
   private Label title;
   private GameApplication owner;
 
+  /**
+   * Creates an instance of the <tt>MainMenuScreen</tt>.
+   *
+   * @param gameApplication
+   */
+
   public MainMenuScreen(GameApplication gameApplication) {
     owner = gameApplication;
 
@@ -55,6 +61,11 @@ public class MainMenuScreen implements Screen {
     layout.setAlignment(Pos.CENTER);
   }
 
+  /**
+   * Enters the Main Menu Screen.
+   *
+   * @param stage the Stage
+   */
   @Override
   public void enter(Stage stage) {
     Group root = new Group();
@@ -68,22 +79,45 @@ public class MainMenuScreen implements Screen {
     stage.setScene(scene);
   }
 
+  /**
+   * Exits the game.
+   *
+   * @param event an ActionEvent from clicking the exit button.
+   */
   void onExitButton(ActionEvent event) {
     Platform.exit();
   }
 
+  /**
+   * Sets the active screen to the PlayScreen.
+   *
+   * @param event an ActionEvent from clicking a button.
+   */
   void onLocalGameButton(ActionEvent event) {
     owner.setActiveScreen(owner.playScreen);
   }
 
+  /**
+   * Sets the active screen to the JoinScreen.
+   *
+   * @param event an ActionEvent from clicking a button.
+   */
   void onJoinGameButton(ActionEvent event) {
     owner.setActiveScreen(owner.joinScreen);
   }
 
+  /**
+   * Sets the Active to the SettingsScreen.
+   *
+   * @param event an ActionEvent from clicking a button.
+   */
   void onSettingsButton(ActionEvent event) {
     owner.setActiveScreen(owner.settingsScreen);
   }
 
+  /**
+   * Exits the game.
+   */
   @Override
   public void exit() {
 

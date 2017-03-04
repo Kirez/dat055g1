@@ -38,10 +38,20 @@ public class JoinScreen implements Screen {
   private Group root;
   private GameApplication owner;
 
+  /**
+   * Creates an instance of the <tt>JoinScreen</tt>.
+   *
+   * @param gameApplication
+   */
   public JoinScreen(GameApplication gameApplication) {
     owner = gameApplication;
   }
 
+  /**
+   * Enters the screen and creates the content of it.
+   *
+   * @param stage
+   */
   @Override
   public void enter(Stage stage) {
     this.stage = stage;
@@ -78,11 +88,19 @@ public class JoinScreen implements Screen {
     stage.setScene(scene);
   }
 
+  /**
+   * Exits the Screen.
+   */
   @Override
   public void exit() {
 
   }
 
+  /**
+   * Connects to a network.
+   *
+   * @param event an ActionEvent from a button click.
+   */
   void onConnectButton(ActionEvent event) {
     try {
       owner.networkPlayScreen.setClient(
@@ -93,12 +111,22 @@ public class JoinScreen implements Screen {
     }
   }
 
+  /**
+   * Keeps track of the key presses. If ESC is pressed it returns to the MainMenuScreen.
+   *
+   * @param event a KeyEvent.
+   */
   public void onKeyPressed(KeyEvent event) {
     if (event.getCode().equals(KeyCode.ESCAPE)) {
       owner.setActiveScreen(owner.mainMenuScreen);
     }
   }
 
+  /**
+   * Keeps track of Key Releases.
+   *
+   * @param event
+   */
   public void onKeyReleased(KeyEvent event) {
 
   }

@@ -15,7 +15,8 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
- * EndScreen with the options to have a rematch, etc.
+ * EndScreen with the options to have a rematch, exit and go back to the main menu. Appears when
+ * the game ends.
  *
  * @author Alexander Andersson (alexaan)
  * @author Linus Berglund (belinus)
@@ -34,6 +35,11 @@ public class EndScreen implements Screen {
   private GameApplication owner;
   private String winningPlayer;
 
+  /**
+   * Creates an instance of the <tt>Endscreen</tt>.
+   *
+   * @param gameApplication takes the Game Application as a parameter to use as owner
+   */
   public EndScreen(GameApplication gameApplication) {
     owner = gameApplication;
     menuButton = new Button("Main Menu");
@@ -49,6 +55,11 @@ public class EndScreen implements Screen {
     layout.setAlignment(Pos.CENTER);
   }
 
+  /**
+   * Enters the active screen.
+   *
+   * @param stage is the current stage
+   */
   @Override
   public void enter(Stage stage) {
     Group root = new Group();
@@ -60,24 +71,47 @@ public class EndScreen implements Screen {
     scene.setOnKeyPressed(this::onKeyPressed);
   }
 
+  /**
+   * When the rematch button is clicked this function changes the screen back to PlayScreen.
+   *
+   * @param event an ActionEvent from the button click
+   */
   void onRematchButton(ActionEvent event) {
     owner.setActiveScreen(owner.playScreen);
   }
 
+  /**
+   * When the Menu button is clicked this function changes the screen back to the MainMenuScreen.
+   *
+   * @param event Action event form the button click
+   */
   void onMenuButton(ActionEvent event) {
     owner.setActiveScreen(owner.mainMenuScreen);
   }
 
+  /**
+   * Reads key presses and exits the game when ESC is pressed.
+   *
+   * @param event a KeyEvent that is any clicked button
+   */
   public void onKeyPressed(KeyEvent event) {
     if (event.getCode().equals(KeyCode.ESCAPE)) {
       owner.setActiveScreen(owner.mainMenuScreen);
     }
   }
 
+  /**
+   * When the Exit button is clicked the game exits.
+   *
+   * @param event ActionEvent from button clicks
+   */
   void onExitButton(ActionEvent event) {
     Platform.exit();
   }
 
+  /**
+   * Exits the game.
+   */
   @Override
   public void exit() {
 
