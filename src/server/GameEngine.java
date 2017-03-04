@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.concurrent.TimeUnit;
 
 /**
- * TODO: Add description
+ * Handles game logic updates and tick rate.
  *
  * @author Alexander Andersson (alexaan)
  * @author Linus Berglund (belinus)
@@ -40,7 +40,7 @@ public class GameEngine implements Runnable {
   private boolean pause;
 
   /**
-   * Initializes the {@code GameEngine}
+   * Creates a new instance of {@code GameEngine}.
    */
   public GameEngine() {
     controllers = new HashSet<>();
@@ -70,7 +70,7 @@ public class GameEngine implements Runnable {
   }
 
   /**
-   * Main game loop.
+   * Main game loop. Calculate each tick, then sleep for the remaining time allocated to the tick.
    */
   @Override
   public void run() {
