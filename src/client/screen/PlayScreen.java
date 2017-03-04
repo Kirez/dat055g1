@@ -103,7 +103,17 @@ public class PlayScreen extends AnimationTimer implements Screen {
   @Override
   public void enter(Stage stage) {
     this.stage = stage;
-    gameStage.reset();
+    gameStage = new GameStage();
+    engine = new GameEngine();
+
+    // PlayerController, stageController, StageRenderer from the same gameStage
+    stageController = new StageController(gameStage);
+    stageRenderer = new StageRenderer(gameStage);
+    player1Renderer = new PlayerRenderer(gameStage.getPlayer1());
+    player2Renderer = new PlayerRenderer(gameStage.getPlayer2());
+    player1HealthBar = new HealthRenderer(gameStage.getPlayer1(), true);
+    player2HealthBar = new HealthRenderer(gameStage.getPlayer2(), false);
+    stageController.attach(engine);
 
     // The root element in the javafx gui stack, all sub-elements attach to this
     root = new Group();
