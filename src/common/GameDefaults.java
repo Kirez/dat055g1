@@ -4,6 +4,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 
 /**
+ * Contains static variables to ease changes and unify standards
+ *
  * @author Alexander Andersson (alexaan)
  * @author Linus Berglund (belinus)
  * @author Erik Källberg (kalerik)
