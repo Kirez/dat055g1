@@ -16,8 +16,8 @@
       <Left>J</Left>
       <Down>K</Down>
       <Right>L</Right>
-      <Jab>CONTROL</Jab>
-      <Kick>ENTER</Kick>
+      <Jab>U</Jab>
+      <Kick>O</Kick>
     </P2>
   </Controls>
 </Settings>

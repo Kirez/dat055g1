@@ -165,7 +165,7 @@ public class StageController implements GameController {
         if (p2.getHitBox(0).getBoundsInParent().intersects(hurt.getBoundsInParent())) {
           if (!p1.stateStunned.isActive()) {
             p1.stateStunned.enterCycle(CYCLE.ACTIVE);
-            p1.setHP(p1.getHP() - 20);
+            p1.setHP(p1.getHP() - 10);
             System.out.println("Player 1 is hit - " + p1.getHP() + "HP");
             if (p2.isFaceRight()) {
               p1.accelerate(new Point2D(15, -3).multiply(kbMultiplier2));
@@ -192,6 +192,8 @@ public class StageController implements GameController {
         }
       }
     }
+
+
   }
 
   @Override
