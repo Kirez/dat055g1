@@ -13,7 +13,7 @@ import java.net.Socket;
 import java.util.HashSet;
 
 /**
- * TODO: Add description
+ * A game server
  *
  * @author Alexander Andersson (alexaan)
  * @author Linus Berglund (belinus)
@@ -37,6 +37,12 @@ public class GameServer {
   private Thread gameThread;
   private HashSet<Thread> clientThreads;
 
+  /**
+   * Creates an instance of GameServer
+   *
+   * @param port target port to host the server on
+   * @throws IOException thrown if anything goes wrong with the sockets TODO: handle errors
+   */
   public GameServer(int port) throws IOException {
     serverSocket = new ServerSocket(port);
 
@@ -56,11 +62,22 @@ public class GameServer {
     gameThread = new Thread(gameEngine);
   }
 
+  /**
+   * Entry point for running a server.
+   *
+   * @param args totally ignored
+   * @throws IOException on any exception
+   */
   public static void main(String[] args) throws IOException {
     GameServer server = new GameServer(8022);
     server.start();
   }
 
+  /**
+   * Sends a game-state synchronization packet to each player.
+   *
+   * @throws IOException on any exception
+   */
   void syncClients() throws IOException {
     OutputStream outputStream = client1.getOutputStream();
     outputStream.write(NetworkPacket.sync(player1, 1));
@@ -70,6 +87,9 @@ public class GameServer {
     outputStream.write(NetworkPacket.sync(player2, 2));
   }
 
+  /**
+   * Starting point for the server awaits two connections before starting the game engine
+   */
   public void start() {
     while (client1 == null || client2 == null) {
       try {
@@ -103,18 +123,31 @@ public class GameServer {
     }
   }
 
+  /**
+   * Inner class for running socket threads for client communication
+   */
   private class ClientListener implements Runnable {
 
-
-    InputStream inputStream;
-    PlayerController playerController;
+    private InputStream inputStream;
+    private PlayerController playerController;
     private Socket socket;
 
+    /**
+     * Creates an instance
+     *
+     * @param socket clients socket
+     * @param playerController player controller associated with this client's player
+     */
     public ClientListener(Socket socket, PlayerController playerController) {
       this.socket = socket;
       this.playerController = playerController;
     }
 
+    /**
+     * Reads a single byte from the socket to determine type, this must be the first byte in each
+     * packet.
+     * @return the type of packet
+     */
     public TYPE identifyPacket() throws IOException {
       int maybeType = inputStream.read();
 
@@ -128,6 +161,9 @@ public class GameServer {
       return type;
     }
 
+    /**
+     * Entry point for thread
+     */
     @Override
     public void run() {
       try {
