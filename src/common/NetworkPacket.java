@@ -17,11 +17,12 @@ public class NetworkPacket {
   private TYPE type;
   private byte[] data;
 
-  private NetworkPacket(TYPE type, byte[] data) {
-    this.type = type;
-    this.data = data;
-  }
-
+  /**
+   * Creates byte array for a 'other connect' packet that tells a client that another has connected
+   * (unimplemented).
+   * @param name the name of player that connected
+   * @return packet as byte array
+   */
   public static byte[] otherConnect(String name) {
     byte data[] = new byte[2 + name.length()];
     data[0] = (byte) TYPE.S_OTHER_CONNECT.ordinal();
@@ -36,6 +37,11 @@ public class NetworkPacket {
     return data;
   }
 
+  /**
+   * Creates a byte array for a 'other disconnect' packet that tells a client that another has
+   * disconnected. (unimplemented)
+   * @return packet as byte array
+   */
   public static byte[] otherDisconnect() {
     byte data[] = new byte[1];
     data[0] = (byte) TYPE.S_OTHER_DISCONNECT.ordinal();
@@ -63,6 +69,11 @@ public class NetworkPacket {
     return data;
   }
 
+  /**
+   * Creates an 'action start' packet that tells the server that a player has started an action.
+   * @param action the action that has started
+   * @return packet as byte array
+   */
   public static byte[] actionStart(GamePlayer.ACTION action) {
     byte data[] = new byte[2];
     data[0] = (byte) TYPE.C_ACTION_START.ordinal();
@@ -70,6 +81,11 @@ public class NetworkPacket {
     return data;
   }
 
+  /**
+   * Creates an 'action start' end that tells the server that a player has ended an action.
+   * @param action the action that has ended
+   * @return packet as byte array
+   */
   public static byte[] actionEnd(GamePlayer.ACTION action) {
     byte data[] = new byte[2];
     data[0] = (byte) TYPE.C_ACTION_END.ordinal();
@@ -77,6 +93,9 @@ public class NetworkPacket {
     return data;
   }
 
+  /**
+   * Packet type
+   */
   public enum TYPE {
     S_OTHER_CONNECT,
     S_OTHER_DISCONNECT,

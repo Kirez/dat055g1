@@ -15,7 +15,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 /**
- * TODO: Add description
+ * Client that updates an internal game state based on packets received from a game server
  *
  * @author Alexander Andersson (alexaan)
  * @author Linus Berglund (belinus)
@@ -33,6 +33,12 @@ public class GameClient implements Runnable {
   private InputStream inputStream;
   private OutputStream outputStream;
 
+  /**
+   * Creates an instance of GameClient.
+   * @param address address of server
+   * @param port port of server
+   * @throws IOException on any exception
+   */
   public GameClient(String address, int port) throws IOException {
     clientSocket = new Socket(address, port);
     inputStream = clientSocket.getInputStream();
@@ -42,20 +48,39 @@ public class GameClient implements Runnable {
     player2 = gameStage.getPlayer2();
   }
 
+  /**
+   * Entry point for a dummy client used for testing.
+   * @param args totally ignored
+   * @throws IOException on any exception
+   */
   public static void main(String[] args) throws IOException {
     GameClient client = new GameClient("localhost", 8022);
 
     client.run();
   }
 
+  /**
+   * Sends a connect packet to server.
+   * @throws IOException on any exception
+   */
   private void onConnect() throws IOException {
     sendPacket(NetworkPacket.otherConnect("DefaultPlayer"));
   }
 
+  /**
+   * Sends a packet to server.
+   * @param packet byte array representing packet
+   * @throws IOException on any Exception
+   */
   private void sendPacket(byte[] packet) throws IOException {
     outputStream.write(packet);
   }
 
+  /**
+   * Handles packets from server.
+   * @return false on io stream error true otherwise
+   * @throws IOException on any exception
+   */
   private boolean receivePacket() throws IOException {
     int maybeType = inputStream.read();
 
@@ -107,6 +132,10 @@ public class GameClient implements Runnable {
     return true;
   }
 
+  /**
+   * Handles key presses and sends actions based on key binds to server.
+   * @param event the event to handle
+   */
   public void onKeyPressed(KeyEvent event) {
     try {
       KeyCode code = event.getCode();
@@ -127,6 +156,10 @@ public class GameClient implements Runnable {
     }
   }
 
+  /**
+   * Handles key releases and sends 'action end' packtes to server.
+   * @param event the event to handle
+   */
   public void onKeyReleased(KeyEvent event) {
     try {
       KeyCode code = event.getCode();
@@ -147,6 +180,9 @@ public class GameClient implements Runnable {
     }
   }
 
+  /**
+   * Entry point for client thread
+   */
   @Override
   public void run() {
     try {
@@ -170,14 +206,26 @@ public class GameClient implements Runnable {
     }
   }
 
+  /**
+   * Gets the game stage
+   * @return the game stage
+   */
   public GameStage getGameStage() {
     return gameStage;
   }
 
+  /**
+   * Gets player 1
+   * @return player 1
+   */
   public GamePlayer getPlayer1() {
     return player1;
   }
 
+  /**
+   * Gets player 1
+   * @return player 1
+   */
   public GamePlayer getPlayer2() {
     return player2;
   }

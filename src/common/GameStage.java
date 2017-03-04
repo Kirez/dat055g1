@@ -4,8 +4,7 @@ import client.FileHandler;
 import javafx.geometry.Point2D;
 
 /**
- * The model/state for a stage and all that is in it. Handles only data
- *
+ * Model class for GameStage
  * @author Alexander Andersson (alexaan)
  * @author Linus Berglund (belinus)
  * @author Erik Källberg (kalerik)
@@ -30,7 +29,15 @@ public class GameStage {
 
   private double groundLevelY = 6;
 
-  //  Constructor
+  /**
+   * Creates an instance of GameStage.
+   *
+   * @param p1s player 1 spawn position
+   * @param p2s player 2 spawn position
+   * @param p1 player 1 reference
+   * @param p2 player 2 reference
+   * @param gly ground level y
+   */
   public GameStage(Point2D p1s, Point2D p2s, GamePlayer p1, GamePlayer p2, double gly) {
     player1Spawn = p1s;
     player2Spawn = p2s;
@@ -46,6 +53,9 @@ public class GameStage {
     player2.setPosition(player2Spawn);
   }
 
+  /**
+   * Creates an instance of GameStage.
+   */
   public GameStage() {
     this(DEFAULT_PLAYER_1_SPAWN
         , DEFAULT_PLAYER_2_SPAWN
@@ -54,7 +64,10 @@ public class GameStage {
         , DEFAULT_GROUND_Y);
   }
 
-  //  Resets players position and HP, player is still after reset
+  /**
+   * Resets player position, hit points, velocity and sets on ground to false since player spawns in
+   * air.
+   */
   public void reset() {
     player1.setPosition(player1Spawn);
     player2.setPosition(player2Spawn);
@@ -69,15 +82,26 @@ public class GameStage {
     player2.setOnGround(false);
   }
 
-  //  Getters
+  /**
+   * Gets player 1
+   * @return player 1
+   */
   public GamePlayer getPlayer1() {
     return player1;
   }
 
+  /**
+   * Gets player 2
+   * @return player 2
+   */
   public GamePlayer getPlayer2() {
     return player2;
   }
 
+  /**
+   * Gets y-coordinate of ground
+   * @return
+   */
   public double getGroundLevelY() {
     return groundLevelY;
   }

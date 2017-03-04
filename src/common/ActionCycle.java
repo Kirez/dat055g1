@@ -3,7 +3,7 @@ package common;
 import java.util.HashMap;
 
 /**
- * TODO: Add description
+ * Class that describes the cycles of an action spool up, active, cool down, inactive.
  *
  * @author Alexander Andersson (alexaan)
  * @author Linus Berglund (belinus)
@@ -19,6 +19,13 @@ public class ActionCycle {
   private double time;
   private CYCLE cycle;
 
+  /**
+   * Creates an instance of ActionCycle.
+   *
+   * @param spoolUpTime time spent on spool phase
+   * @param activeTime time spent on active phase
+   * @param coolDownTime time spent on cool down phase
+   */
   public ActionCycle(double spoolUpTime, double activeTime, double coolDownTime) {
     times = new HashMap<>();
     next = new HashMap<>();
@@ -35,6 +42,11 @@ public class ActionCycle {
     cycle = CYCLE.INACTIVE;
   }
 
+  /**
+   * Advances the cycle if time left minus {@param delta} less or equal zero cycle enters next
+   * stage.
+   * @return true if next stage false if not
+   */
   public boolean update(double delta) {
     if (!cycle.equals(CYCLE.INACTIVE)) {
       time -= delta;
@@ -45,27 +57,50 @@ public class ActionCycle {
     return false;
   }
 
+  /**
+   * Enters into a cycle phase
+   * @param cycle phase to enter
+   */
   public void enterCycle(CYCLE cycle) {
     this.cycle = cycle;
     time = times.get(cycle);
   }
 
+  /**
+   * Whether in active phase or not
+   * @return true if active phase else false
+   */
   public boolean isActive() {
     return cycle == CYCLE.ACTIVE;
   }
 
+  /**
+   * Whether in cool down phase or not
+   * @return true if cool down phase else false
+   */
   public boolean isOnCoolDown() {
     return cycle == CYCLE.COOL_DOWN;
   }
 
+  /**
+   * Whether in spool-up phase or not
+   * @return true if spool-up phase else false
+   */
   public boolean isSpoolingUp() {
     return cycle == CYCLE.SPOOL_UP;
   }
 
+  /**
+   * Whether in this cycle is ready for next iteration this would be when inactive
+   * @return true if ready for next phase else false
+   */
   public boolean isReady() {
     return cycle == CYCLE.INACTIVE;
   }
 
+  /**
+   * The cycle phase types
+   */
   public enum CYCLE {
     SPOOL_UP,
     ACTIVE,

@@ -14,5 +14,9 @@ import javafx.scene.canvas.Canvas;
  */
 public interface GameRenderer {
 
+  /**
+   * Renders model to target canvas.
+   * @param canvas the render target
+   */
   void render(Canvas canvas);
 }

@@ -21,17 +21,28 @@ import javafx.scene.input.KeyEvent;
  */
 public class PlayerController implements GameController {
 
+  /**
+   * player reference.
+   */
   public GamePlayer player;
 
   private HashMap<KeyCode, ACTION> keyBinds;
   private HashSet<ACTION> actions; //actions to be performed during update
 
+  /**
+   * Creates an instance of PlayerController.
+   * @param player the player to control
+   */
   public PlayerController(GamePlayer player) {
     this.player = player;
     keyBinds = new HashMap<>();
     actions = new HashSet<>();
   }
 
+  /**
+   * Updates player based on {@param delta} time.
+   * @param delta the time difference between this and the previous tick, used for scaling
+   */
   @Override
   public void update(double delta) {
     if (actions.contains(ACTION.MOVE_LEFT)) {
@@ -67,15 +78,28 @@ public class PlayerController implements GameController {
     player.setPosition(player.getPosition().add(player.getVelocity().multiply(delta)));
   }
 
+  /**
+   * Attaches this controller to an engine.
+   * @param engine the engine to attach this controller to
+   */
   @Override
   public void attach(GameEngine engine) {
     engine.addController(this);
   }
 
+  /**
+   * Binds a key to an action.
+   * @param code the key code to bind
+   * @param action the action to be bound to
+   */
   public void bindKey(KeyCode code, ACTION action) {
     keyBinds.put(code, action);
   }
 
+  /**
+   * Handles key presses based on key binds.
+   * @param event the event that has been fired
+   */
   @Override
   public void onKeyPressed(KeyEvent event) {
     if (keyBinds.get(event.getCode()) == ACTION.HIT && player.statePunching.isReady()
@@ -98,7 +122,10 @@ public class PlayerController implements GameController {
     }
   }
 
-
+  /**
+   * Handles key releases based on key binds.
+   * @param event the event that has been fired
+   */
   @Override
   public void onKeyReleased(KeyEvent event) {
     if (keyBinds.containsKey(event.getCode())) {
@@ -106,6 +133,10 @@ public class PlayerController implements GameController {
     }
   }
 
+  /**
+   * Starts a player action.
+   * @param action action to be started
+   */
   public void actionStart(ACTION action) {
     if (!actions.contains(ACTION.HIT) && action == ACTION.HIT) {
       if (player.statePunching.isReady() && !player.stateStunned.isActive()) {
@@ -116,6 +147,10 @@ public class PlayerController implements GameController {
     actions.add(action);
   }
 
+  /**
+   * Ends a player action.
+   * @param action action to end
+   */
   public void actionEnd(ACTION action) {
     actions.remove(action);
   }
