@@ -28,7 +28,12 @@ public class StageController implements GameController {
   private PlayerController player1Controller;
   private PlayerController player2Controller;
 
-
+  /**
+   * Creates a new instance of <tt>StageController</tt>, gets the controls and creates instances
+   * of PlayerController.
+   *
+   * @param stage
+   */
   public StageController(GameStage stage) {
     this.stage = stage;
     player1Controller = new PlayerController(stage.getPlayer1());
@@ -36,6 +41,11 @@ public class StageController implements GameController {
     getControls();
   }
 
+  /**
+   * Updates the current events in the game.
+   *
+   * @param delta the time difference between this and the previous tick, used for scaling
+   */
   @Override
   public void update(double delta) {
 
@@ -125,7 +135,7 @@ public class StageController implements GameController {
       p2.setPosition(new Point2D(p2.getPosition().getX(), 0));
       p2.setVelocity(new Point2D(p2.getVelocity().getX(), p2.getVelocity().getY() * -1));
     }
-
+    //Checks HitBox/HurtBox collisions
     if (player1Controller.player.statePunching.isActive()) {
       for (Rectangle hurt : p2.getHurtBoxes()) {
         if (p1.getHitBox(0).getBoundsInParent().intersects(hurt.getBoundsInParent())) {
@@ -141,8 +151,8 @@ public class StageController implements GameController {
           }
         }
       }
-
     }
+    //Checks HitBox/HurtBox collisions
     if (player1Controller.player.stateKicking.isActive()) {
       for (Rectangle hurt : p2.getHurtBoxes()) {
         if (p1.getHitBox(1).getBoundsInParent().intersects(hurt.getBoundsInParent())) {
@@ -159,7 +169,7 @@ public class StageController implements GameController {
         }
       }
     }
-
+    //Checks HitBox/HurtBox collisions
     if (player2Controller.player.statePunching.isActive()) {
       for (Rectangle hurt : p1.getHurtBoxes()) {
         if (p2.getHitBox(0).getBoundsInParent().intersects(hurt.getBoundsInParent())) {
@@ -176,6 +186,7 @@ public class StageController implements GameController {
         }
       }
     }
+    //Checks HitBox/HurtBox collisions
     if (player2Controller.player.stateKicking.isActive()) {
       for (Rectangle hurt : p1.getHurtBoxes()) {
         if (p2.getHitBox(1).getBoundsInParent().intersects(hurt.getBoundsInParent())) {
@@ -192,10 +203,14 @@ public class StageController implements GameController {
         }
       }
     }
-
-
   }
 
+  /**
+   * Attaches The <tt>StageController</tt> and the two <tt>PlayerControllers</tt> to the
+   * <tt>GameEngine</tt>.
+   *
+   * @param engine the engine to attach this controller to
+   */
   @Override
   public void attach(GameEngine engine) {
     engine.addController(this); // Ping-pong pow!
@@ -204,6 +219,11 @@ public class StageController implements GameController {
     player2Controller.attach(engine);
   }
 
+  /**
+   * Keeps track of the pressed keys.
+   *
+   * @param event the event that has been fired
+   */
   @Override
   public void onKeyPressed(KeyEvent event) {
     player1Controller.onKeyPressed(event);
@@ -211,6 +231,10 @@ public class StageController implements GameController {
     //gameClient.setKeyPressed(event); //Add key to client sendlist
   }
 
+  /**
+   * Keeps track of the released keys.
+   * @param event the event that has been fired
+   */
   @Override
   public void onKeyReleased(KeyEvent event) {
     player1Controller.onKeyReleased(event);
@@ -218,6 +242,9 @@ public class StageController implements GameController {
     //gameClient.setKeyReleased(event); //Remove key from client sendlist
   }
 
+  /**
+   * Gets the current controls from the Settings.
+   */
   public void getControls() {
     ArrayList<String> impControls = FileHandler.importControls();
     for (int i = 0; i < 12; i++) {

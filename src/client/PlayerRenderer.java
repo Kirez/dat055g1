@@ -23,12 +23,20 @@ public class PlayerRenderer implements GameRenderer {
 
   private GamePlayer player;
 
-  //  Constructor
+  /**
+   * Crates an instance of the <tt>PlayerRenderer</tt>
+   *
+   * @param player The player being rendered
+   */
   public PlayerRenderer(GamePlayer player) {
     this.player = player;
   }
 
-  //  Renders the player (which is now a 16x16 circle(oval) inside a rectangle) on the canvas
+  /**
+   * Renders the player.
+   *
+   * @param canvas javafx canvas to render to
+   */
   @Override
   public void render(Canvas canvas) {
     GraphicsContext gc = canvas.getGraphicsContext2D();
