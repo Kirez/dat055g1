@@ -42,6 +42,7 @@ public class SettingsScreen implements Screen {
   static public Button kickField2;
   static public Button selButton;
   static public Button backButton;
+  private Button defaultsButton;
   private GridPane layout;
   private Stage stage;
   private Scene scene;
@@ -107,7 +108,9 @@ public class SettingsScreen implements Screen {
     backButton = new Button("Main Menu");
     backButton.setOnAction(this::backToMenu);
     backButton.setPrefSize(200, 75);
-    //nativeButton = new Button ("Native");
+    defaultsButton = new Button("Default Controls");
+    defaultsButton.setPrefSize(200, 75);
+    defaultsButton.setOnAction(this::setDefaultControls);
 
     layout = new GridPane();
     layout.setPadding(new Insets(50, 50, 50, 50));
@@ -139,7 +142,9 @@ public class SettingsScreen implements Screen {
 
     //layout.addColumn(4, screenresLabel);
 
-    layout.addColumn(4, backButton);
+    layout.addColumn(4);
+    layout.add(backButton, 4, 1);
+    layout.add(defaultsButton, 4, 2);
 
     // Enables exiting to main menu
     scene.setOnKeyPressed(this::onKeyPressed);
@@ -202,5 +207,20 @@ public class SettingsScreen implements Screen {
     al.add(kickField2.getText());
     FileHandler.setControls(al);
     owner.setActiveScreen(owner.mainMenuScreen);
+  }
+
+  void setDefaultControls(ActionEvent e) {
+    jumpField1.setText("W");
+    leftField1.setText("A");
+    downField1.setText("S");
+    rightField1.setText("D");
+    jabField1.setText("Q");
+    kickField1.setText("E");
+    jumpField2.setText("I");
+    leftField2.setText("J");
+    downField2.setText("K");
+    rightField2.setText("L");
+    jabField2.setText("U");
+    kickField2.setText("O");
   }
 }

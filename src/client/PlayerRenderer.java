@@ -136,7 +136,7 @@ public class PlayerRenderer implements GameRenderer {
     if (player.stateKicking.isOnCoolDown()) {
       if (player.isFaceRight()) {
         gc.setFill(GameDefaults.BACKGROUND_COLOR);
-        gc.fillRect(player.getPosition().getX() + 0.52, player.getPosition().getY() + 1.5, 0.2,
+        gc.fillRect(player.getPosition().getX() + 0.52, player.getPosition().getY() + 1.5, 0.25,
             0.505);
         gc.setFill(player.getColor());
         gc.fillRect(player.getPosition().getX() + 0.52, player.getPosition().getY() + 1.5,

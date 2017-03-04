@@ -1,7 +1,6 @@
 package client.screen;
 
 import client.GameApplication;
-import client.HealthRenderer;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
@@ -34,6 +33,7 @@ public class EndScreen implements Screen {
   private Label winner;
   private GameApplication owner;
   private String winningPlayer;
+
   public EndScreen(GameApplication gameApplication) {
     owner = gameApplication;
     menuButton = new Button("Main Menu");
@@ -67,11 +67,13 @@ public class EndScreen implements Screen {
   void onMenuButton(ActionEvent event) {
     owner.setActiveScreen(owner.mainMenuScreen);
   }
+
   public void onKeyPressed(KeyEvent event) {
     if (event.getCode().equals(KeyCode.ESCAPE)) {
       owner.setActiveScreen(owner.mainMenuScreen);
     }
   }
+
   void onExitButton(ActionEvent event) {
     Platform.exit();
   }
