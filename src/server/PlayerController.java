@@ -40,7 +40,7 @@ public class PlayerController implements GameController {
   }
 
   /**
-   * Updates player based on {@param delta} time.
+   * Updates player based on {@code delta} time.
    * @param delta the time difference between this and the previous tick, used for scaling
    */
   @Override

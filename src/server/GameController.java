@@ -22,7 +22,7 @@ public interface GameController {
   void update(double delta);
 
   /**
-   * Adds this controller to {@param engine}
+   * Adds this controller to {@code engine}
    * @param engine the engine to attach this controller to
    */
   void attach(GameEngine engine);
