@@ -21,32 +21,32 @@ import javafx.stage.WindowEvent;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-28
+ * @version 2017-03-04
  */
 public class GameApplication extends Application {
 
   /**
-   * Instance of <tt>PlayScreen</tt>.
+   * Instance of {@code PlayScreen}.
    */
   public PlayScreen playScreen;
   /**
-   * Instance of <tt>MainMenuScreen</tt>.
+   * Instance of {@code MainMenuScreen}.
    */
   public MainMenuScreen mainMenuScreen;
   /**
-   * Instance of <tt>JoinScreen</tt>.
+   * Instance of {@code JoinScreen}.
    */
   public JoinScreen joinScreen;
   /**
-   * Instance of <tt>NetworkPlayScreen</tt>.
+   * Instance of {@code NetworkPlayScreen}.
    */
   public NetworkPlayScreen networkPlayScreen;
   /**
-   * Instance of <tt>EndScreen</tt>.
+   * Instance of {@code EndScreen}.
    */
   public EndScreen endScreen;
   /**
-   * Instance of <tt>SettingsScreen</tt>.
+   * Instance of {@code SettingsScreen}.
    */
   public SettingsScreen settingsScreen;
 
@@ -55,7 +55,7 @@ public class GameApplication extends Application {
   private Stage stage;
 
   /**
-   * The main function for the client in <tt>GameApplication</tt>. Launches the game.
+   * The main function for the client in {@code GameApplication}. Launches the game.
    *
    * @param args Launch parameters
    */
@@ -64,7 +64,7 @@ public class GameApplication extends Application {
   }
 
   /**
-   * Create a new instance of <tt>Stage</tt> which contains a new instance of each screen.
+   * Create a new instance of {@code Stage} which contains a new instance of each screen.
    *
    * @param primaryStage stage to start
    * @throws Exception general exception
@@ -97,7 +97,7 @@ public class GameApplication extends Application {
   }
 
   /**
-   * Switches to <tt>screen</tt>, if possible.
+   * Switches to {@code screen}, if possible.
    *
    * @param screen screen to switch to
    */
@@ -110,7 +110,7 @@ public class GameApplication extends Application {
   }
 
   /**
-   * Closes the current screen and the <tt>GameApplication</tt>.
+   * Closes the current screen and the {@code GameApplication}.
    *
    * @param windowEvent event invoking this function
    */

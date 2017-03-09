@@ -23,7 +23,7 @@ import server.GameServer;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-28
+ * @version 2017-03-04
  */
 public class CreateScreen implements Screen {
 
@@ -37,7 +37,7 @@ public class CreateScreen implements Screen {
   private GameApplication owner;
 
   /**
-   * Creates an instance of the <tt>CreateScreen</tt>.
+   * Creates an instance of the {@code CreateScreen}.
    *
    * @param gameApplication
    */

@@ -28,7 +28,7 @@ import server.StageController;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-28
+ * @version 2017-03-04
  */
 public class PlayScreen extends AnimationTimer implements Screen {
 
@@ -77,7 +77,7 @@ public class PlayScreen extends AnimationTimer implements Screen {
   private Object l;
 
   /**
-   * Creates an instance of the <tt>PlayScreen</tt>.
+   * Creates an instance of the {@code PlayScreen}.
    *
    * @param gameApplication
    */
@@ -99,7 +99,7 @@ public class PlayScreen extends AnimationTimer implements Screen {
   }
 
   /**
-   * Handles the rendering of the <tt>PlayScreen</tt>.
+   * Handles the rendering of the {@code PlayScreen}.
    *
    * @param l
    */
@@ -116,7 +116,7 @@ public class PlayScreen extends AnimationTimer implements Screen {
   }
 
   /**
-   * Enters the <tt>PlayScreen</tt>.
+   * Enters the {@code PlayScreen}.
    *
    * @param stage the stage
    */
@@ -216,7 +216,7 @@ public class PlayScreen extends AnimationTimer implements Screen {
   }
 
   /**
-   *Exits the game and sets the screen to the <tt>EndScreen</tt>.
+   *Exits the game and sets the screen to the {@code EndScreen}.
    */
   public void onGameEnd() {
     this.exit();

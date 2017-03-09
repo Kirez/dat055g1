@@ -10,7 +10,7 @@ import java.util.HashMap;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-28
+ * @version 2017-03-04
  */
 public class ActionCycle {
 
@@ -43,7 +43,7 @@ public class ActionCycle {
   }
 
   /**
-   * Advances the cycle if time left minus {@param delta} less or equal zero cycle enters next
+   * Advances the cycle if time left minus {@code delta} less or equal zero cycle enters next
    * stage.
    * @return true if next stage false if not
    */

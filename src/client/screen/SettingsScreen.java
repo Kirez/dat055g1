@@ -23,7 +23,7 @@ import javafx.stage.Stage;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-28
+ * @version 2017-03-04
  */
 public class SettingsScreen implements Screen {
 
@@ -91,7 +91,7 @@ public class SettingsScreen implements Screen {
   private GameApplication owner;
 
   /**
-   * Creates an instance of the <tt>SettingsScreen</tt>
+   * Creates an instance of the {@code SettingsScreen}
    *
    * @param gameApplication a parameter that is set to the owner
    */
@@ -252,7 +252,7 @@ public class SettingsScreen implements Screen {
 
   /**
    * Creates an ArrayList of the Button texts and calls the setControls function in
-   * <tt>FileHandler</tt>.Then it returns to the main menu.
+   * {@code FileHandler}.Then it returns to the main menu.
    *
    * @param e ActionEvent from clicking a button
    */

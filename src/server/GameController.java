@@ -10,7 +10,7 @@ import javafx.scene.input.KeyEvent;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-28
+ * @version 2017-03-04
  */
 public interface GameController {
 
@@ -22,7 +22,7 @@ public interface GameController {
   void update(double delta);
 
   /**
-   * Adds this controller to {@param engine}
+   * Adds this controller to {@code engine}
    * @param engine the engine to attach this controller to
    */
   void attach(GameEngine engine);

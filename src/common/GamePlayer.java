@@ -13,7 +13,7 @@ import javafx.scene.shape.Rectangle;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-28
+ * @version 2017-03-04
  */
 public class GamePlayer {
 
@@ -160,7 +160,7 @@ public class GamePlayer {
   }
 
   /**
-   * Sets either stateStunned, stateKicking and statePunching based on contents of {@param type}.
+   * Sets either stateStunned, stateKicking and statePunching based on contents of {@code type}.
    * @param spool
    * @param duration
    * @param cooldown
@@ -211,7 +211,7 @@ public class GamePlayer {
   }
 
   /**
-   * Adds {@param delta} to player velocity, 'accelerating' the player by delta.
+   * Adds {@code delta} to player velocity, 'accelerating' the player by delta.
    * @param delta the delta-v to accelerate player by
    */
   public void accelerate(Point2D delta) {

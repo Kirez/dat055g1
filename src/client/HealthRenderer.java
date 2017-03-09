@@ -16,7 +16,7 @@ import javafx.scene.shape.Rectangle;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-28
+ * @version 2017-03-04
  */
 public class HealthRenderer implements GameRenderer {
 
@@ -25,7 +25,7 @@ public class HealthRenderer implements GameRenderer {
   private boolean leftBar;
 
   /**
-   * Creates an instance of <tt>HealthRenderer</tt>.
+   * Creates an instance of {@code HealthRenderer}.
    *
    * @param player the player corresponding to the Healthbar
    * @param leftBar boolean for wether the bar is to the left

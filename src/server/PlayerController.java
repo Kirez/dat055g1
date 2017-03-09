@@ -17,7 +17,7 @@ import javafx.scene.input.KeyEvent;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-28
+ * @version 2017-03-04
  */
 public class PlayerController implements GameController {
 
@@ -40,7 +40,7 @@ public class PlayerController implements GameController {
   }
 
   /**
-   * Updates player based on {@param delta} time.
+   * Updates player based on {@code delta} time.
    * @param delta the time difference between this and the previous tick, used for scaling
    */
   @Override

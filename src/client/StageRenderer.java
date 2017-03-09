@@ -13,14 +13,14 @@ import javafx.scene.canvas.GraphicsContext;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-28
+ * @version 2017-03-04
  */
 public class StageRenderer implements GameRenderer {
 
   private GameStage gameStage;
 
   /**
-   * Creates an instance of the <tt>StageRenderer</tt>.
+   * Creates an instance of the {@code StageRenderer}.
    * @param gameStage
    */
   public StageRenderer(GameStage gameStage) {

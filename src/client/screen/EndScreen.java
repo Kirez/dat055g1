@@ -23,7 +23,7 @@ import javafx.stage.Stage;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-02-28
+ * @version 2017-03-04
  */
 public class EndScreen implements Screen {
 
@@ -36,7 +36,7 @@ public class EndScreen implements Screen {
   private String winningPlayer;
 
   /**
-   * Creates an instance of the <tt>Endscreen</tt>.
+   * Creates an instance of the {@code Endscreen}.
    *
    * @param gameApplication takes the Game Application as a parameter to use as owner
    */
