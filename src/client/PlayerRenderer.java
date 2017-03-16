@@ -17,7 +17,7 @@ import javafx.scene.shape.Rectangle;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-03-04
+ * @version 2017-03-16
  */
 public class PlayerRenderer implements GameRenderer {
 
@@ -50,15 +50,19 @@ public class PlayerRenderer implements GameRenderer {
 
     gc.setFill(player.getColor());
 
-    // TODO: Do case analysis BEFORE invoking functions
+    this.renderPlayer(gc);
+
+    gc.setLineWidth(gc.getLineWidth() * scaleX);
+    gc.restore();
+  }
+
+  private void renderPlayer(GraphicsContext gc) {
+    // TODO: Maybe do case analysis before invoking functions?
     renderStunned(gc);
     renderHurtBoxes(gc);
     renderSpoolUp(gc);
     renderHitBoxes(gc);
     renderCoolDown(gc);
-
-    gc.setLineWidth(gc.getLineWidth() * scaleX);
-    gc.restore();
   }
 
   private void renderStunned(GraphicsContext gc) {
@@ -114,7 +118,6 @@ public class PlayerRenderer implements GameRenderer {
             player.getPosition().getY() + 1.5,
             1.5 / 2,
             0.2);
-
       } else {
         gc.setFill(GameDefaults.BACKGROUND_COLOR);
         gc.fillRect(
@@ -257,4 +260,3 @@ public class PlayerRenderer implements GameRenderer {
     }
   }
 }
-
