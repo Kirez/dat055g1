@@ -100,7 +100,7 @@ public class GameStage {
 
   /**
    * Gets y-coordinate of ground
-   * @return
+   * @return the y-coordinate of the ground
    */
   public double getGroundLevelY() {
     return groundLevelY;

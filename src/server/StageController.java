@@ -32,7 +32,7 @@ public class StageController implements GameController {
    * Creates a new instance of {@code StageController}, gets the controls and creates instances
    * of PlayerController.
    *
-   * @param stage
+   * @param stage the stage of the game
    */
   public StageController(GameStage stage) {
     this.stage = stage;

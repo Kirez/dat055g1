@@ -99,11 +99,7 @@ public class SettingsScreen implements Screen {
     owner = gameApplication;
   }
 
-  /**
-   * Enters the screen and creates the layout of the screen.
-   *
-   * @param stage the Stage
-   */
+
   @Override
   public void enter(Stage stage) {
     this.stage = stage;

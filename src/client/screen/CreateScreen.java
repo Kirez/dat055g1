@@ -39,7 +39,7 @@ public class CreateScreen implements Screen {
   /**
    * Creates an instance of the {@code CreateScreen}.
    *
-   * @param gameApplication
+   * @param gameApplication the Application is used to change between screens
    */
   public CreateScreen(GameApplication gameApplication) {
     owner = gameApplication;
@@ -48,7 +48,7 @@ public class CreateScreen implements Screen {
   /**
    * Enters the screen and creates the content of it.
    *
-   * @param stage
+   * @param stage the stage of the screen
    */
   @Override
   public void enter(Stage stage) {
@@ -103,7 +103,7 @@ public class CreateScreen implements Screen {
   /**
    * Keeps track of key presses. Returns to Main menu when ESCAPE is pressed.
    *
-   * '@param event
+   * @param event a KeyEvent
    */
   public void onKeyPressed(KeyEvent event) {
     if (event.getCode().equals(KeyCode.ESCAPE)) {
@@ -114,7 +114,7 @@ public class CreateScreen implements Screen {
   /**
    * Keeps track of Key releases.
    *
-   * @param event
+   * @param event a KeyEvent
    */
   public void onKeyReleased(KeyEvent event) {
 

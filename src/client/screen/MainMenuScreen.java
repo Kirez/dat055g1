@@ -36,7 +36,7 @@ public class MainMenuScreen implements Screen {
   /**
    * Creates an instance of the {@code MainMenuScreen}.
    *
-   * @param gameApplication
+   * @param gameApplication is used to change between screens
    */
 
   public MainMenuScreen(GameApplication gameApplication) {
@@ -61,11 +61,6 @@ public class MainMenuScreen implements Screen {
     layout.setAlignment(Pos.CENTER);
   }
 
-  /**
-   * Enters the Main Menu Screen.
-   *
-   * @param stage the Stage
-   */
   @Override
   public void enter(Stage stage) {
     Group root = new Group();

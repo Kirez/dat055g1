@@ -55,11 +55,6 @@ public class EndScreen implements Screen {
     layout.setAlignment(Pos.CENTER);
   }
 
-  /**
-   * Enters the active screen.
-   *
-   * @param stage is the current stage
-   */
   @Override
   public void enter(Stage stage) {
     Group root = new Group();

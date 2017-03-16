@@ -75,7 +75,7 @@ public class GamePlayer {
 
   /**
    * Creates instance of {@code GamePlayer} with everything as default except position.
-   * @param position
+   * @param position the position of the player
    */
   public GamePlayer(Point2D position) {
     this(position, DEFAULT_MAX_HP);
@@ -161,10 +161,10 @@ public class GamePlayer {
 
   /**
    * Sets either stateStunned, stateKicking and statePunching based on contents of {@code type}.
-   * @param spool
-   * @param duration
-   * @param cooldown
-   * @param type
+   * @param spool the duration of the attack's spool up time
+   * @param duration the duration of the attack hitbox
+   * @param cooldown the duration of the attack's cooldown
+   * @param type the type of attack
    */
   public void setCycles(double spool, double duration, double cooldown, String type) {
     stateStunned = new ActionCycle(0, 0.5, 0);
@@ -236,7 +236,7 @@ public class GamePlayer {
 
   /**
    * Gets an ArrayList of globally positioned Rectangles representing the player's hurtboxes.
-   * @return
+   * @return the ArrayList of the hurtboxes of type Rectangle
    */
   public ArrayList<Rectangle> getHurtBoxes() {
     ArrayList<Rectangle> rectangles = new ArrayList<>();

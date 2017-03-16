@@ -56,7 +56,6 @@ public class PlayScreen extends AnimationTimer implements Screen {
     @Override
     public void changed(ObservableValue observableValue, Object oldValue,
         Object newValue) {
-      //   System.out.println(Integer.parseInt(newValue.toString()));
       if (player1HealthBar.getHealth() < player2HealthBar.getHealth()) {
         player1wins = false;
       } else {
@@ -79,7 +78,7 @@ public class PlayScreen extends AnimationTimer implements Screen {
   /**
    * Creates an instance of the {@code PlayScreen}.
    *
-   * @param gameApplication
+   * @param gameApplication the application is used to change screens
    */
   public PlayScreen(GameApplication gameApplication) {
     gameOver = false;
@@ -101,7 +100,7 @@ public class PlayScreen extends AnimationTimer implements Screen {
   /**
    * Handles the rendering of the {@code PlayScreen}.
    *
-   * @param l
+   * @param l the current the time given in nanoseconds
    */
   @Override
   public void handle(long l) {
@@ -115,11 +114,6 @@ public class PlayScreen extends AnimationTimer implements Screen {
     player2Renderer.render(canvas);
   }
 
-  /**
-   * Enters the {@code PlayScreen}.
-   *
-   * @param stage the stage
-   */
   @Override
   public void enter(Stage stage) {
     this.stage = stage;

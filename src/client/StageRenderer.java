@@ -21,14 +21,14 @@ public class StageRenderer implements GameRenderer {
 
   /**
    * Creates an instance of the {@code StageRenderer}.
-   * @param gameStage
+   * @param gameStage the stage is taken as a parameter as it contains information about the groundlevel
    */
   public StageRenderer(GameStage gameStage) {
     this.gameStage = gameStage;
   }
 
   /**
-   * Renders the Stage. GameStage is used to get the GroundLevel.
+   * Renders the Stage.
    */
   @Override
   public void render(Canvas canvas) {

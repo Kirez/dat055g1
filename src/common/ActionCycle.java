@@ -45,6 +45,7 @@ public class ActionCycle {
   /**
    * Advances the cycle if time left minus {@code delta} less or equal zero cycle enters next
    * stage.
+   * @param delta the difference in time between the update ticks
    * @return true if next stage false if not
    */
   public boolean update(double delta) {

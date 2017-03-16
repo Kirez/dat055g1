@@ -244,6 +244,7 @@ public class FileHandler {
 
   /**
    *  Reads the controls specified in the Settings.xml file and returns an ArrayList with the controls.
+   *  @return controls The imported controls in an ArrayList
    */
   public static ArrayList<String> importControls() {
     ArrayList controls = new ArrayList<String>();

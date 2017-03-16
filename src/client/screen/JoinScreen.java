@@ -41,17 +41,13 @@ public class JoinScreen implements Screen {
   /**
    * Creates an instance of the {@code JoinScreen}.
    *
-   * @param gameApplication
+   * @param gameApplication used to change between screens
    */
   public JoinScreen(GameApplication gameApplication) {
     owner = gameApplication;
   }
 
-  /**
-   * Enters the screen and creates the content of it.
-   *
-   * @param stage
-   */
+
   @Override
   public void enter(Stage stage) {
     this.stage = stage;
@@ -125,7 +121,7 @@ public class JoinScreen implements Screen {
   /**
    * Keeps track of Key Releases.
    *
-   * @param event
+   * @param event a KeyEvent
    */
   public void onKeyReleased(KeyEvent event) {
 

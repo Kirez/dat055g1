@@ -52,7 +52,7 @@ public class NetworkPlayScreen extends AnimationTimer implements Screen {
   /**
    * Renders the game.
    *
-   * @param l
+   * @param l the current time in nanoseconds
    */
   @Override
   public void handle(long l) {
@@ -69,7 +69,6 @@ public class NetworkPlayScreen extends AnimationTimer implements Screen {
   /**
    * Initializes the screen by creating instances of the renderers etc.
    *
-   * @param stage
    */
   @Override
   public void enter(Stage stage) {
@@ -121,7 +120,7 @@ public class NetworkPlayScreen extends AnimationTimer implements Screen {
   /**
    * Sets the Client.
    *
-   * @param client
+   * @param client the client to set
    */
   public void setClient(GameClient client) {
     this.client = client;
