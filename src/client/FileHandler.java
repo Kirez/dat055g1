@@ -243,8 +243,10 @@ public class FileHandler {
   }
 
   /**
-   *  Reads the controls specified in the Settings.xml file and returns an ArrayList with the controls.
-   *  @return controls The imported controls in an ArrayList
+   * Reads the controls specified in the Settings.xml file and returns an ArrayList with the
+   * controls.
+   *
+   * @return controls The imported controls in an ArrayList
    */
   public static ArrayList<String> importControls() {
     ArrayList controls = new ArrayList<String>();
@@ -264,6 +266,7 @@ public class FileHandler {
         boolean player1 = false;
         boolean player2 = false;
         String temp;
+
         /**
          * Sets a specific boolean to true when a certain element starts.
          *
@@ -300,6 +303,7 @@ public class FileHandler {
             cKick = true;
           }
         }
+
         /**
          * Sets a specific boolean to false and adds the fetched control to the ArrayList.
          *
@@ -340,6 +344,7 @@ public class FileHandler {
             controls.add(temp);
           }
         }
+
         /**
          * Sets the temp String when the specific elements are set to true.
          *
@@ -392,6 +397,7 @@ public class FileHandler {
         String tagName1 = "";
         String tagName2 = "";
         String temp;
+
         /**
          * Sets one of strings to correspond the current element. The first String is only set when it parses in a player element.
          *
@@ -410,6 +416,7 @@ public class FileHandler {
           }
           super.startElement(uri, localName, qName, attributes);
         }
+
         /**
          * Sets the current element string name to nothing.
          *
@@ -427,6 +434,7 @@ public class FileHandler {
           }
           super.endElement(uri, localName, qName);
         }
+
         /**
          * When on the corresponding element this function writes the new control
          *

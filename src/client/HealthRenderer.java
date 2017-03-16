@@ -95,6 +95,7 @@ public class HealthRenderer implements GameRenderer {
 
   /**
    * Returns the current health of a player.
+   *
    * @return the health of a player
    */
   public double getHealth() {

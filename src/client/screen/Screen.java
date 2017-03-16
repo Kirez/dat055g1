@@ -16,6 +16,7 @@ public interface Screen {
 
   /**
    * Runs when a screen becomes visible
+   *
    * @param stage the stage to enter
    */
   void enter(Stage stage);

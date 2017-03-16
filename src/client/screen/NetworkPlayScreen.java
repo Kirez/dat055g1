@@ -41,6 +41,7 @@ public class NetworkPlayScreen extends AnimationTimer implements Screen {
 
   /**
    * Creates an instance of NetworkPlayScreen
+   *
    * @param gameApplication the owner application
    */
   public NetworkPlayScreen(GameApplication gameApplication) {
@@ -68,7 +69,6 @@ public class NetworkPlayScreen extends AnimationTimer implements Screen {
 
   /**
    * Initializes the screen by creating instances of the renderers etc.
-   *
    */
   @Override
   public void enter(Stage stage) {

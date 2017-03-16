@@ -31,6 +31,7 @@ public class PlayerController implements GameController {
 
   /**
    * Creates an instance of PlayerController.
+   *
    * @param player the player to control
    */
   public PlayerController(GamePlayer player) {
@@ -41,6 +42,7 @@ public class PlayerController implements GameController {
 
   /**
    * Updates player based on {@code delta} time.
+   *
    * @param delta the time difference between this and the previous tick, used for scaling
    */
   @Override
@@ -80,6 +82,7 @@ public class PlayerController implements GameController {
 
   /**
    * Attaches this controller to an engine.
+   *
    * @param engine the engine to attach this controller to
    */
   @Override
@@ -89,6 +92,7 @@ public class PlayerController implements GameController {
 
   /**
    * Binds a key to an action.
+   *
    * @param code the key code to bind
    * @param action the action to be bound to
    */
@@ -98,6 +102,7 @@ public class PlayerController implements GameController {
 
   /**
    * Handles key presses based on key binds.
+   *
    * @param event the event that has been fired
    */
   @Override
@@ -124,6 +129,7 @@ public class PlayerController implements GameController {
 
   /**
    * Handles key releases based on key binds.
+   *
    * @param event the event that has been fired
    */
   @Override
@@ -135,6 +141,7 @@ public class PlayerController implements GameController {
 
   /**
    * Starts a player action.
+   *
    * @param action action to be started
    */
   public void actionStart(ACTION action) {
@@ -149,6 +156,7 @@ public class PlayerController implements GameController {
 
   /**
    * Ends a player action.
+   *
    * @param action action to end
    */
   public void actionEnd(ACTION action) {

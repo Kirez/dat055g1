@@ -23,18 +23,21 @@ public interface GameController {
 
   /**
    * Adds this controller to {@code engine}
+   *
    * @param engine the engine to attach this controller to
    */
   void attach(GameEngine engine);
 
   /**
    * To be run when a key is pressed (deprecated)
+   *
    * @param event the event that has been fired
    */
   void onKeyPressed(KeyEvent event);
 
   /**
    * To be run when a key is released (deprecated)
+   *
    * @param event the event that has been fired
    */
   void onKeyReleased(KeyEvent event);

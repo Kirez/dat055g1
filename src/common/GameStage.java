@@ -5,6 +5,7 @@ import javafx.geometry.Point2D;
 
 /**
  * Model class for GameStage
+ *
  * @author Alexander Andersson (alexaan)
  * @author Linus Berglund (belinus)
  * @author Erik Källberg (kalerik)
@@ -84,6 +85,7 @@ public class GameStage {
 
   /**
    * Gets player 1
+   *
    * @return player 1
    */
   public GamePlayer getPlayer1() {
@@ -92,6 +94,7 @@ public class GameStage {
 
   /**
    * Gets player 2
+   *
    * @return player 2
    */
   public GamePlayer getPlayer2() {
@@ -100,6 +103,7 @@ public class GameStage {
 
   /**
    * Gets y-coordinate of ground
+   *
    * @return the y-coordinate of the ground
    */
   public double getGroundLevelY() {

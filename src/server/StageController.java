@@ -233,6 +233,7 @@ public class StageController implements GameController {
 
   /**
    * Keeps track of the released keys.
+   *
    * @param event the event that has been fired
    */
   @Override

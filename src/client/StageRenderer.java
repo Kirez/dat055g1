@@ -21,7 +21,9 @@ public class StageRenderer implements GameRenderer {
 
   /**
    * Creates an instance of the {@code StageRenderer}.
-   * @param gameStage the stage is taken as a parameter as it contains information about the groundlevel
+   *
+   * @param gameStage the stage is taken as a parameter as it contains information about the
+   * groundlevel
    */
   public StageRenderer(GameStage gameStage) {
     this.gameStage = gameStage;

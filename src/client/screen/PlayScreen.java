@@ -33,6 +33,7 @@ import server.StageController;
 public class PlayScreen extends AnimationTimer implements Screen {
 
   public static IntegerProperty intProperty1 = new SimpleIntegerProperty(100);
+  private static boolean player1wins;
   GridPane layout = new GridPane();
   private boolean gameOver;
   private Canvas canvas;
@@ -44,7 +45,11 @@ public class PlayScreen extends AnimationTimer implements Screen {
   private Scene scene;
   private Stage stage;
   private GameApplication owner;
-  private static boolean player1wins;
+  private GameRenderer stageRenderer;
+  private GameRenderer player1Renderer;
+  private GameRenderer player2Renderer;
+  private HealthRenderer player1HealthBar;
+  private HealthRenderer player2HealthBar;
   final ChangeListener changeListener = new ChangeListener() {
     /**
      * Keeps track of the health of the players.
@@ -68,11 +73,6 @@ public class PlayScreen extends AnimationTimer implements Screen {
     }
 
   };
-  private GameRenderer stageRenderer;
-  private GameRenderer player1Renderer;
-  private GameRenderer player2Renderer;
-  private HealthRenderer player1HealthBar;
-  private HealthRenderer player2HealthBar;
   private Object l;
 
   /**
@@ -95,6 +95,19 @@ public class PlayScreen extends AnimationTimer implements Screen {
     player1HealthBar = new HealthRenderer(gameStage.getPlayer1(), true);
     player2HealthBar = new HealthRenderer(gameStage.getPlayer2(), false);
     stageController.attach(engine);
+  }
+
+  /**
+   * Returns a String with the winner.
+   *
+   * @return the winning player
+   */
+  public static String getWinner() {
+    if (player1wins == true) {
+      return ("Player 1");
+    } else {
+      return ("Player 2");
+    }
   }
 
   /**
@@ -210,23 +223,10 @@ public class PlayScreen extends AnimationTimer implements Screen {
   }
 
   /**
-   *Exits the game and sets the screen to the {@code EndScreen}.
+   * Exits the game and sets the screen to the {@code EndScreen}.
    */
   public void onGameEnd() {
     this.exit();
     owner.setActiveScreen(owner.endScreen);
-  }
-
-  /**
-   * Returns a String with the winner.
-   *
-   * @return the winning player
-   */
-  public static String getWinner() {
-    if (player1wins == true) {
-      return ("Player 1");
-    } else {
-      return ("Player 2");
-    }
   }
 }

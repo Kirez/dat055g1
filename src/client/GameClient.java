@@ -35,6 +35,7 @@ public class GameClient implements Runnable {
 
   /**
    * Creates an instance of GameClient.
+   *
    * @param address address of server
    * @param port port of server
    * @throws IOException on any exception
@@ -50,6 +51,7 @@ public class GameClient implements Runnable {
 
   /**
    * Entry point for a dummy client used for testing.
+   *
    * @param args totally ignored
    * @throws IOException on any exception
    */
@@ -61,6 +63,7 @@ public class GameClient implements Runnable {
 
   /**
    * Sends a connect packet to server.
+   *
    * @throws IOException on any exception
    */
   private void onConnect() throws IOException {
@@ -69,6 +72,7 @@ public class GameClient implements Runnable {
 
   /**
    * Sends a packet to server.
+   *
    * @param packet byte array representing packet
    * @throws IOException on any Exception
    */
@@ -78,6 +82,7 @@ public class GameClient implements Runnable {
 
   /**
    * Handles packets from server.
+   *
    * @return false on io stream error true otherwise
    * @throws IOException on any exception
    */
@@ -134,6 +139,7 @@ public class GameClient implements Runnable {
 
   /**
    * Handles key presses and sends actions based on key binds to server.
+   *
    * @param event the event to handle
    */
   public void onKeyPressed(KeyEvent event) {
@@ -158,6 +164,7 @@ public class GameClient implements Runnable {
 
   /**
    * Handles key releases and sends 'action end' packtes to server.
+   *
    * @param event the event to handle
    */
   public void onKeyReleased(KeyEvent event) {
@@ -208,6 +215,7 @@ public class GameClient implements Runnable {
 
   /**
    * Gets the game stage
+   *
    * @return the game stage
    */
   public GameStage getGameStage() {
@@ -216,6 +224,7 @@ public class GameClient implements Runnable {
 
   /**
    * Gets player 1
+   *
    * @return player 1
    */
   public GamePlayer getPlayer1() {
@@ -224,6 +233,7 @@ public class GameClient implements Runnable {
 
   /**
    * Gets player 1
+   *
    * @return player 1
    */
   public GamePlayer getPlayer2() {

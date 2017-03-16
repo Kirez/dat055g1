@@ -182,7 +182,6 @@ public class SettingsScreen implements Screen {
     layout.add(jabField2, 3, 5);
     layout.add(kickField2, 3, 6);
 
-
     layout.addColumn(4);
     layout.add(backButton, 4, 1);
     layout.add(defaultsButton, 4, 2);

@@ -45,6 +45,7 @@ public class ActionCycle {
   /**
    * Advances the cycle if time left minus {@code delta} less or equal zero cycle enters next
    * stage.
+   *
    * @param delta the difference in time between the update ticks
    * @return true if next stage false if not
    */
@@ -60,6 +61,7 @@ public class ActionCycle {
 
   /**
    * Enters into a cycle phase
+   *
    * @param cycle phase to enter
    */
   public void enterCycle(CYCLE cycle) {
@@ -69,6 +71,7 @@ public class ActionCycle {
 
   /**
    * Whether in active phase or not
+   *
    * @return true if active phase else false
    */
   public boolean isActive() {
@@ -77,6 +80,7 @@ public class ActionCycle {
 
   /**
    * Whether in cool down phase or not
+   *
    * @return true if cool down phase else false
    */
   public boolean isOnCoolDown() {
@@ -85,6 +89,7 @@ public class ActionCycle {
 
   /**
    * Whether in spool-up phase or not
+   *
    * @return true if spool-up phase else false
    */
   public boolean isSpoolingUp() {
@@ -93,6 +98,7 @@ public class ActionCycle {
 
   /**
    * Whether in this cycle is ready for next iteration this would be when inactive
+   *
    * @return true if ready for next phase else false
    */
   public boolean isReady() {

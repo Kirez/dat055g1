@@ -146,6 +146,7 @@ public class GameServer {
     /**
      * Reads a single byte from the socket to determine type, this must be the first byte in each
      * packet.
+     *
      * @return the type of packet
      */
     public TYPE identifyPacket() throws IOException {

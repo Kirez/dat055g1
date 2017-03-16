@@ -48,6 +48,7 @@ public class GamePlayer {
 
   /**
    * Creates instance of {@code GamePlayer}.
+   *
    * @param position player position
    * @param velocity player velocity
    * @param maxHP player max hp
@@ -66,6 +67,7 @@ public class GamePlayer {
 
   /**
    * Creates instance of {@code GamePlayer} with default hp and default velocity.
+   *
    * @param position player position
    * @param maxHP player max hp
    */
@@ -75,6 +77,7 @@ public class GamePlayer {
 
   /**
    * Creates instance of {@code GamePlayer} with everything as default except position.
+   *
    * @param position the position of the player
    */
   public GamePlayer(Point2D position) {
@@ -90,6 +93,7 @@ public class GamePlayer {
 
   /**
    * gets maximum player hp.
+   *
    * @return maximum player hp
    */
   public int getMaxHP() {
@@ -98,6 +102,7 @@ public class GamePlayer {
 
   /**
    * gets player position.
+   *
    * @return player position
    */
   public Point2D getPosition() {
@@ -106,6 +111,7 @@ public class GamePlayer {
 
   /**
    * sets player position.
+   *
    * @param position the new position
    */
   public void setPosition(Point2D position) {
@@ -115,6 +121,7 @@ public class GamePlayer {
 
   /**
    * Adds a hurtbox.
+   *
    * @param x relative x-coordinate to player position of this hurtbox
    * @param y relative y-coordinate to player position of this hurtbox
    * @param boxwidth the width of the hurtbox
@@ -128,6 +135,7 @@ public class GamePlayer {
 
   /**
    * Adds a hitbox.
+   *
    * @param x relative x-coordinate to player position of this hitbox
    * @param y relative y-coordinate to player position of this hitbox
    * @param boxwidth the width of the hitbox
@@ -141,6 +149,7 @@ public class GamePlayer {
 
   /**
    * Sets player health.
+   *
    * @param health value to set player health to
    */
   public void setHealth(int health) {
@@ -150,6 +159,7 @@ public class GamePlayer {
 
   /**
    * Sets player width and height.
+   *
    * @param h the new height of player
    * @param w the new width of player
    */
@@ -161,6 +171,7 @@ public class GamePlayer {
 
   /**
    * Sets either stateStunned, stateKicking and statePunching based on contents of {@code type}.
+   *
    * @param spool the duration of the attack's spool up time
    * @param duration the duration of the attack hitbox
    * @param cooldown the duration of the attack's cooldown
@@ -180,6 +191,7 @@ public class GamePlayer {
 
   /**
    * Gets player velocity.
+   *
    * @return player velocity
    */
   public Point2D getVelocity() {
@@ -188,6 +200,7 @@ public class GamePlayer {
 
   /**
    * Sets player velocity.
+   *
    * @param velocity value to set velocity to
    */
   public void setVelocity(Point2D velocity) {
@@ -196,6 +209,7 @@ public class GamePlayer {
 
   /**
    * Gets height of player.
+   *
    * @return height of player
    */
   public double getHeight() {
@@ -204,6 +218,7 @@ public class GamePlayer {
 
   /**
    * Gets width of player.
+   *
    * @return width of player
    */
   public double getWidth() {
@@ -212,6 +227,7 @@ public class GamePlayer {
 
   /**
    * Adds {@code delta} to player velocity, 'accelerating' the player by delta.
+   *
    * @param delta the delta-v to accelerate player by
    */
   public void accelerate(Point2D delta) {
@@ -220,6 +236,7 @@ public class GamePlayer {
 
   /**
    * Answers whether player is on ground or not.
+   *
    * @return true if player is on ground and false if not
    */
   public boolean isOnGround() {
@@ -228,6 +245,7 @@ public class GamePlayer {
 
   /**
    * Sets whether player is considered on ground or not.
+   *
    * @param onGround true if on ground else false
    */
   public void setOnGround(boolean onGround) {
@@ -236,6 +254,7 @@ public class GamePlayer {
 
   /**
    * Gets an ArrayList of globally positioned Rectangles representing the player's hurtboxes.
+   *
    * @return the ArrayList of the hurtboxes of type Rectangle
    */
   public ArrayList<Rectangle> getHurtBoxes() {
@@ -260,6 +279,7 @@ public class GamePlayer {
 
   /**
    * Gets a specific hitbox.
+   *
    * @param hitbox index of hitbox to get
    * @return the hitbox
    */
@@ -285,6 +305,7 @@ public class GamePlayer {
 
   /**
    * Gets the color of the player.
+   *
    * @return the color
    */
   public Color getColor() {
@@ -293,6 +314,7 @@ public class GamePlayer {
 
   /**
    * Sets the color of the player.
+   *
    * @param color the color to set
    */
   public void setColor(Color color) {
@@ -301,6 +323,7 @@ public class GamePlayer {
 
   /**
    * Gets player hit points.
+   *
    * @return player hit points
    */
   public int getHP() {
@@ -309,6 +332,7 @@ public class GamePlayer {
 
   /**
    * Sets player hit points.
+   *
    * @param HP value to set hitpoints to
    */
   public void setHP(int HP) {
@@ -317,6 +341,7 @@ public class GamePlayer {
 
   /**
    * Whether or not player is facing right.
+   *
    * @return true if true and false if false
    */
   public boolean isFaceRight() {
@@ -325,6 +350,7 @@ public class GamePlayer {
 
   /**
    * Set whether or not a player is considered to be facing right or left.
+   *
    * @param faceRight true if player is to be considered facing right and false for left.
    */
   public void setFaceRight(boolean faceRight) {
