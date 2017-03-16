@@ -56,6 +56,12 @@ public class PlayerRenderer implements GameRenderer {
     gc.restore();
   }
 
+  /**
+   * A collection of sub-render functions. Helps abstracting the main {@code render() function} by
+   * delegation.
+   *
+   * @param gc The {@code GraphicsContext} that {@code render()} was invoked by
+   */
   private void renderPlayer(GraphicsContext gc) {
     // TODO: Maybe do case analysis before invoking functions?
     renderStunned(gc);
@@ -65,6 +71,11 @@ public class PlayerRenderer implements GameRenderer {
     renderCoolDown(gc);
   }
 
+  /**
+   * Render the current stunned state on player.
+   *
+   * @param gc The {@code GraphicsContext} that {@code render()} was invoked by
+   */
   private void renderStunned(GraphicsContext gc) {
     if (player.stateStunned.isActive()) {
       gc.setFill(GameDefaults.HITSTUN_COLOR);
@@ -73,12 +84,22 @@ public class PlayerRenderer implements GameRenderer {
     }
   }
 
+  /**
+   * Render the hurtboxes for each player, i.e. where players can get hit.
+   *
+   * @param gc The {@code GraphicsContext} that {@code render()} was invoked by
+   */
   private void renderHurtBoxes(GraphicsContext gc) {
     for (Rectangle B : player.getHurtBoxes()) {
       gc.fillRect(B.getX(), B.getY(), B.getWidth(), B.getHeight());
     }
   }
 
+  /**
+   * Render the spool-up for each attack, i.e. the startup frames.
+   *
+   * @param gc The {@code GraphicsContext} that {@code render()} was invoked by
+   */
   private void renderSpoolUp(GraphicsContext gc) {
     // PUNCH
     if (player.statePunching.isSpoolingUp()) {
@@ -135,6 +156,11 @@ public class PlayerRenderer implements GameRenderer {
     }
   }
 
+  /**
+   * Render the hitboxes for each attack, i.e. what players can get hit by.
+   *
+   * @param gc The {@code GraphicsContext} that {@code render()} was invoked by
+   */
   private void renderHitBoxes(GraphicsContext gc) {
     // PUNCH
     if (player.statePunching.isActive()) {
@@ -205,6 +231,11 @@ public class PlayerRenderer implements GameRenderer {
     }
   }
 
+  /**
+   * Render the cooldown for each attack, i.e. the downtime frames between attacks and spool-up.
+   *
+   * @param gc The {@code GraphicsContext} that {@code render()} was invoked by
+   */
   private void renderCoolDown(GraphicsContext gc) {
     // PUNCH
     if (player.statePunching.isOnCoolDown()) {
