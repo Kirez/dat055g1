@@ -17,14 +17,14 @@ import javafx.scene.shape.Rectangle;
  * @author Erik Källberg (kalerik)
  * @author Timmy Truong (timmyt)
  * @author Karl Ängermark (karlang)
- * @version 2017-03-04
+ * @version 2017-03-16
  */
 public class PlayerRenderer implements GameRenderer {
 
   private GamePlayer player;
 
   /**
-   * Crates an instance of the {@code PlayerRenderer}
+   * Crates an instance of {@code PlayerRenderer}.
    *
    * @param player The player being rendered
    */
@@ -33,7 +33,7 @@ public class PlayerRenderer implements GameRenderer {
   }
 
   /**
-   * Renders the player.
+   * Renders the player and its accompanying attributes.
    *
    * @param canvas javafx canvas to render to
    */
@@ -50,117 +50,244 @@ public class PlayerRenderer implements GameRenderer {
 
     gc.setFill(player.getColor());
 
+    this.renderPlayer(gc);
+
+    gc.setLineWidth(gc.getLineWidth() * scaleX);
+    gc.restore();
+  }
+
+  /**
+   * A collection of sub-render functions. Helps abstracting the main {@code render() function} by
+   * delegation.
+   *
+   * @param gc The {@code GraphicsContext} that {@code render()} was invoked by
+   */
+  private void renderPlayer(GraphicsContext gc) {
+    // TODO: Maybe do case analysis before invoking functions?
+    renderStunned(gc);
+    renderHurtBoxes(gc);
+    renderSpoolUp(gc);
+    renderHitBoxes(gc);
+    renderCoolDown(gc);
+  }
+
+  /**
+   * Render the current stunned state on player.
+   *
+   * @param gc The {@code GraphicsContext} that {@code render()} was invoked by
+   */
+  private void renderStunned(GraphicsContext gc) {
     if (player.stateStunned.isActive()) {
       gc.setFill(GameDefaults.HITSTUN_COLOR);
     } else {
       gc.setFill(player.getColor());
     }
+  }
 
+  /**
+   * Render the hurtboxes for each player, i.e. where players can get hit.
+   *
+   * @param gc The {@code GraphicsContext} that {@code render()} was invoked by
+   */
+  private void renderHurtBoxes(GraphicsContext gc) {
     for (Rectangle B : player.getHurtBoxes()) {
       gc.fillRect(B.getX(), B.getY(), B.getWidth(), B.getHeight());
     }
+  }
+
+  /**
+   * Render the spool-up for each attack, i.e. the startup frames.
+   *
+   * @param gc The {@code GraphicsContext} that {@code render()} was invoked by
+   */
+  private void renderSpoolUp(GraphicsContext gc) {
+    // PUNCH
     if (player.statePunching.isSpoolingUp()) {
       gc.setFill(player.getColor());
       if (player.isFaceRight()) {
-        gc.fillRect(player.getPosition().getX() + 0.5, player.getHitBox(0).getY(),
-            ((player.getHitBox(0).getWidth() + player.getHitBox(0).getX()) - player.getPosition()
-                .getX() - 0.505) * 0.33, player.getHitBox(0).getHeight());
-      } else {
-        gc.fillRect(player.getPosition().getX() + (0.5 - player.getHitBox(0).getWidth()) / 2,
+        gc.fillRect(
+            player.getPosition().getX() + 0.5,
             player.getHitBox(0).getY(),
-            ((-player.getHitBox(0).getWidth() - player.getHitBox(0).getX()) + player.getPosition()
-                .getX() + 0.505) * 0.33, player.getHitBox(0).getHeight());
-
-      }
-    }
-    if (player.statePunching.isActive()) {
-      gc.setFill(GameDefaults.HITBOX_COLOR);
-      gc.fillRect(player.getHitBox(0).getX(), player.getHitBox(0).getY(),
-          player.getHitBox(0).getWidth(), player.getHitBox(0).getHeight());
-      gc.setFill(player.getColor());
-      if (player.isFaceRight()) {
-        gc.fillRect(player.getPosition().getX() + 0.5, player.getHitBox(0).getY(),
-            ((player.getHitBox(0).getX()) - player.getPosition().getX() - 0.505),
+            ((player.getHitBox(0).getWidth()
+                + player.getHitBox(0).getX())
+                - player.getPosition().getX()
+                - 0.505) * 0.33,
             player.getHitBox(0).getHeight());
       } else {
-        gc.fillRect(player.getHitBox(0).getX() + player.getHitBox(0).getWidth(),
+        gc.fillRect(
+            player.getPosition().getX() + (0.5 - player.getHitBox(0).getWidth()) / 2,
             player.getHitBox(0).getY(),
-            (-player.getHitBox(0).getWidth() - player.getHitBox(0).getX()) + player.getPosition()
-                .getX() + 0.5, player.getHitBox(0).getHeight());
+            ((-player.getHitBox(0).getWidth()
+                - player.getHitBox(0).getX())
+                + player.getPosition().getX() + 0.505) * 0.33,
+            player.getHitBox(0).getHeight());
       }
     }
-    if (player.statePunching.isOnCoolDown()) {
-      gc.setFill(player.getColor());
-      if (player.isFaceRight()) {
-        gc.fillRect(player.getPosition().getX() + 0.5, player.getHitBox(0).getY(),
-            ((player.getHitBox(0).getWidth() + player.getHitBox(0).getX()) - player.getPosition()
-                .getX() - 0.505) * 0.66, player.getHitBox(0).getHeight());
-      } else {
-        gc.fillRect(player.getPosition().getX() + (0.5 - player.getHitBox(0).getWidth()) / 2,
-            player.getHitBox(0).getY(),
-            ((-player.getHitBox(0).getWidth() - player.getHitBox(0).getX()) + player.getPosition()
-                .getX() + 0.505) * 0.66, player.getHitBox(0).getHeight());
-      }
-    }
+
+    // KICK
     if (player.stateKicking.isSpoolingUp()) {
       if (player.isFaceRight()) {
         gc.setFill(GameDefaults.BACKGROUND_COLOR);
-        gc.fillRect(player.getPosition().getX() + 0.52, player.getPosition().getY() + 1.5, 0.25,
+        gc.fillRect(
+            player.getPosition().getX() + 0.52,
+            player.getPosition().getY() + 1.5,
+            0.25,
             0.505);
         gc.setFill(player.getColor());
-        gc.fillRect(player.getPosition().getX() + 0.52, player.getPosition().getY() + 1.5,
-            1.5 / 2, 0.2);
-
+        gc.fillRect(
+            player.getPosition().getX() + 0.52,
+            player.getPosition().getY() + 1.5,
+            1.5 / 2,
+            0.2);
       } else {
         gc.setFill(GameDefaults.BACKGROUND_COLOR);
-        gc.fillRect(player.getPosition().getX() + 0.27, player.getPosition().getY() + 1.5, 0.25,
+        gc.fillRect(
+            player.getPosition().getX() + 0.27,
+            player.getPosition().getY() + 1.5,
+            0.25,
             0.505);
         gc.setFill(player.getColor());
-        gc.fillRect(player.getPosition().getX() - 0.3, player.getHitBox(1).getY(),
-            1.5 / 2, 0.2);
-
+        gc.fillRect(
+            player.getPosition().getX() - 0.3,
+            player.getHitBox(1).getY(),
+            1.5 / 2,
+            0.2);
       }
     }
+  }
+
+  /**
+   * Render the hitboxes for each attack, i.e. what players can get hit by.
+   *
+   * @param gc The {@code GraphicsContext} that {@code render()} was invoked by
+   */
+  private void renderHitBoxes(GraphicsContext gc) {
+    // PUNCH
+    if (player.statePunching.isActive()) {
+      gc.setFill(GameDefaults.HITBOX_COLOR);
+      gc.fillRect(
+          player.getHitBox(0).getX(),
+          player.getHitBox(0).getY(),
+          player.getHitBox(0).getWidth(),
+          player.getHitBox(0).getHeight());
+      gc.setFill(player.getColor());
+      if (player.isFaceRight()) {
+        gc.fillRect(
+            player.getPosition().getX() + 0.5,
+            player.getHitBox(0).getY(),
+            ((player.getHitBox(0).getX())
+                - player.getPosition().getX()
+                - 0.505),
+            player.getHitBox(0).getHeight());
+      } else {
+        gc.fillRect(
+            player.getHitBox(0).getX() + player.getHitBox(0).getWidth(),
+            player.getHitBox(0).getY(),
+            (-player.getHitBox(0).getWidth()
+                - player.getHitBox(0).getX())
+                + player.getPosition().getX()
+                + 0.5,
+            player.getHitBox(0).getHeight());
+      }
+    }
+
+    // KICK
     if (player.stateKicking.isActive()) {
       gc.setFill(GameDefaults.HITBOX_COLOR);
-      gc.fillRect(player.getHitBox(1).getX(), player.getHitBox(1).getY(),
-          player.getHitBox(1).getWidth(), player.getHitBox(1).getHeight());
+      gc.fillRect(
+          player.getHitBox(1).getX(),
+          player.getHitBox(1).getY(),
+          player.getHitBox(1).getWidth(),
+          player.getHitBox(1).getHeight());
       gc.setFill(GameDefaults.BACKGROUND_COLOR);
       if (player.isFaceRight()) {
-        gc.fillRect(player.getPosition().getX() + 0.52, player.getPosition().getY() + 1.5, 0.25,
+        gc.fillRect(
+            player.getPosition().getX() + 0.52,
+            player.getPosition().getY() + 1.5,
+            0.25,
             0.505);
         gc.setFill(player.getColor());
-        gc.fillRect(player.getPosition().getX() + 0.52, player.getPosition().getY() + 1.5,
-            player.getHitBox(1).getX() + player.getHitBox(1).getWidth() - player.getPosition()
-                .getX() - 0.52, 0.2);
+        gc.fillRect(
+            player.getPosition().getX() + 0.52,
+            player.getPosition().getY() + 1.5,
+            player.getHitBox(1).getX()
+                + player.getHitBox(1).getWidth()
+                - player.getPosition().getX()
+                - 0.52,
+            0.2);
       } else {
-        gc.fillRect(player.getPosition().getX() + 0.27, player.getPosition().getY() + 1.5, 0.25,
+        gc.fillRect(
+            player.getPosition().getX() + 0.27,
+            player.getPosition().getY() + 1.5,
+            0.25,
             0.505);
         gc.setFill(player.getColor());
-        gc.fillRect(player.getHitBox(1).getX(), player.getHitBox(1).getY(),
-            player.getPosition().getX() - player.getHitBox(1).getX() + 0.45, 0.2);
+        gc.fillRect(
+            player.getHitBox(1).getX(),
+            player.getHitBox(1).getY(),
+            player.getPosition().getX() - player.getHitBox(1).getX() + 0.45,
+            0.2);
       }
     }
+  }
+
+  /**
+   * Render the cooldown for each attack, i.e. the downtime frames between attacks and spool-up.
+   *
+   * @param gc The {@code GraphicsContext} that {@code render()} was invoked by
+   */
+  private void renderCoolDown(GraphicsContext gc) {
+    // PUNCH
+    if (player.statePunching.isOnCoolDown()) {
+      gc.setFill(player.getColor());
+      if (player.isFaceRight()) {
+        gc.fillRect(
+            player.getPosition().getX() + 0.5,
+            player.getHitBox(0).getY(),
+            ((player.getHitBox(0).getWidth()
+                + player.getHitBox(0).getX())
+                - player.getPosition().getX() - 0.505) * 0.66,
+            player.getHitBox(0).getHeight());
+      } else {
+        gc.fillRect(
+            player.getPosition().getX() + (0.5 - player.getHitBox(0).getWidth()) / 2,
+            player.getHitBox(0).getY(),
+            ((-player.getHitBox(0).getWidth()
+                - player.getHitBox(0).getX())
+                + player.getPosition().getX() + 0.505) * 0.66,
+            player.getHitBox(0).getHeight());
+      }
+    }
+
+    // KICK
     if (player.stateKicking.isOnCoolDown()) {
       if (player.isFaceRight()) {
         gc.setFill(GameDefaults.BACKGROUND_COLOR);
-        gc.fillRect(player.getPosition().getX() + 0.52, player.getPosition().getY() + 1.5, 0.25,
+        gc.fillRect(
+            player.getPosition().getX() + 0.52,
+            player.getPosition().getY() + 1.5,
+            0.25,
             0.505);
         gc.setFill(player.getColor());
-        gc.fillRect(player.getPosition().getX() + 0.52, player.getPosition().getY() + 1.5,
-            1.5 / 2, 0.2);
-
+        gc.fillRect(
+            player.getPosition().getX() + 0.52,
+            player.getPosition().getY() + 1.5,
+            1.5 / 2,
+            0.2);
       } else {
         gc.setFill(GameDefaults.BACKGROUND_COLOR);
-        gc.fillRect(player.getPosition().getX() + 0.27, player.getPosition().getY() + 1.5, 0.25,
+        gc.fillRect(
+            player.getPosition().getX() + 0.27,
+            player.getPosition().getY() + 1.5,
+            0.25,
             0.505);
         gc.setFill(player.getColor());
-        gc.fillRect(player.getPosition().getX() - 0.3, player.getHitBox(1).getY(),
-            1.5 / 2, 0.2);
+        gc.fillRect(
+            player.getPosition().getX() - 0.3,
+            player.getHitBox(1).getY(),
+            1.5 / 2,
+            0.2);
       }
     }
-    gc.setLineWidth(gc.getLineWidth() * scaleX);
-    gc.restore();
   }
 }
-

@@ -66,6 +66,29 @@ public class StageController implements GameController {
     double kbMultiplier1 = ((double) p2.getMaxHP() / (p2.getHP() + 1)) / 1.5;
     double kbMultiplier2 = ((double) p1.getMaxHP() / (p1.getHP() + 1)) / 1.5;
 
+    updatePlayers(delta, gravity, p1, p2, p1f, p2f, kbMultiplier1, kbMultiplier2);
+  }
+
+  private void updatePlayers(
+      double delta,
+      double gravity,
+      GamePlayer p1,
+      GamePlayer p2,
+      Point2D p1f,
+      Point2D p2f,
+      double kbMultiplier1,
+      double kbMultiplier2)
+  {
+    updateGroundState(p1, p2);
+    updateHorizontalMovement(delta, p1, p2);
+    updateVerticalMovement(delta, gravity, p1, p2, p1f, p2f);
+    updateStageCollisions(p1, p2, p1f, p2f);
+    updatePlayer1HitBoxes(p1, p2, kbMultiplier1);
+    updatePlayer2HitBoxes(p1, p2, kbMultiplier2);
+  }
+
+  private void updateGroundState(GamePlayer p1, GamePlayer p2)
+  {
     //Set player 1 as not on ground if above ground level
     if (p1.getPosition().getY() + p1.getHeight() < stage.getGroundLevelY()) {
       p1.setOnGround(false);
@@ -75,7 +98,10 @@ public class StageController implements GameController {
     if (p2.getPosition().getY() + p2.getHeight() < stage.getGroundLevelY()) {
       p2.setOnGround(false);
     }
+  }
 
+  private void updateHorizontalMovement(double delta, GamePlayer p1, GamePlayer p2)
+  {
     //Apply air resistance + eventual ground friction to reduce player 1 x-velocity
     if (p1.isOnGround()) {
       p1.accelerate(new Point2D(p1.getVelocity().multiply(-5 * delta).getX(), 0));
@@ -89,7 +115,11 @@ public class StageController implements GameController {
     } else {
       p2.accelerate(new Point2D(p2.getVelocity().multiply(-2.5 * delta).getX(), 0));
     }
+  }
 
+  private void updateVerticalMovement(double delta, double gravity, GamePlayer p1, GamePlayer p2,
+      Point2D p1f, Point2D p2f)
+  {
     //Apply gravity acceleration if not on ground and handle ground collision
     if (p1f.getY() < stage.getGroundLevelY()) {
       p1.accelerate(new Point2D(0, gravity * delta));
@@ -108,7 +138,10 @@ public class StageController implements GameController {
           , stage.getGroundLevelY() - p2.getHeight()));
       p2.setVelocity(new Point2D(p2.getVelocity().getX(), 0));
     }
+  }
 
+  private void updateStageCollisions(GamePlayer p1, GamePlayer p2, Point2D p1f, Point2D p2f)
+  {
     //Stage wall collision
     if (p1f.getX() + p1.getWidth() / 2 > 16) {
       p1.setPosition(new Point2D(16 - p1.getWidth(), p1.getPosition().getY()));
@@ -135,7 +168,11 @@ public class StageController implements GameController {
       p2.setPosition(new Point2D(p2.getPosition().getX(), 0));
       p2.setVelocity(new Point2D(p2.getVelocity().getX(), p2.getVelocity().getY() * -1));
     }
-    //Checks HitBox/HurtBox collisions
+  }
+
+  private void updatePlayer1HitBoxes(GamePlayer p1, GamePlayer p2, double kbMultiplier1)
+  {
+    //Checks HitBox/HurtBox collisions for punches
     if (player1Controller.player.statePunching.isActive()) {
       for (Rectangle hurt : p2.getHurtBoxes()) {
         if (p1.getHitBox(0).getBoundsInParent().intersects(hurt.getBoundsInParent())) {
@@ -152,7 +189,7 @@ public class StageController implements GameController {
         }
       }
     }
-    //Checks HitBox/HurtBox collisions
+    //Checks HitBox/HurtBox collisions for kicks
     if (player1Controller.player.stateKicking.isActive()) {
       for (Rectangle hurt : p2.getHurtBoxes()) {
         if (p1.getHitBox(1).getBoundsInParent().intersects(hurt.getBoundsInParent())) {
@@ -169,6 +206,10 @@ public class StageController implements GameController {
         }
       }
     }
+  }
+
+  private void updatePlayer2HitBoxes(GamePlayer p1, GamePlayer p2, double kbMultiplier2)
+  {
     //Checks HitBox/HurtBox collisions
     if (player2Controller.player.statePunching.isActive()) {
       for (Rectangle hurt : p1.getHurtBoxes()) {
