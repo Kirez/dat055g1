@@ -69,6 +69,18 @@ public class StageController implements GameController {
     updatePlayers(delta, gravity, p1, p2, p1f, p2f, kbMultiplier1, kbMultiplier2);
   }
 
+  /**
+   * Invokes all player update methods
+   *
+   * @param delta the delta time since last update in seconds
+   * @param gravity the gravitational constant
+   * @param p1 player 1
+   * @param p2 player 2
+   * @param p1f position of player 1 with x-axis centered
+   * @param p2f position of player 2 with x-axis centered
+   * @param kbMultiplier1 knock back multiplier for player 1
+   * @param kbMultiplier2 knock back multiplier for player 2
+   */
   private void updatePlayers(
       double delta,
       double gravity,
@@ -77,8 +89,7 @@ public class StageController implements GameController {
       Point2D p1f,
       Point2D p2f,
       double kbMultiplier1,
-      double kbMultiplier2)
-  {
+      double kbMultiplier2) {
     updateGroundState(p1, p2);
     updateHorizontalMovement(delta, p1, p2);
     updateVerticalMovement(delta, gravity, p1, p2, p1f, p2f);
@@ -87,8 +98,13 @@ public class StageController implements GameController {
     updatePlayer2HitBoxes(p1, p2, kbMultiplier2);
   }
 
-  private void updateGroundState(GamePlayer p1, GamePlayer p2)
-  {
+  /**
+   * Changes on ground status of players if necessary
+   *
+   * @param p1 player 1
+   * @param p2 player 2
+   */
+  private void updateGroundState(GamePlayer p1, GamePlayer p2) {
     //Set player 1 as not on ground if above ground level
     if (p1.getPosition().getY() + p1.getHeight() < stage.getGroundLevelY()) {
       p1.setOnGround(false);
@@ -100,8 +116,14 @@ public class StageController implements GameController {
     }
   }
 
-  private void updateHorizontalMovement(double delta, GamePlayer p1, GamePlayer p2)
-  {
+  /**
+   * Slows players by applying varying 'friction' depending on whether they are on ground or not
+   *
+   * @param delta time in seconds since last update
+   * @param p1 player 1
+   * @param p2 player 2
+   */
+  private void updateHorizontalMovement(double delta, GamePlayer p1, GamePlayer p2) {
     //Apply air resistance + eventual ground friction to reduce player 1 x-velocity
     if (p1.isOnGround()) {
       p1.accelerate(new Point2D(p1.getVelocity().multiply(-5 * delta).getX(), 0));
@@ -117,9 +139,18 @@ public class StageController implements GameController {
     }
   }
 
+  /**
+   * Applies gravity to players
+   *
+   * @param delta time in seconds since last update
+   * @param gravity the gravitational constant
+   * @param p1 player 1
+   * @param p2 player 2
+   * @param p1f position of player 1 with x-axis centered
+   * @param p2f position of player 2 with x-axis centered
+   */
   private void updateVerticalMovement(double delta, double gravity, GamePlayer p1, GamePlayer p2,
-      Point2D p1f, Point2D p2f)
-  {
+      Point2D p1f, Point2D p2f) {
     //Apply gravity acceleration if not on ground and handle ground collision
     if (p1f.getY() < stage.getGroundLevelY()) {
       p1.accelerate(new Point2D(0, gravity * delta));
@@ -140,8 +171,15 @@ public class StageController implements GameController {
     }
   }
 
-  private void updateStageCollisions(GamePlayer p1, GamePlayer p2, Point2D p1f, Point2D p2f)
-  {
+  /**
+   * Handles collision between players and the stage
+   *
+   * @param p1 player 1
+   * @param p2 player 2
+   * @param p1f position of player 1 with x-axis centered
+   * @param p2f position of player 2 with x-axis centered
+   */
+  private void updateStageCollisions(GamePlayer p1, GamePlayer p2, Point2D p1f, Point2D p2f) {
     //Stage wall collision
     if (p1f.getX() + p1.getWidth() / 2 > 16) {
       p1.setPosition(new Point2D(16 - p1.getWidth(), p1.getPosition().getY()));
@@ -170,8 +208,14 @@ public class StageController implements GameController {
     }
   }
 
-  private void updatePlayer1HitBoxes(GamePlayer p1, GamePlayer p2, double kbMultiplier1)
-  {
+  /**
+   * Checks for and handles the effect of player 1 landing a hit on player 2
+   *
+   * @param p1 player 1
+   * @param p2 player 2
+   * @param kbMultiplier1 effectiveness of knock back on player 2
+   */
+  private void updatePlayer1HitBoxes(GamePlayer p1, GamePlayer p2, double kbMultiplier1) {
     //Checks HitBox/HurtBox collisions for punches
     if (player1Controller.player.statePunching.isActive()) {
       for (Rectangle hurt : p2.getHurtBoxes()) {
@@ -208,8 +252,14 @@ public class StageController implements GameController {
     }
   }
 
-  private void updatePlayer2HitBoxes(GamePlayer p1, GamePlayer p2, double kbMultiplier2)
-  {
+  /**
+   * Checks for and handles the effect of player 2 landing a hit on player 1
+   *
+   * @param p1 player 1
+   * @param p2 player 2
+   * @param kbMultiplier2 effectiveness of knock back on player 1
+   */
+  private void updatePlayer2HitBoxes(GamePlayer p1, GamePlayer p2, double kbMultiplier2) {
     //Checks HitBox/HurtBox collisions
     if (player2Controller.player.statePunching.isActive()) {
       for (Rectangle hurt : p1.getHurtBoxes()) {
