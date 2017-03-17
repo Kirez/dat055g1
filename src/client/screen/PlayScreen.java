@@ -173,7 +173,7 @@ public class PlayScreen extends AnimationTimer implements Screen {
   }
 
   /**
-   * Exits the game.
+   * This method should be invoked by GameApplication before switching from this screen
    */
   @Override
   public void exit() {

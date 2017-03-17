@@ -85,7 +85,7 @@ public class JoinScreen implements Screen {
   }
 
   /**
-   * Exits the Screen.
+   * This method should be invoked by GameApplication before switching from this screen
    */
   @Override
   public void exit() {

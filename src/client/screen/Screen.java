@@ -22,7 +22,7 @@ public interface Screen {
   void enter(Stage stage);
 
   /**
-   * Runs when a screen becomes invisible
+   * This method should be invoked by GameApplication before switching from this screen
    */
   void exit();
 }

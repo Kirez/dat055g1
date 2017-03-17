@@ -110,7 +110,7 @@ public class NetworkPlayScreen extends AnimationTimer implements Screen {
   }
 
   /**
-   * Does nothing.
+   * This method should be invoked by GameApplication before switching from this screen
    */
   @Override
   public void exit() {
