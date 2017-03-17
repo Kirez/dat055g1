@@ -163,7 +163,7 @@ public class GameClient implements Runnable {
   }
 
   /**
-   * Handles key releases and sends 'action end' packtes to server.
+   * Handles key releases and sends 'action end' packets to server.
    *
    * @param event the event to handle
    */
