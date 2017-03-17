@@ -3,7 +3,7 @@ package common;
 import java.util.HashMap;
 
 /**
- * Class that describes the cycles of an action spool up, active, cool down, inactive.
+ * Class that describes the cycle of an action; spool up, active, cool down, inactive.
  *
  * @author Alexander Andersson (alexaan)
  * @author Linus Berglund (belinus)
@@ -43,8 +43,8 @@ public class ActionCycle {
   }
 
   /**
-   * Advances the cycle if time left minus {@code delta} less or equal zero cycle enters next
-   * stage.
+   * Checks if the time left minus {@code delta} is less than or equal to zero. If true the
+   * cycle enters the next phase.
    *
    * @param delta the difference in time between the update ticks
    * @return true if next stage false if not
@@ -70,7 +70,7 @@ public class ActionCycle {
   }
 
   /**
-   * Whether in active phase or not
+   * Checks whether in active phase or not
    *
    * @return true if active phase else false
    */
@@ -79,7 +79,7 @@ public class ActionCycle {
   }
 
   /**
-   * Whether in cool down phase or not
+   * Checks whether in cool down phase or not
    *
    * @return true if cool down phase else false
    */
@@ -88,7 +88,7 @@ public class ActionCycle {
   }
 
   /**
-   * Whether in spool-up phase or not
+   * Checks whether in spool-up phase or not
    *
    * @return true if spool-up phase else false
    */
@@ -97,7 +97,7 @@ public class ActionCycle {
   }
 
   /**
-   * Whether in this cycle is ready for next iteration this would be when inactive
+   * Checks whether this cycle is ready for next iteration this would be when inactive
    *
    * @return true if ready for next phase else false
    */

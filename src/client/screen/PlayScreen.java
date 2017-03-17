@@ -21,7 +21,7 @@ import server.GameEngine;
 import server.StageController;
 
 /**
- * The 'play' screen handles the 'play' state
+ * The 'play' screen handles the 'play' state and is active during local games
  *
  * @author Alexander Andersson (alexaan)
  * @author Linus Berglund (belinus)

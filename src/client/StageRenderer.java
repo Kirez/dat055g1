@@ -30,7 +30,7 @@ public class StageRenderer implements GameRenderer {
   }
 
   /**
-   * Renders the Stage.
+   * Renders the Stage which consists of the ground and the background.
    */
   @Override
   public void render(Canvas canvas) {
